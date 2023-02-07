@@ -1,42 +1,25 @@
-# PegaModeler
+# Tool Window Sample [![JetBrains IntelliJ Platform SDK Docs](https://jb.gg/badges/docs.svg)][docs]
+*Reference: [Tool Windows in IntelliJ SDK Docs][docs:tool_windows]*
 
-![Build](https://github.com/spassignat/PegaModeler/workflows/Build/badge.svg)
-[![Version](https://img.shields.io/jetbrains/plugin/v/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
-[![Downloads](https://img.shields.io/jetbrains/plugin/d/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
+## Quickstart
 
-## Template ToDo list
-- [x] Create a new [IntelliJ Platform Plugin Template][template] project.
-- [ ] Get familiar with the [template documentation][template].
-- [ ] Verify the [pluginGroup](./gradle.properties), [plugin ID](./src/main/resources/META-INF/plugin.xml) and [sources package](./src/main/kotlin).
-- [ ] Review the [Legal Agreements](https://plugins.jetbrains.com/docs/marketplace/legal-agreements.html?from=IJPluginTemplate).
-- [ ] [Publish a plugin manually](https://plugins.jetbrains.com/docs/intellij/publishing-plugin.html?from=IJPluginTemplate) for the first time.
-- [ ] Set the Plugin ID in the above README badges.
-- [ ] Set the [Plugin Signing](https://plugins.jetbrains.com/docs/intellij/plugin-signing.html?from=IJPluginTemplate) related [secrets](https://github.com/JetBrains/intellij-platform-plugin-template#environment-variables).
-- [ ] Set the [Deployment Token](https://plugins.jetbrains.com/docs/marketplace/plugin-upload.html?from=IJPluginTemplate).
-- [ ] Click the <kbd>Watch</kbd> button on the top of the [IntelliJ Platform Plugin Template][template] to be notified about releases containing new features and fixes.
+Tool Windows are child windows of the IDE used to display information.
+These windows generally have their toolbars (referred to as tool window bars) along the outer edges of the main window containing one or more tool window buttons, which activate panels displayed on the left, bottom, and right sides of the main IDE window.
 
-<!-- Plugin description -->
-This Fancy IntelliJ Platform Plugin is going to be your implementation of the brilliant ideas that you have.
+The current implementation displays a `JPanel` component containing simple icons and information about the actual system date, time, and timezone.
+Component is provided by the `MyToolWindow` class through the `getContent()` method invoked inside the `MyToolWindowFactory` implementation.
 
-This specific section is a source for the [plugin.xml](/src/main/resources/META-INF/plugin.xml) file which will be extracted by the [Gradle](/build.gradle.kts) during the build process.
+### Extension Points
 
-To keep everything working, do not remove `<!-- ... -->` sections. 
-<!-- Plugin description end -->
+| Name                      | Implementation                                  | Extension Point Class |
+|---------------------------|-------------------------------------------------|-----------------------|
+| `com.intellij.toolWindow` | [MyToolWindowFactory][file:MyToolWindowFactory] | `ToolWindowFactory`   |
 
-## Installation
-
-- Using IDE built-in plugin system:
-  
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "PegaModeler"</kbd> >
-  <kbd>Install Plugin</kbd>
-  
-- Manually:
-
-  Download the [latest release](https://github.com/spassignat/PegaModeler/releases/latest) and install it manually using
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
+*Reference: [Plugin Extension Points in IntelliJ SDK Docs][docs:ep]*
 
 
----
-Plugin based on the [IntelliJ Platform Plugin Template][template].
+[docs]: https://plugins.jetbrains.com/docs/intellij/
+[docs:tool_windows]: https://plugins.jetbrains.com/docs/intellij/tool-windows.html
+[docs:ep]: https://plugins.jetbrains.com/docs/intellij/plugin-extensions.html
 
-[template]: https://github.com/JetBrains/intellij-platform-plugin-template
+[file:MyToolWindowFactory]: ./src/main/java/org/intellij/sdk/toolWindow/MyToolWindowFactory.java
