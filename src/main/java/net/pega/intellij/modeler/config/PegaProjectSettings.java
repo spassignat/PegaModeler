@@ -4,27 +4,40 @@ import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.project.Project;
-import com.intellij.util.xmlb.annotations.Property;
+import com.intellij.util.xmlb.annotations.Transient;
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
-@State(name = "PegaProjectSettings", storages = @Storage("pegamodeler.xml"))
+@State(name = "PegaProjectSettings", storages = @Storage(value = "pega.xml"))
 public class PegaProjectSettings implements PersistentStateComponent<PegaProjectSettings.PegaConfigState> {
-
-	public PegaConfigState state;
-	static Map<String, PegaProjectSettings> managers = new HashMap<>();
-
-	public static PegaProjectSettings getInstance(Project myProject) {
-		if (!managers.containsKey(myProject.getName())) {
-			managers.put(myProject.getName(), new PegaProjectSettings());
-		}
-		return managers.get(myProject.getName());
-	}
+	@Transient
+	private List<ChangeListener> listeners = new ArrayList<>();
+	private PegaConfigState state = new PegaConfigState();
 
 	public PegaProjectSettings() {
-		state = new PegaConfigState();
+	}
+
+	public static PegaProjectSettings getInstance(@NotNull Project project) {
+		return project.getService(PegaProjectSettings.class);
+	}
+
+	public void addChangeListener(ChangeListener changeListener) {
+		listeners.add(changeListener);
+	}
+
+	public void fireChangeEvent() {
+		final ChangeEvent e = new ChangeEvent(this);
+		for (int i = 0; i < listeners.size(); i++) {
+			ChangeListener changeListener = listeners.get(i);
+			changeListener.stateChanged(e);
+		}
 	}
 
 	public PegaConfigState getState() {
@@ -32,37 +45,46 @@ public class PegaProjectSettings implements PersistentStateComponent<PegaProject
 	}
 
 	public void loadState(PegaConfigState state) {
-		this.state.login=state.login;
-		this.state.url=state.url;
-		this.state.baseClassName=state.baseClassName;
-		this.state.pwd=state.pwd;
+		this.state.login = state.login;
+		this.state.url = state.url;
+		this.state.baseClassName = state.baseClassName;
+		this.state.pwd = state.pwd;
+		this.state.caseTypeColor = state.caseTypeColor;
+		this.state.highestClasses = state.highestClasses;
+		this.state.pageColor = state.pageColor;
+		this.state.entityColor = state.entityColor;
 	}
 
 	public static class PegaConfigState {
-		@Property
+		@NonNls
+		public boolean abstractOnTop;
+		@NonNls
 		public String baseClassName;
-		@Property
-		public String url;
-		@Property
+		@NonNls
+		public String caseTypeColor;
+		@NonNls
+		public String entityColor;
+		public String[] highestClasses;
+		@NonNls
 		public String login;
-		@Property
+		@NonNls
+		public String pageColor;
+		@NonNls
 		public String pwd;
-		private List<ChangeListener> listeners = new ArrayList<>();
+		@NonNls
+		public String url;
 
-		public void addChangeListener(ChangeListener changeListener) {
-			listeners.add(changeListener);
-		}
-
-		@Override
-		public String toString() {
-			return "PegaConfigState{" + "baseClassName='" + baseClassName + '\'' + ", url='" + url + '\'' + ", login='" + login + '\'' + ", pwd='" + pwd + '\'' + '}';
-		}
-
-		public PegaConfigState(String baseClassName, String url, String login, String pwd) {
+		public PegaConfigState(boolean abstractOnTop, String baseClassName, String caseTypeColor, String entityColor, String[] highestClasses, String login, String pageColor, String pwd, String url) {
+			this.abstractOnTop = abstractOnTop;
 			this.baseClassName = baseClassName;
-			this.url = url;
+			this.caseTypeColor = caseTypeColor;
+			this.entityColor = entityColor;
+			this.highestClasses = highestClasses;
 			this.login = login;
+			this.pageColor = pageColor;
 			this.pwd = pwd;
+			this.url = url;
+			System.arraycopy(highestClasses, 0, this.highestClasses, 0, highestClasses.length);
 		}
 
 		public PegaConfigState() {
@@ -75,20 +97,23 @@ public class PegaProjectSettings implements PersistentStateComponent<PegaProject
 			if (o == null || getClass() != o.getClass())
 				return false;
 			PegaConfigState that = (PegaConfigState) o;
-			return Objects.equals(baseClassName, that.baseClassName) && Objects.equals(url, that.url) && Objects.equals(login, that.login) && Objects.equals(pwd, that.pwd);
+			return abstractOnTop == that.abstractOnTop && Objects.equals(baseClassName, that.baseClassName) && Objects.equals(caseTypeColor, that.caseTypeColor) && Objects.equals(entityColor,
+																																												   that.entityColor) && Arrays.equals(
+					highestClasses,
+					that.highestClasses) && Objects.equals(login, that.login) && Objects.equals(pageColor, that.pageColor) && Objects.equals(pwd, that.pwd) && Objects.equals(url, that.url);
 		}
 
 		@Override
 		public int hashCode() {
-			return Objects.hash(baseClassName, url, login, pwd);
+			int result = Objects.hash(abstractOnTop, baseClassName, caseTypeColor, entityColor, login, pageColor, pwd, url);
+			result = 31 * result + Arrays.hashCode(highestClasses);
+			return result;
 		}
 
-		public void fireChangeEvent() {
-			final ChangeEvent e = new ChangeEvent(this);
-			for (int i = 0; i < listeners.size(); i++) {
-				ChangeListener changeListener = listeners.get(i);
-				changeListener.stateChanged(e);
-			}
+		@Override
+		public String toString() {
+			return "PegaConfigState{" + "abstractOnTop=" + abstractOnTop + ", baseClassName='" + baseClassName + '\'' + ", caseTypeColor='" + caseTypeColor + '\'' + ", entityColor='" + entityColor + '\'' + ", highestClasses=" + Arrays.toString(
+					highestClasses) + ", login='" + login + '\'' + ", pageColor='" + pageColor + '\'' + ", pwd='" + pwd + '\'' + ", url='" + url + '\'' + '}';
 		}
 	}
 }
