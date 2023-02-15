@@ -1,0 +1,311 @@
+GET http://localhost:8090/prweb/api/UML/1.0/properties/EXYGEN-UML-Work-DemoCase
+Authorization: Basic admin@uml Password2!
+Accept: application/json
+X-Application: IntelliJ
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=CF07EE0808BD83077B6FE2DCE1F92356
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-02-11T094216.200.json
+
+###
+
+GET http://localhost:8090/prweb/api/UML/1.0/properties/EXYGEN-UML-Work-DemoCase
+Authorization: Basic admin@uml Password2!
+Accept: application/json
+X-Application: IntelliJ
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=2F4B3F87467921BCCC3945432AB2E236
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-02-11T093419.200.json
+
+###
+
+GET http://localhost:8090/prweb/api/UML/1.0/properties/EXYGEN-UML-Work-DemoCase
+Authorization: Basic admin@uml Password2!
+Accept: application/json
+X-Application: IntelliJ
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=72B42F12D6FA6F9F589B9B365B5FE7D4
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-02-11T093210.200.json
+
+###
+
+GET http://localhost:8090/prweb/api/UML/1.0/properties/EXYGEN-UML-Work-DemoCase
+Authorization: Basic admin@uml Password2!
+Accept: application/json
+X-Application: IntelliJ
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=BA67C75F870980864D78DE69FD806B0D
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-02-11T093135.200.json
+
+###
+
+GET http://localhost:8090/prweb/api/UML/1.0/properties/EXYGEN-UML-Work-DemoCase
+Authorization: Basic admin@uml Password2!
+Accept: application/json
+X-Application: IntelliJ
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=470AC92495DE875F45DE2DA73EB869CB
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-02-11T092707.200.json
+
+###
+
+GET http://localhost:8090/prweb/api/UML/1.0/properties/EXYGEN-UML-Work-DemoCase
+Authorization: Basic admin@uml Password2!
+Accept: application/json
+X-Application: IntelliJ
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=71511D55771E86A201B97C26297169E3
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-02-11T092601.200.json
+
+###
+
+GET http://localhost:8090/prweb/api/UML/1.0/properties/EXYGEN-UML-Work-DemoCase
+Authorization: Basic admin@uml Password2!
+Accept: application/json
+X-Application: IntelliJ
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=08D77399F6C3884F1D729F216763470E
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-02-11T085538.200.json
+
+###
+
+GET http://localhost:8090/prweb/api/UML/1.0/properties/EXYGEN-UML-Work-DemoCase
+Authorization: Basic admin@uml Password2!
+Accept: application/json
+X-Application: IntelliJ
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=9C903262ADFA45EFC1A4C27DB5C11F90
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-02-11T084705.200.json
+
+###
+
+GET http://localhost:8090/prweb/api/UML/1.0/properties/EXYGEN-UML-Work-DemoCase/
+Authorization: Basic admin@uml Password2!
+Accept: application/json
+X-Application: IntelliJ
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=59F47C792464CE13D064D041EE9BB86E
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-02-11T084658.200.json
+
+###
+
+GET http://localhost:8090/prweb/api/UML/1.0/properties/EXYGEN-UML-Work-DemoCase/
+Authorization: Basic admin@uml Password2!
+Accept: application/json
+X-Application: IntelliJ
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=2D5C0DC37E3B95099027BD0F029C7B72
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-02-11T084523.200.json
+
+###
+
+GET http://localhost:8090/prweb/api/UML/1.0/properties/EXYGEN_UML_Work_DemoCase/
+Authorization: Basic admin@uml Password2!
+Accept: application/json
+X-Application: IntelliJ
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=7D8A36F7B33A59B60990581492B28FCD
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-02-11T083421.200.json
+
+###
+
+GET http://localhost:8090/prweb/api/UML/1.0/properties/EXYGEN-UML-Data-Address/
+Authorization: Basic admin@uml Password2!
+Accept: application/json
+X-Application: IntelliJ
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=A00747018A723DA4814A041C87729EF7
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-02-11T083337.200.json
+
+###
+
+GET http://localhost:8090/prweb/api/UML/1.0/properties/EXYGEN-UML-Data-Address/
+Authorization: Basic admin@uml Password2!
+Accept: application/json
+X-Application: IntelliJ
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=25FDC706574DD7CC4BC9DE332408B431
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-02-11T083127.200.json
+
+###
+
+GET http://localhost:8090/prweb/api/UML/1.0/properties/EXYGEN-UML-Data-Address/
+Authorization: Basic admin@uml Password2!
+Accept: application/json
+X-Application: IntelliJ
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=64AEF42D1B28FEA5FFDFC4AF8B990556
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-02-11T073254.200.json
+
+###
+
+GET http://localhost:8090/prweb/api/UML/1.0/properties/EXYGEN-UML-Data-Address/
+Authorization: Basic admin@uml Password2!
+Accept: application/json
+X-Application: IntelliJ
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=ED8F778A95D0935E5E3967A1C3475F29
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-02-11T072925.200.json
+
+###
+
+GET http://localhost:8090/prweb/api/UML/1.0/properties/EXYGEN-UML-Data-Address/
+Authorization: Basic admin@uml Password2!
+Accept: application/json
+X-Application: IntelliJ
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=339B002E28B69995CED186AD771D3563
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-02-10T231744.200.json
+
+###
+
+GET http://localhost:8090/prweb/api/UML/1.0/properties/EXYGEN-UML-Data-Address/
+Authorization: Basic admin@uml Password2!
+Accept: application/json
+X-Application: IntelliJ
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=C33E7756A18FFE76EDFD0E85BABE0C5E
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-02-10T180630.200.json
+
+###
+
+GET http://localhost:8090/prweb/api/UML/1.0/properties/EXYGEN-UML-Data-Address/
+Authorization: Basic admin@uml Password2!
+Accept: application/json
+X-Application: IntelliJ
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=540D5223614D220BBC1ABD8898BB3467
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-02-10T175936.200.json
+
+###
+
+GET http://localhost:8090/prweb/api/UML/1.0/properties/EXYGEN-UML-Data-Address/
+Authorization: Basic admin@uml Password2!
+Accept: application/json
+X-Application: IntelliJ
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=C0FF731A87E80A15E8E37A6B572D2A5F
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-02-10T175252.200.json
+
+###
+
+GET http://localhost:8090/prweb/api/UML/1.0/properties/EXYGEN-UML-Data-Address/
+Authorization: Basic admin@uml Password2!
+Accept: application/json
+X-Application: IntelliJ
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=2EAA4BF2FD769917A1EB24A507CADB16
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-02-10T174539.200.json
+
+###
+
+GET http://localhost:8090/prweb/api/UML/1.0/properties/EXYGEN-UML-Data-Address/
+Authorization: Basic admin@uml Password2!
+Accept: application/json
+X-Application: IntelliJ
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=27036DBD3588EC18436C1133ECB4EF54
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-02-10T174505.200.json
+
+###
+
+GET http://localhost:8090/prweb/api/UML/1.0/properties/EXYGEN-UML-Data-Address/
+Authorization: Basic admin@uml Password2!
+Accept: application/json
+X-Application: IntelliJ
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=BCD0CE58105469FC5B5ED553C8F63443
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-02-10T173617.200.json
+
+###
+
+GET http://localhost:8090/prweb/api/UML/1.0/properties/EXYGEN-UML-Data-Address/
+Authorization: Basic admin@uml Password2!
+Accept: application/json
+X-Application: IntelliJ
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=0BD5F7CF306812ABD4778167B7CE8ECC
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-02-10T173605.200.json
+
+###
+
+GET http://localhost:8090/prweb/api/UML/1.0/datamodel
+Authorization: Basic admin@uml Password2!
+Accept: application/json
+X-Application: IntelliJ
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-02-08T223814.200.json
+
+###
+
