@@ -7,7 +7,7 @@
 	<name>Pega Modeler</name>
 	<!-- Indicate this plugin can be loaded in all IntelliJ Platform-based products. -->
 	<depends>com.intellij.modules.platform</depends>
-	<!-- Text to display as description on Preferences/Settings | Plugin page -->
+	<depends optional="true">PlantUML integration</depends><!-- Text to display as description on Preferences/Settings | Plugin page -->
 	<description>
 		<![CDATA[
       Pega Modeler helps developper to view Pega application architecture.<br>

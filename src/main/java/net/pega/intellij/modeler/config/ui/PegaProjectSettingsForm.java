@@ -4,10 +4,12 @@ package net.pega.intellij.modeler.config.ui;
 import com.intellij.openapi.options.ConfigurableUi;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
+import net.pega.intellij.modeler.PegaBundle;
 import net.pega.intellij.modeler.config.PegaProjectSettings;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -33,6 +35,11 @@ public class PegaProjectSettingsForm implements ConfigurableUi<PegaProjectSettin
 	private JTextField textField1;
 	private JTextArea urlField;
 	private JLabel urlLabel;
+	private JTextPane helpAbout;
+	private JTextPane helpUML;
+	private JTextPane helpConnection;
+	private JTextPane helpDataModel;
+	private JTextField maxClass;
 
 	public PegaProjectSettingsForm(Project project) {
 		model = new DefaultListModel<String>();
@@ -62,13 +69,34 @@ public class PegaProjectSettingsForm implements ConfigurableUi<PegaProjectSettin
 				model.addElement(textField1.getText().trim());
 			}
 		});
+		helpAbout.setText(PegaBundle.getHelp("about"));
+		helpConnection.setText(PegaBundle.getHelp("connect"));
+		helpDataModel.setText(PegaBundle.getHelp("datamodel"));
+		helpUML.setText(PegaBundle.getHelp("uml"));
+		maxClass.addKeyListener(new KeyAdapter() {
+			public void keyReleased(KeyEvent ke) {
+				String value = maxClass.getText();
+				try {
+					Integer.parseInt(value);
+					maxClass.setForeground(Color.black);
+				} catch (NumberFormatException e) {
+					maxClass.setForeground(Color.red);
+				}
+			}
+		});
 	}
 
 	@Override
 	public void apply(@NotNull PegaProjectSettings settings) throws ConfigurationException {
 		final PegaProjectSettings.PegaConfigState state = settings.getState();
+		try {
+			state.maxClass = Integer.parseInt(maxClass.getText());
+		} catch (NumberFormatException e) {
+
+		}
 		state.baseClassName = baseClassField.getText();
 		state.login = loginField.getText();
+		state.abstractOnTop = onTopCheckBox.isSelected();
 		state.pwd = passwordField.getText();
 		state.url = urlField.getText();
 		state.pageColor = pageColorField.getText();
@@ -79,6 +107,7 @@ public class PegaProjectSettingsForm implements ConfigurableUi<PegaProjectSettin
 		System.arraycopy(objects, 0, state.highestClasses, 0, objects.length);
 		settings.fireChangeEvent();
 	}
+
 
 	@Override
 	public @NotNull JComponent getComponent() {
@@ -91,6 +120,8 @@ public class PegaProjectSettingsForm implements ConfigurableUi<PegaProjectSettin
 		Arrays.sort(objects);
 		String[] cls = new String[objects.length];
 		System.arraycopy(objects, 0, cls, 0, cls.length);
+		final String text = maxClass.getText();
+		final int i = Integer.parseInt(text);
 		final PegaProjectSettings.PegaConfigState
 				conf =
 				new PegaProjectSettings.PegaConfigState(onTopCheckBox.isSelected(),
@@ -98,7 +129,7 @@ public class PegaProjectSettingsForm implements ConfigurableUi<PegaProjectSettin
 														urlField.getText(),
 														loginField.getText(),
 														cls,
-														new String(passwordField.getPassword()),
+														new String(passwordField.getPassword()), i,
 														caseTypeColorField.getText(),
 														pageColorField.getText(),
 														entityColorField.getText());
@@ -111,7 +142,9 @@ public class PegaProjectSettingsForm implements ConfigurableUi<PegaProjectSettin
 		passwordField.setText(state.pwd);
 		loginField.setText(state.login);
 		urlField.setText(state.url);
+		maxClass.setText(""+state.maxClass);
 		baseClassField.setText(state.baseClassName);
+		onTopCheckBox.setSelected(state.abstractOnTop);
 		if (state.caseTypeColor != null && "".equals(state.caseTypeColor.trim())) {
 			caseTypeColorField.setText(state.caseTypeColor);
 		} else {

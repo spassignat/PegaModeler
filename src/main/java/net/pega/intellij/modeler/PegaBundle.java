@@ -7,23 +7,47 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.PropertyKey;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Locale;
 import java.util.function.Supplier;
 
 public final class PegaBundle extends DynamicBundle {
-  @NonNls private static final String BUNDLE = "messages.PegaBundle";
-  private static final PegaBundle INSTANCE = new PegaBundle();
+	@NonNls
+	private static final String BUNDLE = "messages.PegaBundle";
+	private static final PegaBundle INSTANCE = new PegaBundle();
 
-  private PegaBundle() {
-    super(BUNDLE);
-  }
+	private PegaBundle() {
+		super(BUNDLE);
+	}
 
-  @NotNull
-  public static @Nls String message(@NotNull @PropertyKey(resourceBundle = BUNDLE) String key, Object @NotNull ... params) {
-    return INSTANCE.getMessage(key, params);
-  }
+	public static String getHelp(String page) {
+		final Locale aDefault = Locale.getDefault();
+		final ClassLoader classLoader = PegaBundle.class.getClassLoader();
+		InputStream resourceAsStream = classLoader.getResourceAsStream("i18n/" + page + "_" + aDefault.toString() + ".html");
+		if (resourceAsStream == null) {
+			resourceAsStream = classLoader.getResourceAsStream("i18n/" + page + ".html");
+		}
+		if (resourceAsStream != null) {
+			final byte[] bytes;
+			try {
+				bytes = resourceAsStream.readAllBytes();
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+			return new String(bytes);
+		}
+		return page+" help not found.";
+	}
 
-  @NotNull
-  public static Supplier<@Nls String> messagePointer(@NotNull @PropertyKey(resourceBundle = BUNDLE) String key, Object @NotNull ... params) {
-    return INSTANCE.getLazyMessage(key, params);
-  }
+	@NotNull
+	public static @Nls String message(@NotNull @PropertyKey(resourceBundle = BUNDLE) String key, Object @NotNull ... params) {
+		return INSTANCE.getMessage(key, params);
+	}
+
+	@NotNull
+	public static Supplier<@Nls String> messagePointer(@NotNull @PropertyKey(resourceBundle = BUNDLE) String key, Object @NotNull ... params) {
+		return INSTANCE.getLazyMessage(key, params);
+	}
 }

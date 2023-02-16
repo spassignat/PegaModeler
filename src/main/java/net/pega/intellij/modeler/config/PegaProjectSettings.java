@@ -67,6 +67,7 @@ public class PegaProjectSettings implements PersistentStateComponent<PegaProject
 		public String[] highestClasses;
 		@NonNls
 		public String login;
+		public int maxClass;
 		@NonNls
 		public String pageColor;
 		@NonNls
@@ -74,20 +75,31 @@ public class PegaProjectSettings implements PersistentStateComponent<PegaProject
 		@NonNls
 		public String url;
 
-		public PegaConfigState(boolean abstractOnTop, String baseClassName, String caseTypeColor, String entityColor, String[] highestClasses, String login, String pageColor, String pwd, String url) {
+
+
+		public PegaConfigState() {
+		}
+
+		public PegaConfigState(boolean abstractOnTop,
+							   String baseClassName,
+							   String caseTypeColor,
+							   String entityColor,
+							   String[] highestClasses,
+							   String login,
+							   int maxClass,
+							   String pageColor,
+							   String pwd,
+							   String url) {
 			this.abstractOnTop = abstractOnTop;
 			this.baseClassName = baseClassName;
 			this.caseTypeColor = caseTypeColor;
 			this.entityColor = entityColor;
 			this.highestClasses = highestClasses;
 			this.login = login;
+			this.maxClass = maxClass;
 			this.pageColor = pageColor;
 			this.pwd = pwd;
 			this.url = url;
-			System.arraycopy(highestClasses, 0, this.highestClasses, 0, highestClasses.length);
-		}
-
-		public PegaConfigState() {
 		}
 
 		@Override
@@ -97,23 +109,20 @@ public class PegaProjectSettings implements PersistentStateComponent<PegaProject
 			if (o == null || getClass() != o.getClass())
 				return false;
 			PegaConfigState that = (PegaConfigState) o;
-			return abstractOnTop == that.abstractOnTop && Objects.equals(baseClassName, that.baseClassName) && Objects.equals(caseTypeColor, that.caseTypeColor) && Objects.equals(entityColor,
-																																												   that.entityColor) && Arrays.equals(
-					highestClasses,
-					that.highestClasses) && Objects.equals(login, that.login) && Objects.equals(pageColor, that.pageColor) && Objects.equals(pwd, that.pwd) && Objects.equals(url, that.url);
+			return abstractOnTop == that.abstractOnTop && maxClass == that.maxClass && Objects.equals(baseClassName, that.baseClassName) && Objects.equals(caseTypeColor,
+																																						   that.caseTypeColor) && Objects.equals(
+					entityColor,
+					that.entityColor) && Arrays.equals(highestClasses, that.highestClasses) && Objects.equals(login, that.login) && Objects.equals(pageColor, that.pageColor) && Objects.equals(pwd,
+																																																that.pwd) && Objects.equals(
+					url,
+					that.url);
 		}
 
 		@Override
 		public int hashCode() {
-			int result = Objects.hash(abstractOnTop, baseClassName, caseTypeColor, entityColor, login, pageColor, pwd, url);
+			int result = Objects.hash(abstractOnTop, baseClassName, caseTypeColor, entityColor, login, maxClass, pageColor, pwd, url);
 			result = 31 * result + Arrays.hashCode(highestClasses);
 			return result;
-		}
-
-		@Override
-		public String toString() {
-			return "PegaConfigState{" + "abstractOnTop=" + abstractOnTop + ", baseClassName='" + baseClassName + '\'' + ", caseTypeColor='" + caseTypeColor + '\'' + ", entityColor='" + entityColor + '\'' + ", highestClasses=" + Arrays.toString(
-					highestClasses) + ", login='" + login + '\'' + ", pageColor='" + pageColor + '\'' + ", pwd='" + pwd + '\'' + ", url='" + url + '\'' + '}';
 		}
 	}
 }

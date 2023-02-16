@@ -15,7 +15,7 @@ class UmlGenerator {
 
 	void generateDataModel(PrintStream out, Collection<MClass> dataModel) {
 		for (MClass value : dataModel) {
-			out.println("class " + DataModel.snakeToCamel(value.name) + getTemplate(value) + " {");
+			out.println((value.abs?"abstract ":"")+"class " + DataModel.snakeToCamel(value.name) + getTemplate(value) + " {");
 			for (MProperty mProperty : value.properties.values()) {
 				if (!mProperty.page) {
 					out.println(DataModel.snakeToCamel(mProperty.name) + ":" + DataModel.snakeToCamel(mProperty.type));
@@ -28,9 +28,9 @@ class UmlGenerator {
 				final String s1 = DataModel.snakeToCamel(value.parent);
 				final String s2 = DataModel.snakeToCamel(value.name);
 				if (context.getState().abstractOnTop) {
-					out.println(s1 + " <|- " + s2);
+					out.println(s1 + " <|-- " + s2);
 				} else {
-					out.println(s2 + " -|> " + s1);
+					out.println(s2 + " --|> " + s1);
 				}
 			}
 			for (MProperty mProperty : value.properties.values()) {

@@ -23,16 +23,18 @@ class MetadataLoader {
 	void analyseClass(MClass mClass) {
 		if (Arrays.stream(context.getState().highestClasses).noneMatch(ac -> Objects.equals(ac, mClass.name))) {
 			final MClass mClass1 = getMClass(mClass.name);
-			analyseInheritance(mClass1);
-			analyseProperties(mClass1);
-			mClass1.analyzed = true;
-			boolean pendingClasses = true;
-			int mxc = 100;
-			while (pendingClasses && mxc-- > 0) {
-				getClasses().stream().filter(c -> !c.analyzed).forEach(d -> {
-					analyseClass(d);
-				});
-				pendingClasses = getClasses().stream().anyMatch(c -> !c.analyzed);
+			if (mClass1!=null) {
+				analyseInheritance(mClass1);
+				analyseProperties(mClass1);
+				mClass1.analyzed = true;
+				boolean pendingClasses = true;
+				int mxc = 100;
+				while (pendingClasses && mxc-- > 0) {
+					getClasses().stream().filter(c -> !c.analyzed).forEach(d -> {
+						analyseClass(d);
+					});
+					pendingClasses = getClasses().stream().anyMatch(c -> !c.analyzed);
+				}
 			}
 		}
 	}
@@ -92,7 +94,7 @@ class MetadataLoader {
 	}
 
 	private MClass getMClass(String pyPageClass) {
-		if (Arrays.stream(context.getState().highestClasses).noneMatch(ac -> Objects.equals(ac, pyPageClass))) {
+		if (Arrays.stream(context.getState().highestClasses).noneMatch(ac -> Objects.equals(ac, pyPageClass))&&classMap.size()<context.getState().maxClass) {
 			if (!classMap.containsKey(pyPageClass)) {
 				classMap.put(pyPageClass, new MClass(pyPageClass));
 			}
