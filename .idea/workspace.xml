@@ -5,21 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1cf70225-d520-4266-9950-27b31bba04d6" name="Changes" comment="initial">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/i18n/about.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/i18n/about_en_US.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/i18n/about_fr_FR.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/i18n/connect_en_US.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/i18n/uml_en_US.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/i18n/uml_fr_FR.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/PegaBundle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/PegaBundle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/config/PegaProjectSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/config/PegaProjectSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/config/ui/PegaProjectSettingsForm.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/config/ui/PegaProjectSettingsForm.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/config/ui/PegaProjectSettingsForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/config/ui/PegaProjectSettingsForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/data/MetadataLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/data/MetadataLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/data/UmlGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/data/UmlGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/view/PegaWindow.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/view/PegaWindow.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/pluginIcon.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/pluginIcon.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/i18n/about_en_US.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/i18n/about_en_US.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/i18n/about_fr_FR.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/i18n/about_fr_FR.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/i18n/connect_en_US.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/i18n/connect_en_US.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/i18n/datamodel_en_US.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/i18n/datamodel_en_US.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,7 +128,7 @@
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.27198124",
-    "settings.editor.selected.configurable": "advanced.settings",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -339,7 +333,7 @@
       <workItem from="1676388291448" duration="23232000" />
       <workItem from="1676488975035" duration="602000" />
       <workItem from="1676489643650" duration="4279000" />
-      <workItem from="1676530471967" duration="13373000" />
+      <workItem from="1676530471967" duration="16791000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <created>1675790197797</created>
@@ -362,7 +356,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676500653558</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="initial">
+      <created>1676564837430</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1676564837430</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

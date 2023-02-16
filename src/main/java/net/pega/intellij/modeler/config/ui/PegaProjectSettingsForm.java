@@ -25,9 +25,14 @@ public class PegaProjectSettingsForm implements ConfigurableUi<PegaProjectSettin
 	private JLabel classLabel;
 	private JPanel configPane;
 	private JTextField entityColorField;
+	private JTextPane helpAbout;
+	private JTextPane helpConnection;
+	private JTextPane helpDataModel;
+	private JTextPane helpUML;
 	private JList<String> list1;
 	private JTextField loginField;
 	private JLabel loginLabel;
+	private JTextField maxClass;
 	private JCheckBox onTopCheckBox;
 	private JTextField pageColorField;
 	private JPasswordField passwordField;
@@ -35,11 +40,6 @@ public class PegaProjectSettingsForm implements ConfigurableUi<PegaProjectSettin
 	private JTextField textField1;
 	private JTextArea urlField;
 	private JLabel urlLabel;
-	private JTextPane helpAbout;
-	private JTextPane helpUML;
-	private JTextPane helpConnection;
-	private JTextPane helpDataModel;
-	private JTextField maxClass;
 
 	public PegaProjectSettingsForm(Project project) {
 		model = new DefaultListModel<String>();
@@ -92,7 +92,6 @@ public class PegaProjectSettingsForm implements ConfigurableUi<PegaProjectSettin
 		try {
 			state.maxClass = Integer.parseInt(maxClass.getText());
 		} catch (NumberFormatException e) {
-
 		}
 		state.baseClassName = baseClassField.getText();
 		state.login = loginField.getText();
@@ -107,7 +106,6 @@ public class PegaProjectSettingsForm implements ConfigurableUi<PegaProjectSettin
 		System.arraycopy(objects, 0, state.highestClasses, 0, objects.length);
 		settings.fireChangeEvent();
 	}
-
 
 	@Override
 	public @NotNull JComponent getComponent() {
@@ -129,20 +127,20 @@ public class PegaProjectSettingsForm implements ConfigurableUi<PegaProjectSettin
 														urlField.getText(),
 														loginField.getText(),
 														cls,
-														new String(passwordField.getPassword()), i,
+														new String(passwordField.getPassword()),
+														i,
 														caseTypeColorField.getText(),
 														pageColorField.getText(),
 														entityColorField.getText());
 		return !settings.getState().equals(conf);
 	}
 
-	@Override
 	public void reset(@NotNull PegaProjectSettings settings) {
 		final PegaProjectSettings.PegaConfigState state = settings.getState();
 		passwordField.setText(state.pwd);
 		loginField.setText(state.login);
 		urlField.setText(state.url);
-		maxClass.setText(""+state.maxClass);
+		maxClass.setText("" + state.maxClass);
 		baseClassField.setText(state.baseClassName);
 		onTopCheckBox.setSelected(state.abstractOnTop);
 		if (state.caseTypeColor != null && "".equals(state.caseTypeColor.trim())) {
