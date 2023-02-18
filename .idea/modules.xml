@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/pega_modeler.iml" filepath="$PROJECT_DIR$/.idea/modules/pega_modeler.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/pega_modeler.main.iml" filepath="$PROJECT_DIR$/.idea/modules/pega_modeler.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pega_modeler.test.iml" filepath="$PROJECT_DIR$/.idea/modules/pega_modeler.test.iml" />
     </modules>
   </component>
 </project>
