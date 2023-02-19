@@ -1,6 +1,6 @@
 package net.pega.intellij.modeler.uml;
 
-import net.pega.intellij.modeler.config.PegaProjectSettings;
+import net.pega.intellij.modeler.config.PegaConfigState;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 
@@ -11,7 +11,7 @@ public interface Context {
 
 	CloseableHttpResponse execute(HttpGet get) throws IOException;
 
-	PegaProjectSettings.PegaConfigState getState();
+	PegaConfigState getState();
 
 	void log(String msg);
 }

@@ -1,6 +1,6 @@
 package net.pega.intellij.modeler.uml.data;
 
-import net.pega.intellij.modeler.config.PegaProjectSettings;
+import net.pega.intellij.modeler.config.PegaConfigState;
 import net.pega.intellij.modeler.uml.Context;
 
 import java.io.PrintStream;
@@ -27,7 +27,7 @@ class UmlGenerator {
 			if (value.parent != null) {
 				final String s1 = DataModel.snakeToCamel(value.parent);
 				final String s2 = DataModel.snakeToCamel(value.name);
-				if (context.getState().abstractOnTop) {
+				if (context.getState().dataModelState.abstractOnTop) {
 					out.println(s1 + " <|-- " + s2);
 				} else {
 					out.println(s2 + " --|> " + s1);
@@ -42,11 +42,11 @@ class UmlGenerator {
 		}
 	}
 
-	void generateHeader(PrintStream out, PegaProjectSettings.PegaConfigState state) {
+	void generateHeader(PrintStream out, PegaConfigState state) {
 		out.println("skinparam class {");
-		out.println("BackgroundColor<<Work>> " + state.caseTypeColor);
-		out.println("BackgroundColor<<Entity>> " + state.entityColor);
-		out.println("BackgroundColor<<Page>> " + state.pageColor);
+		out.println("BackgroundColor<<Work>> " + state.dataModelState.caseTypeColor);
+		out.println("BackgroundColor<<Entity>> " + state.dataModelState.entityColor);
+		out.println("BackgroundColor<<Page>> " + state.dataModelState.pageColor);
 		out.println("}");
 	}
 

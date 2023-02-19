@@ -7,6 +7,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="pega_modeler.main" />
+    <orderEntry type="library" name="Gradle: org.eclipse.mylyn.github:org.eclipse.egit.github.core:2.1.5" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains:annotations:24.0.0" level="project" />
     <orderEntry type="module-library">
       <library name="Gradle: com.jetbrains:ideaIC:2022.1.4">
@@ -76,6 +77,7 @@
         </SOURCES>
       </library>
     </orderEntry>
+    <orderEntry type="library" name="Gradle: com.google.code.gson:gson:2.2.2" level="project" />
   </component>
   <component name="TestModuleProperties" production-module="pega_modeler.main" />
 </module>

@@ -32,3 +32,9 @@ tasks {
     untilBuild.set("223.*")
   }
 }
+
+dependencies{
+  // https://mvnrepository.com/artifact/org.eclipse.mylyn.github/org.eclipse.egit.github.core
+  implementation ("org.eclipse.mylyn.github:org.eclipse.egit.github.core:2.1.5")
+
+}

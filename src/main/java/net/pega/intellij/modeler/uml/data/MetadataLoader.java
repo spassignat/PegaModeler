@@ -21,7 +21,7 @@ class MetadataLoader {
 	}
 
 	void analyseClass(MClass mClass) {
-		if (Arrays.stream(context.getState().highestClasses).noneMatch(ac -> Objects.equals(ac, mClass.name))) {
+		if (Arrays.stream(context.getState().dataModelState.highestClasses).noneMatch(ac -> Objects.equals(ac, mClass.name))) {
 			final MClass mClass1 = getMClass(mClass.name);
 			if (mClass1!=null) {
 				analyseInheritance(mClass1);
@@ -94,7 +94,8 @@ class MetadataLoader {
 	}
 
 	private MClass getMClass(String pyPageClass) {
-		if (Arrays.stream(context.getState().highestClasses).noneMatch(ac -> Objects.equals(ac, pyPageClass))&&classMap.size()<context.getState().maxClass) {
+		if (Arrays.stream(context.getState().dataModelState.highestClasses).noneMatch(ac -> Objects.equals(ac, pyPageClass))
+				&&classMap.size()<context.getState().dataModelState.maxClass) {
 			if (!classMap.containsKey(pyPageClass)) {
 				classMap.put(pyPageClass, new MClass(pyPageClass));
 			}

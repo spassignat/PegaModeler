@@ -10,6 +10,7 @@
 	<description>
 		<![CDATA[
       Pega Modeler helps developper to view Pega application architecture.<br> Generated diagrams use plantuml syntax.
+      It requires to install some rules in pega, available in https://github.com/spassignat/PegaModeler/pega-ruleset/
 
       There is actually no error report. Please open a case, for any error and feature suggestion.
     ]]>
@@ -41,5 +42,6 @@
 							 key="pega.plugin.display.name"
 							 id="pega-modeler"
 							 instance="net.pega.intellij.modeler.config.PegaProjectConfigurable"/>-->
+		<errorHandler implementation="net.pega.intellij.errorreporting.GitHubErrorReporter"/>
 	</extensions>
 </idea-plugin>

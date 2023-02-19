@@ -1,6 +1,6 @@
 package net.pega.intellij.modeler.uml;
 
-import net.pega.intellij.modeler.config.PegaProjectSettings;
+import net.pega.intellij.modeler.config.PegaConfigState;
 import net.pega.intellij.modeler.view.MessageCallback;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -15,14 +15,14 @@ import java.util.Base64;
 
 public abstract class PegaClient implements Context {
 	protected DefaultHttpClient client;
-	protected PegaProjectSettings.PegaConfigState state;
+	protected PegaConfigState state;
 	MessageCallback log;
 	private String token;
 
 	public abstract void analyse(PrintStream out) throws IOException;
 
 	public HttpGet createRequest(String path) {
-		final HttpGet get = new HttpGet(state.url + path);
+		final HttpGet get = new HttpGet(state.connectState.url + path);
 		log(get.toString());
 		//		final HttpGet get = new HttpGet("http://localhost:8090/prweb/api/UML/1.0/datamodel");
 		get.setHeader("Cookie", "JSESSIONID=1234");
@@ -40,20 +40,20 @@ public abstract class PegaClient implements Context {
 	public abstract String getAnalysis();
 
 	@Override
-	public PegaProjectSettings.PegaConfigState getState() {
+	public PegaConfigState getState() {
 		return state;
 	}
 
-	public void init(PegaProjectSettings.PegaConfigState state) {
+	public void init(PegaConfigState state) {
 		this.state = state;
 		client = new DefaultHttpClient();
 		final BasicCredentialsProvider credsProvider = new BasicCredentialsProvider();
-		credsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(state.login, state.pwd));
+		credsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(state.connectState.login, state.connectState.pwd));
 		client.setCredentialsProvider(credsProvider);
-		token = Base64.getEncoder().encodeToString((state.login + ":" + state.pwd).getBytes());
+		token = Base64.getEncoder().encodeToString((state.connectState.login + ":" + state.connectState.pwd).getBytes());
 	}
 
-	public void init(PegaProjectSettings.PegaConfigState state, MessageCallback log) {
+	public void init(PegaConfigState state, MessageCallback log) {
 		this.state = state;
 		this.log = log;
 	}

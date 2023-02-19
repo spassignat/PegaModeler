@@ -6,6 +6,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import net.pega.intellij.modeler.PegaPlugin;
+import net.pega.intellij.modeler.config.PegaConfigState;
 import net.pega.intellij.modeler.config.PegaProjectSettings;
 import net.pega.intellij.modeler.uml.PegaClient;
 import org.jetbrains.annotations.NotNull;
@@ -34,7 +35,7 @@ class MyRunnable implements Runnable, MessageCallback {
 		try {
 			WriteAction.run(() -> {
 				final PegaProjectSettings instance = PegaProjectSettings.getInstance(project);
-				final PegaProjectSettings.PegaConfigState state = instance.getState();
+				final PegaConfigState state = instance.getState();
 				pegaClient.init(state,this);
 				final VirtualFile root = project.getWorkspaceFile().getParent().getParent();
 				VirtualFile pegaFolder = root.findChild("pega");

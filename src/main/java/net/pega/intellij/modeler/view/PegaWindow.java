@@ -4,6 +4,7 @@ package net.pega.intellij.modeler.view;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
+import net.pega.intellij.modeler.config.PegaConfigState;
 import net.pega.intellij.modeler.config.PegaProjectSettings;
 import net.pega.intellij.modeler.uml.PegaClient;
 import org.jetbrains.annotations.NotNull;
@@ -22,10 +23,11 @@ public class PegaWindow {
 	private JButton generateDataModelButton;
 	private JPanel myToolWindowContent;
 	private JLabel urlLabel;
+	private JButton sendErrorButton;
 
 	public PegaWindow(ToolWindow toolWindow, @NotNull Project project) {
 		final PegaProjectSettings instance = PegaProjectSettings.getInstance(project);
-		final PegaProjectSettings.PegaConfigState state = instance.getState();
+		final PegaConfigState state = instance.getState();
 		final ServiceLoader<PegaClient> load = ServiceLoader.load(PegaClient.class, PegaClient.class.getClassLoader());
 		for (PegaClient pegaClient : load) {
 			pegaClient.init(state);
@@ -49,6 +51,11 @@ public class PegaWindow {
 				public void actionPerformed(ActionEvent e) {
 					area.setText("");
 				}
+			});	sendErrorButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					throw new RuntimeException();
+				}
 			});
 		}
 		instance.addChangeListener(new ChangeListener() {
@@ -68,7 +75,7 @@ public class PegaWindow {
 		return myToolWindowContent;
 	}
 
-	private void updateView(PegaProjectSettings.PegaConfigState state) {
-		urlLabel.setText(state.url);
+	private void updateView(PegaConfigState state) {
+		urlLabel.setText(state.connectState.url);
 	}
 }

@@ -5,106 +5,39 @@ import com.intellij.openapi.options.ConfigurableUi;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
 import net.pega.intellij.modeler.PegaBundle;
+import net.pega.intellij.modeler.config.PegaConfigState;
 import net.pega.intellij.modeler.config.PegaProjectSettings;
+import net.pega.intellij.modeler.uml.connect.ConnectForm;
+import net.pega.intellij.modeler.uml.data.DataModelForm;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.util.Arrays;
-import java.util.List;
 
 public class PegaProjectSettingsForm implements ConfigurableUi<PegaProjectSettings> {
-	private final DefaultListModel<String> model;
-	private JButton addButton;
-	private JTextField baseClassField;
-	private JTextField caseTypeColorField;
-	private JLabel classLabel;
 	private JPanel configPane;
-	private JTextField entityColorField;
+	private ConnectForm connectForm;
+	private DataModelForm dataModelForm;
+	private JTextField gitHubUserField;
+	private JTextArea githubToken;
 	private JTextPane helpAbout;
-	private JTextPane helpConnection;
-	private JTextPane helpDataModel;
-	private JTextPane helpUML;
-	private JList<String> list1;
-	private JTextField loginField;
-	private JLabel loginLabel;
-	private JTextField maxClass;
-	private JCheckBox onTopCheckBox;
-	private JTextField pageColorField;
-	private JPasswordField passwordField;
-	private JLabel passwordLabel;
-	private JTextField textField1;
-	private JTextArea urlField;
-	private JLabel urlLabel;
 
 	public PegaProjectSettingsForm(Project project) {
-		model = new DefaultListModel<String>();
-		textField1.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-				if (e.getKeyChar() == KeyEvent.VK_ENTER) {
-					model.addElement(textField1.getText());
-				}
-			}
-		});
-		list1.setModel(model);
-		list1.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-				if (e.getKeyChar() == KeyEvent.VK_DELETE) {
-					final List<String> selectedValuesList = list1.getSelectedValuesList();
-					for (Object o : selectedValuesList) {
-						model.removeElement(o);
-					}
-				}
-			}
-		});
-		addButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				model.addElement(textField1.getText().trim());
-			}
-		});
 		helpAbout.setText(PegaBundle.getHelp("about"));
-		helpConnection.setText(PegaBundle.getHelp("connect"));
-		helpDataModel.setText(PegaBundle.getHelp("datamodel"));
-		helpUML.setText(PegaBundle.getHelp("uml"));
-		maxClass.addKeyListener(new KeyAdapter() {
-			public void keyReleased(KeyEvent ke) {
-				String value = maxClass.getText();
-				try {
-					Integer.parseInt(value);
-					maxClass.setForeground(Color.black);
-				} catch (NumberFormatException e) {
-					maxClass.setForeground(Color.red);
-				}
-			}
-		});
 	}
 
 	@Override
 	public void apply(@NotNull PegaProjectSettings settings) throws ConfigurationException {
-		final PegaProjectSettings.PegaConfigState state = settings.getState();
-		try {
-			state.maxClass = Integer.parseInt(maxClass.getText());
-		} catch (NumberFormatException e) {
-		}
-		state.baseClassName = baseClassField.getText();
-		state.login = loginField.getText();
-		state.abstractOnTop = onTopCheckBox.isSelected();
-		state.pwd = passwordField.getText();
-		state.url = urlField.getText();
-		state.pageColor = pageColorField.getText();
-		state.entityColor = entityColorField.getText();
-		state.caseTypeColor = caseTypeColorField.getText();
-		final Object[] objects = model.toArray();
-		state.highestClasses = new String[objects.length];
-		System.arraycopy(objects, 0, state.highestClasses, 0, objects.length);
+		final PegaConfigState state = settings.getState();
+		connectForm.apply(settings.getState().connectState);
+		dataModelForm.apply(settings);
+		state.githubUser = gitHubUserField.getText();
+		state.githubToken = githubToken.getText();
 		settings.fireChangeEvent();
+	}
+
+	public PegaConfigState currentState() {
+		final PegaConfigState conf = new PegaConfigState(gitHubUserField.getText(), githubToken.getText());
+		return conf;
 	}
 
 	@Override
@@ -114,58 +47,19 @@ public class PegaProjectSettingsForm implements ConfigurableUi<PegaProjectSettin
 
 	@Override
 	public boolean isModified(@NotNull PegaProjectSettings settings) {
-		final Object[] objects = model.toArray();
-		Arrays.sort(objects);
-		String[] cls = new String[objects.length];
-		System.arraycopy(objects, 0, cls, 0, cls.length);
-		final String text = maxClass.getText();
-		final int i = Integer.parseInt(text);
-		final PegaProjectSettings.PegaConfigState
-				conf =
-				new PegaProjectSettings.PegaConfigState(onTopCheckBox.isSelected(),
-														baseClassField.getText(),
-														urlField.getText(),
-														loginField.getText(),
-														cls,
-														new String(passwordField.getPassword()),
-														i,
-														caseTypeColorField.getText(),
-														pageColorField.getText(),
-														entityColorField.getText());
-		return !settings.getState().equals(conf);
+		final PegaConfigState state = settings.getState();
+		boolean b1 = connectForm.isModified(state.connectState);
+		boolean b2 = dataModelForm.isModified(state.dataModelState);
+		final PegaConfigState conf = new PegaConfigState(gitHubUserField.getText(), githubToken.getText());
+		final boolean b3 = !state.equals(conf);
+		return b3 || b1 || b2;
 	}
 
 	public void reset(@NotNull PegaProjectSettings settings) {
-		final PegaProjectSettings.PegaConfigState state = settings.getState();
-		passwordField.setText(state.pwd);
-		loginField.setText(state.login);
-		urlField.setText(state.url);
-		maxClass.setText("" + state.maxClass);
-		baseClassField.setText(state.baseClassName);
-		onTopCheckBox.setSelected(state.abstractOnTop);
-		if (state.caseTypeColor != null && "".equals(state.caseTypeColor.trim())) {
-			caseTypeColorField.setText(state.caseTypeColor);
-		} else {
-			caseTypeColorField.setText("#2FE5C2");
-		}
-		if (state.pageColor != null && "".equals(state.pageColor.trim())) {
-			pageColorField.setText(state.pageColor);
-		} else {
-			pageColorField.setText("#2FA1E5");
-		}
-		if (state.entityColor != null && "".equals(state.entityColor.trim())) {
-			entityColorField.setText(state.entityColor);
-		} else {
-			entityColorField.setText("#F85475");
-		}
-		model.removeAllElements();
-		if (state.highestClasses != null) {
-			for (String highestClass : state.highestClasses) {
-				model.addElement(highestClass);
-			}
-		} else {
-			model.addElement("Work-");
-			model.addElement("Data-");
-		}
+		final PegaConfigState state = settings.getState();
+		dataModelForm.reset(state.dataModelState);
+		connectForm.reset(state.connectState);
+		gitHubUserField.setText(state.githubUser);
+		githubToken.setText(state.githubToken);
 	}
 }
