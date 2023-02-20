@@ -1,3 +1,22 @@
+/*
+ * Copyright (c) 2023 Stephane Passignat - Exygen
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is furnished
+ * to do so, subject to the following conditions:
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+ * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 package net.pega.intellij.modeler.uml.data;
 
 import com.google.gson.JsonArray;
@@ -23,7 +42,7 @@ class MetadataLoader {
 	void analyseClass(MClass mClass) {
 		if (Arrays.stream(context.getState().dataModelState.highestClasses).noneMatch(ac -> Objects.equals(ac, mClass.name))) {
 			final MClass mClass1 = getMClass(mClass.name);
-			if (mClass1!=null) {
+			if (mClass1 != null) {
 				analyseInheritance(mClass1);
 				analyseProperties(mClass1);
 				mClass1.analyzed = true;
@@ -46,7 +65,7 @@ class MetadataLoader {
 	private void analyseInheritance(MClass mClass) {
 		final HttpGet get = context.createRequest("/class/" + mClass.name);
 		context.log("analyseClass: " + mClass.name);
-//		System.out.println(context.getState());
+		//		System.out.println(context.getState());
 		final InputStream content;
 		try (CloseableHttpResponse response = context.execute(get)) {
 			context.log(response.getStatusLine().toString());
@@ -94,8 +113,7 @@ class MetadataLoader {
 	}
 
 	private MClass getMClass(String pyPageClass) {
-		if (Arrays.stream(context.getState().dataModelState.highestClasses).noneMatch(ac -> Objects.equals(ac, pyPageClass))
-				&&classMap.size()<context.getState().dataModelState.maxClass) {
+		if (Arrays.stream(context.getState().dataModelState.highestClasses).noneMatch(ac -> Objects.equals(ac, pyPageClass)) && classMap.size() < context.getState().dataModelState.maxClass) {
 			if (!classMap.containsKey(pyPageClass)) {
 				classMap.put(pyPageClass, new MClass(pyPageClass));
 			}
@@ -125,7 +143,7 @@ class MetadataLoader {
 		 */
 		String pyPageClass = jsonElement.get("pyPageClass").getAsString();
 		MClass declaringClass = getMClass(pyClassName);
-		if (declaringClass!=null) {
+		if (declaringClass != null) {
 			pyProperty.page = pyPropertyMode.startsWith("Page");
 			pyProperty.reference = pyIsReference;
 			pyProperty.list = pyPropertyMode.equals("PageList");

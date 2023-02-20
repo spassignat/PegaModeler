@@ -19,6 +19,11 @@ java {
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
   version.set("2022.1.4")
+  type.add("IC")
+  type.add("IU")
+  type.add("CL")
+  type.add("PS")
+  plugins.set(listOf("com.jetbrains.php:221.5787.21"))
 }
 
 tasks {

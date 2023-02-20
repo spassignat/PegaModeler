@@ -1,23 +1,21 @@
 /*
- * Copyright (c) 2018 Patrick Scheibe
+ * Copyright (c) 2018-2023 Stephane Passignat - Exygen
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
+ * copies of the Software, and to permit persons to whom the Software is furnished
+ * to do so, subject to the following conditions:
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+ * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package net.pega.intellij.errorreporting;
 
@@ -41,8 +39,6 @@ import com.intellij.openapi.diagnostic.Attachment;
 import com.intellij.openapi.diagnostic.ErrorReportSubmitter;
 import com.intellij.openapi.diagnostic.IdeaLoggingEvent;
 import com.intellij.openapi.diagnostic.SubmittedReportInfo;
-import com.intellij.openapi.progress.EmptyProgressIndicator;
-import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.Consumer;
 import com.intellij.util.containers.ContainerUtil;
@@ -76,17 +72,10 @@ public class GitHubErrorReporter extends ErrorReportSubmitter {
 		}
 		LinkedHashMap<String, String>
 				reportValues =
-				IdeaInformationProxy.getKeyValuePairs(bean, ApplicationManager.getApplication(),
-													  (ApplicationInfoEx) ApplicationInfo.getInstance(),
-													  ApplicationNamesInfo.getInstance());
+				IdeaInformationProxy.getKeyValuePairs(bean, ApplicationManager.getApplication(), (ApplicationInfoEx) ApplicationInfo.getInstance(), ApplicationNamesInfo.getInstance());
 		final Project project = CommonDataKeys.PROJECT.getData(dataContext);
 		final CallbackWithNotification notifyingCallback = new CallbackWithNotification(callback, project);
-		AnonymousFeedbackTask task = new AnonymousFeedbackTask(project, ErrorReportBundle.message("report.error.progress.dialog.text"), true, reportValues, notifyingCallback);
-		/*if (project == null) {
-			task.run(new EmptyProgressIndicator());
-		} else {
-			ProgressManager.getInstance().run(task);
-		}*/
+		AnonymousFeedbackTask task = new AnonymousFeedbackTask(project, ErrorReportBundle.message("report.error.progress.dialog.text"), reportValues, notifyingCallback);
 		return task.perform();
 	}
 

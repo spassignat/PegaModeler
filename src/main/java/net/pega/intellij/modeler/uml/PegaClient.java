@@ -1,3 +1,22 @@
+/*
+ * Copyright (c) 2023 Stephane Passignat - Exygen
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is furnished
+ * to do so, subject to the following conditions:
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+ * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 package net.pega.intellij.modeler.uml;
 
 import net.pega.intellij.modeler.config.PegaConfigState;
@@ -7,19 +26,20 @@ import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicCredentialsProvider;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Base64;
 
 public abstract class PegaClient implements Context {
-	protected DefaultHttpClient client;
+	protected CloseableHttpClient client;
 	protected PegaConfigState state;
 	MessageCallback log;
 	private String token;
 
-	public abstract void analyse(PrintStream out) throws IOException;
+	public abstract void analyse(PrintStream out);
 
 	public HttpGet createRequest(String path) {
 		final HttpGet get = new HttpGet(state.connectState.url + path);
@@ -46,10 +66,10 @@ public abstract class PegaClient implements Context {
 
 	public void init(PegaConfigState state) {
 		this.state = state;
-		client = new DefaultHttpClient();
+		final UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(state.connectState.login, state.connectState.pwd);
 		final BasicCredentialsProvider credsProvider = new BasicCredentialsProvider();
-		credsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(state.connectState.login, state.connectState.pwd));
-		client.setCredentialsProvider(credsProvider);
+		credsProvider.setCredentials(AuthScope.ANY, credentials);
+		client = HttpClientBuilder.create().setDefaultCredentialsProvider(credsProvider).build();
 		token = Base64.getEncoder().encodeToString((state.connectState.login + ":" + state.connectState.pwd).getBytes());
 	}
 

@@ -1,22 +1,21 @@
 /*
- * Copyright (c) 2017 Patrick Scheibe
+ * Copyright (c) 2023-2023 Stephane Passignat - Exygen
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ * copies of the Software, and to permit persons to whom the Software is furnished
+ * to do so, subject to the following conditions:
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
  *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+ * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package net.pega.intellij.errorreporting;
 
@@ -31,7 +30,6 @@ import org.eclipse.egit.github.core.client.PageIterator;
 import org.eclipse.egit.github.core.service.IssueService;
 
 import javax.annotation.Nullable;
-import java.io.IOException;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -39,12 +37,10 @@ import java.util.Map.Entry;
  * Provides functionality to create and send GitHub issues when an exception is thrown by a plugin.
  */
 class AnonymousFeedback {
-	//  private final static String tokenFile = "de/halirutan/mathematica/errorreporting/ScrambledToken.bin";
-	//  private final static String gitRepoUser = "Mathematica-IntelliJ-Plugin";
 	private final static String gitOwner = "spassignat";
 	private final static String gitRepo = "PegaModeler";
 	private final static String issueLabel = "auto-generated";
-	private final static String redirectUri = "https://github.com/spassignat/PegaModeler"; // L'URL de rappel doit correspondre à celle que vous avez définie pour votre application
+	private final static String redirectUri = "https://github.com/spassignat/PegaModeler";
 
 	private AnonymousFeedback() {
 	}
@@ -87,10 +83,9 @@ class AnonymousFeedback {
 	 * @param service     Issue-service of the GitHub lib that lets you access all issues
 	 * @param repo        The repository that should be used
 	 * @return The duplicate if one is found or null
-	 * @throws IOException Problems when connecting to GitHub
 	 */
 	@Nullable
-	private static Issue findFirstDuplicate(String uniqueTitle, final IssueService service, RepositoryId repo) throws IOException {
+	private static Issue findFirstDuplicate(String uniqueTitle, final IssueService service, RepositoryId repo) {
 		Map<String, String> searchParameters = new HashMap<>(2);
 		searchParameters.put(IssueService.FILTER_STATE, IssueService.STATE_OPEN);
 		final PageIterator<Issue> pages = service.pageIssues(repo, searchParameters);
@@ -176,7 +171,7 @@ class AnonymousFeedback {
 			result = new SubmittedReportInfo(htmlUrl, message, isNewIssue ? SubmissionStatus.NEW_ISSUE : SubmissionStatus.DUPLICATE);
 			return result;
 		} catch (Exception e) {
-			return new SubmittedReportInfo(null, ErrorReportBundle.message("report.error.connection.failure",e.getMessage()), SubmissionStatus.FAILED);
+			return new SubmittedReportInfo(null, ErrorReportBundle.message("report.error.connection.failure", e.getMessage()), SubmissionStatus.FAILED);
 		}
 	}
 }
