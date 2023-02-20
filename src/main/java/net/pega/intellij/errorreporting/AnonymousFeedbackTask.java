@@ -26,6 +26,7 @@ import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.Task.Backgroundable;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.Consumer;
+import net.pega.intellij.modeler.config.PegaConfigState;
 import net.pega.intellij.modeler.config.PegaProjectSettings;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -49,10 +50,17 @@ public class AnonymousFeedbackTask extends Backgroundable {
                         final Consumer<SubmittedReportInfo> callback) {
     super(project, title, canBeCancelled);
     final PegaProjectSettings service = project.getService(PegaProjectSettings.class);
-    githubUser=service.getState().githubUser;
-    githubToken=service.getState().githubToken;
+    final PegaConfigState state = service.getState();
+    githubUser= state.githubUser;
+    githubToken= state.githubToken;
     myParams = params;
     myCallback = callback;
+  }
+
+  public boolean perform() {
+    final SubmittedReportInfo t = AnonymousFeedback.sendFeedback(myParams, githubUser, githubToken);
+    myCallback.consume(t);
+    return t.getStatus()== SubmittedReportInfo.SubmissionStatus.FAILED;
   }
 
   @Override

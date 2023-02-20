@@ -82,12 +82,12 @@ public class GitHubErrorReporter extends ErrorReportSubmitter {
 		final Project project = CommonDataKeys.PROJECT.getData(dataContext);
 		final CallbackWithNotification notifyingCallback = new CallbackWithNotification(callback, project);
 		AnonymousFeedbackTask task = new AnonymousFeedbackTask(project, ErrorReportBundle.message("report.error.progress.dialog.text"), true, reportValues, notifyingCallback);
-		if (project == null) {
+		/*if (project == null) {
 			task.run(new EmptyProgressIndicator());
 		} else {
 			ProgressManager.getInstance().run(task);
-		}
-		return true;
+		}*/
+		return task.perform();
 	}
 
 	@NotNull

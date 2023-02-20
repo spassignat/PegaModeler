@@ -23,7 +23,6 @@ public class PegaWindow {
 	private JButton generateDataModelButton;
 	private JPanel myToolWindowContent;
 	private JLabel urlLabel;
-	private JButton sendErrorButton;
 
 	public PegaWindow(ToolWindow toolWindow, @NotNull Project project) {
 		final PegaProjectSettings instance = PegaProjectSettings.getInstance(project);
@@ -50,11 +49,6 @@ public class PegaWindow {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					area.setText("");
-				}
-			});	sendErrorButton.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					throw new RuntimeException();
 				}
 			});
 		}

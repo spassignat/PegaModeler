@@ -41,7 +41,8 @@ import java.util.Map.Entry;
 class AnonymousFeedback {
 	//  private final static String tokenFile = "de/halirutan/mathematica/errorreporting/ScrambledToken.bin";
 	//  private final static String gitRepoUser = "Mathematica-IntelliJ-Plugin";
-	private final static String gitRepo = "spassignat/PegaModeler";
+	private final static String gitOwner = "spassignat";
+	private final static String gitRepo = "PegaModeler";
 	private final static String issueLabel = "auto-generated";
 	private final static String redirectUri = "https://github.com/spassignat/PegaModeler"; // L'URL de rappel doit correspondre à celle que vous avez définie pour votre application
 
@@ -157,7 +158,7 @@ class AnonymousFeedback {
 		try {
 			GitHubClient client = new GitHubClient();
 			client.setOAuth2Token(githubToken);
-			RepositoryId repoID = new RepositoryId(githubUser, gitRepo);
+			RepositoryId repoID = new RepositoryId(gitOwner, gitRepo);
 			IssueService issueService = new IssueService(client);
 			Issue newGibHubIssue = createNewGibHubIssue(environmentDetails);
 			Issue duplicate = findFirstDuplicate(newGibHubIssue.getTitle(), issueService, repoID);
@@ -175,7 +176,7 @@ class AnonymousFeedback {
 			result = new SubmittedReportInfo(htmlUrl, message, isNewIssue ? SubmissionStatus.NEW_ISSUE : SubmissionStatus.DUPLICATE);
 			return result;
 		} catch (Exception e) {
-			return new SubmittedReportInfo(null, ErrorReportBundle.message("report.error.connection.failure"), SubmissionStatus.FAILED);
+			return new SubmittedReportInfo(null, ErrorReportBundle.message("report.error.connection.failure",e.getMessage()), SubmissionStatus.FAILED);
 		}
 	}
 }
