@@ -13,7 +13,8 @@
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Login"/>
+          <labelFor value="d26b9"/>
+          <text resource-bundle="messages/PegaBundle" key="settings.pega.login"/>
         </properties>
       </component>
       <component id="44767" class="javax.swing.JLabel" binding="passwordLabel">
@@ -21,7 +22,8 @@
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Password"/>
+          <labelFor value="851ca"/>
+          <text resource-bundle="messages/PegaBundle" key="settings.pega.password"/>
         </properties>
       </component>
       <component id="851ca" class="javax.swing.JPasswordField" binding="passwordField">
@@ -45,7 +47,8 @@
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="URL"/>
+          <labelFor value="e4f3e"/>
+          <text resource-bundle="messages/PegaBundle" key="settings.pega.url"/>
         </properties>
       </component>
       <component id="e4f3e" class="javax.swing.JTextField" binding="urlField">

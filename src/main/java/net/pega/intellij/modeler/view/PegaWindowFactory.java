@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Stephane Passignat - Exygen
+ * Copyright (c) 2023-2023 Stephane Passignat - Exygen
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -12,19 +12,24 @@
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
  * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
  * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package net.pega.intellij.modeler.view;
 
+import com.intellij.openapi.actionSystem.DataProvider;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowFactory;
 import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentFactory;
+import com.intellij.ui.content.ContentManager;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class PegaWindowFactory implements ToolWindowFactory {
 	public PegaWindowFactory() {
@@ -38,8 +43,18 @@ public class PegaWindowFactory implements ToolWindowFactory {
 	 */
 	public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
 		PegaWindow myToolWindow = new PegaWindow(toolWindow, project);
-		ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
+		ContentFactory contentFactory = ApplicationManager.getApplication().getService(ContentFactory.class);
 		Content content = contentFactory.createContent(myToolWindow.getContent(), "", false);
-		toolWindow.getContentManager().addContent(content);
+		final ContentManager contentManager = toolWindow.getContentManager();
+		contentManager.addContent(content);
+		contentManager.addDataProvider(new DataProvider() {
+			@Override
+			public @Nullable Object getData(@NotNull @NonNls String dataId) {
+				if ("Area".equals(dataId)) {
+					return myToolWindow.area;
+				}
+				return null;
+			}
+		});
 	}
 }

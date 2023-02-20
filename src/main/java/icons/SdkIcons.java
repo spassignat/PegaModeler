@@ -1,5 +1,22 @@
-// Copyright 2000-2022 JetBrains s.r.o. and other contributors. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-
+/*
+ * Copyright (c) 2023 Stephane Passignat - Exygen
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is furnished
+ * to do so, subject to the following conditions:
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+ * PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+ * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 package icons;
 
 import com.intellij.openapi.util.IconLoader;
@@ -7,7 +24,7 @@ import com.intellij.openapi.util.IconLoader;
 import javax.swing.*;
 
 public class SdkIcons {
-
-  public static final Icon Sdk_default_icon = IconLoader.getIcon("/icons/sdk_16.svg", SdkIcons.class);
-
+	public static final Icon PegaIcon = IconLoader.getIcon("/META-INF/pluginIcon.svg", SdkIcons.class);
+	public static final Icon DataIcon = IconLoader.getIcon("/icons/database.svg", SdkIcons.class);
+	public static final Icon Sdk_default_icon = IconLoader.getIcon("/icons/sdk_16.svg", SdkIcons.class);
 }

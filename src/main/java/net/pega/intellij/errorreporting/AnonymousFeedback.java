@@ -12,14 +12,13 @@
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
  * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
  * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package net.pega.intellij.errorreporting;
 
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.diagnostic.SubmittedReportInfo;
 import com.intellij.openapi.diagnostic.SubmittedReportInfo.SubmissionStatus;
 import org.eclipse.egit.github.core.Issue;
@@ -29,7 +28,6 @@ import org.eclipse.egit.github.core.client.GitHubClient;
 import org.eclipse.egit.github.core.client.PageIterator;
 import org.eclipse.egit.github.core.service.IssueService;
 
-import javax.annotation.Nullable;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -40,7 +38,6 @@ class AnonymousFeedback {
 	private final static String gitOwner = "spassignat";
 	private final static String gitRepo = "PegaModeler";
 	private final static String issueLabel = "auto-generated";
-	private final static String redirectUri = "https://github.com/spassignat/PegaModeler";
 
 	private AnonymousFeedback() {
 	}
@@ -84,7 +81,6 @@ class AnonymousFeedback {
 	 * @param repo        The repository that should be used
 	 * @return The duplicate if one is found or null
 	 */
-	@Nullable
 	private static Issue findFirstDuplicate(String uniqueTitle, final IssueService service, RepositoryId repo) {
 		Map<String, String> searchParameters = new HashMap<>(2);
 		searchParameters.put(IssueService.FILTER_STATE, IssueService.STATE_OPEN);
@@ -142,13 +138,11 @@ class AnonymousFeedback {
 	 * new issue or comments on the duplicate (if the user provided additional information).
 	 *
 	 * @param environmentDetails Information collected by {@link IdeaInformationProxy}
-	 * @param githubUser
 	 * @param githubToken
 	 * @return The report info that is then used in {@link GitHubErrorReporter} to show the user a balloon with the link
 	 * of the created issue.
 	 */
-	static SubmittedReportInfo sendFeedback(LinkedHashMap<String, String> environmentDetails, String githubUser, String githubToken) {
-		final Logger myLogger = Logger.getInstance(AnonymousFeedback.class.getName());
+	static SubmittedReportInfo sendFeedback(LinkedHashMap<String, String> environmentDetails, String githubToken) {
 		final SubmittedReportInfo result;
 		try {
 			GitHubClient client = new GitHubClient();

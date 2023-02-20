@@ -1,6 +1,6 @@
 
 /*
- * Copyright (c) 2023 Stephane Passignat - Exygen
+ * Copyright (c) 2023-2023 Stephane Passignat - Exygen
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -13,7 +13,7 @@
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
  * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
  * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -37,7 +37,6 @@ import java.util.LinkedHashMap;
  */
 public class AnonymousFeedbackTask extends Backgroundable {
 	private final String githubToken;
-	private final String githubUser;
 	private final Consumer<SubmittedReportInfo> myCallback;
 	private final LinkedHashMap<String, String> myParams;
 
@@ -45,14 +44,13 @@ public class AnonymousFeedbackTask extends Backgroundable {
 		super(project, title, true);
 		final PegaProjectSettings service = project.getService(PegaProjectSettings.class);
 		final PegaConfigState state = service.getState();
-		githubUser = state.githubUser;
 		githubToken = state.githubToken;
 		myParams = params;
 		myCallback = callback;
 	}
 
 	public boolean perform() {
-		final SubmittedReportInfo t = AnonymousFeedback.sendFeedback(myParams, githubUser, githubToken);
+		final SubmittedReportInfo t = AnonymousFeedback.sendFeedback(myParams, githubToken);
 		myCallback.consume(t);
 		return t.getStatus() == SubmittedReportInfo.SubmissionStatus.FAILED;
 	}
@@ -60,6 +58,6 @@ public class AnonymousFeedbackTask extends Backgroundable {
 	@Override
 	public void run(@NotNull ProgressIndicator indicator) {
 		indicator.setIndeterminate(true);
-		myCallback.consume(AnonymousFeedback.sendFeedback(myParams, githubUser, githubToken));
+		myCallback.consume(AnonymousFeedback.sendFeedback(myParams, githubToken));
 	}
 }

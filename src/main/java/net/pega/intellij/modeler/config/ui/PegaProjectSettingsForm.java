@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Stephane Passignat - Exygen
+ * Copyright (c) 2023-2023 Stephane Passignat - Exygen
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -12,7 +12,7 @@
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
  * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
  * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -36,7 +36,7 @@ public class PegaProjectSettingsForm implements ConfigurableUi<PegaProjectSettin
 	private ConnectForm connectForm;
 	private DataModelForm dataModelForm;
 	private JTextField gitHubUserField;
-	private JTextArea githubToken;
+	private JTextField githubToken;
 	private JTextPane helpAbout;
 
 	public PegaProjectSettingsForm(Project project) {
@@ -45,12 +45,16 @@ public class PegaProjectSettingsForm implements ConfigurableUi<PegaProjectSettin
 
 	@Override
 	public void apply(@NotNull PegaProjectSettings settings) throws ConfigurationException {
-		final PegaConfigState state = settings.getState();
-		connectForm.apply(settings.getState().connectState);
-		dataModelForm.apply(settings);
-		state.githubUser = gitHubUserField.getText();
-		state.githubToken = githubToken.getText();
-		settings.fireChangeEvent();
+		try {
+			final PegaConfigState state = settings.getState();
+			connectForm.apply(settings.getState().connectState);
+			dataModelForm.apply(settings);
+			state.githubUser = gitHubUserField.getText();
+			state.githubToken = githubToken.getText();
+			settings.fireChangeEvent();
+		} catch (Exception e) {
+			throw new ConfigurationException(PegaBundle.message("apply.fail", e.getMessage()));
+		}
 	}
 
 	public PegaConfigState currentState() {

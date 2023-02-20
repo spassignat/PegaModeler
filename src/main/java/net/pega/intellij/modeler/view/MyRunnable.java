@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Stephane Passignat - Exygen
+ * Copyright (c) 2023-2023 Stephane Passignat - Exygen
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -12,7 +12,7 @@
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
  * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
  * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -33,28 +33,37 @@ import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.ServiceLoader;
 
-class MyRunnable implements Runnable, MessageCallback {
-	final JTextArea responsesField;
+public class MyRunnable implements Runnable, MessageCallback {
+	final MessageCallback responsesField;
 	private final String fileName;
 	private final PegaClient pegaClient;
 	private final @NotNull Project project;
 
-	public MyRunnable(JTextArea responsesField, PegaClient pegaClient, @NotNull Project project, String fileName) {
-		this.pegaClient = pegaClient;
+	public MyRunnable(MessageCallback responsesField, String pegaClientName, @NotNull Project project, String fileName) {
+		final ServiceLoader<PegaClient> load = ServiceLoader.load(PegaClient.class, PegaClient.class.getClassLoader());
+		final Optional<ServiceLoader.Provider<PegaClient>> first = load.stream().filter(elt -> Objects.equals(elt.get().getAnalysis(), pegaClientName)).findFirst();
+		this.pegaClient = first.get().get();
 		this.project = project;
 		this.fileName = fileName;
 		this.responsesField = responsesField;
 	}
 
 	public void log(String msg) {
-		responsesField.append(msg);
-		//		System.out.println(msg);
+		responsesField.log(msg);
+	}
+
+	@Override
+	public void clear() {
+		responsesField.clear();
 	}
 
 	@Override
 	public void run() {
-		responsesField.setText("");
+		responsesField.clear();
 		Logger.getInstance(PegaPlugin.class).info("Generate " + fileName);
 		try {
 			WriteAction.run(() -> {
@@ -74,7 +83,7 @@ class MyRunnable implements Runnable, MessageCallback {
 				VfsUtil.saveText(dmFile, byteArrayOutputStream.toString());
 			});
 		} catch (Exception e) {
-			responsesField.setText(e.toString());
+			responsesField.log(e.toString());
 			Logger.getInstance(PegaPlugin.class).error(e);
 		}
 	}

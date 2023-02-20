@@ -12,7 +12,7 @@
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
  * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
  * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -32,7 +32,6 @@ import com.intellij.notification.NotificationType;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.application.ApplicationInfo;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ApplicationNamesInfo;
 import com.intellij.openapi.application.ex.ApplicationInfoEx;
 import com.intellij.openapi.diagnostic.Attachment;
@@ -70,9 +69,7 @@ public class GitHubErrorReporter extends ErrorReportSubmitter {
 		if (data instanceof LogMessage) {
 			bean.setAttachments(ContainerUtil.filter(((LogMessage) data).getAllAttachments(), Attachment::isIncluded));
 		}
-		LinkedHashMap<String, String>
-				reportValues =
-				IdeaInformationProxy.getKeyValuePairs(bean, ApplicationManager.getApplication(), (ApplicationInfoEx) ApplicationInfo.getInstance(), ApplicationNamesInfo.getInstance());
+		LinkedHashMap<String, String> reportValues = IdeaInformationProxy.getKeyValuePairs(bean, (ApplicationInfoEx) ApplicationInfo.getInstance(), ApplicationNamesInfo.getInstance());
 		final Project project = CommonDataKeys.PROJECT.getData(dataContext);
 		final CallbackWithNotification notifyingCallback = new CallbackWithNotification(callback, project);
 		AnonymousFeedbackTask task = new AnonymousFeedbackTask(project, ErrorReportBundle.message("report.error.progress.dialog.text"), reportValues, notifyingCallback);

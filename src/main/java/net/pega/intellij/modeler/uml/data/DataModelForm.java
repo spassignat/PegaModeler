@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Stephane Passignat - Exygen
+ * Copyright (c) 2023-2023 Stephane Passignat - Exygen
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -12,18 +12,18 @@
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
  * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
  * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package net.pega.intellij.modeler.uml.data;
 
+import com.intellij.ui.JBColor;
 import net.pega.intellij.modeler.PegaBundle;
 import net.pega.intellij.modeler.config.PegaProjectSettings;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -37,6 +37,7 @@ public class DataModelForm {
 	private JTextField baseClassField;
 	private JTextField caseTypeColorField;
 	private JLabel classLabel;
+	private JTextField classNameField;
 	private JPanel contentPane;
 	private JTextField entityColorField;
 	private JTextPane helpDataModel;
@@ -44,15 +45,14 @@ public class DataModelForm {
 	private JTextField maxClass;
 	private JCheckBox onTopCheckBox;
 	private JTextField pageColorField;
-	private JTextField textField1;
 
 	public DataModelForm() {
-		model = new DefaultListModel<String>();
-		textField1.addKeyListener(new KeyAdapter() {
+		model = new DefaultListModel<>();
+		classNameField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				if (e.getKeyChar() == KeyEvent.VK_ENTER) {
-					model.addElement(textField1.getText());
+					model.addElement(classNameField.getText());
 				}
 			}
 		});
@@ -68,24 +68,19 @@ public class DataModelForm {
 				}
 			}
 		});
-		addButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				model.addElement(textField1.getText().trim());
-			}
-		});
+		addButton.addActionListener(e -> model.addElement(classNameField.getText().trim()));
 		maxClass.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent ke) {
 				String value = maxClass.getText();
 				try {
 					Integer.parseInt(value);
-					maxClass.setForeground(Color.black);
+					maxClass.setForeground(JBColor.BLACK);
 				} catch (NumberFormatException e) {
-					maxClass.setForeground(Color.red);
+					maxClass.setForeground(JBColor.RED);
 				}
 			}
 		});
-		helpDataModel.setText(PegaBundle.getHelp("datamodel"));
+		helpDataModel.setText(PegaBundle.getHelp("data-model"));
 	}
 
 	public void apply(PegaProjectSettings settings) {

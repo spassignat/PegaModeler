@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "org.intellij.sdk"
-version = "1.0.0"
+version = "1.0.1"
 
 repositories {
   mavenCentral()
@@ -19,11 +19,6 @@ java {
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
   version.set("2022.1.4")
-  type.add("IC")
-  type.add("IU")
-  type.add("CL")
-  type.add("PS")
-  plugins.set(listOf("com.jetbrains.php:221.5787.21"))
 }
 
 tasks {
@@ -40,6 +35,8 @@ tasks {
 
 dependencies{
   // https://mvnrepository.com/artifact/org.eclipse.mylyn.github/org.eclipse.egit.github.core
-  implementation ("org.eclipse.mylyn.github:org.eclipse.egit.github.core:2.1.5")
+  implementation ("org.eclipse.mylyn.github:org.eclipse.egit.github.core:2.1.5"){
+    exclude(group = "com.google.code.gson", module = "gson")
+  }
 
 }

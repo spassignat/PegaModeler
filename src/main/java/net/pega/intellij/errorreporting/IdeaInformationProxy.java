@@ -12,14 +12,13 @@
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
  * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
  * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package net.pega.intellij.errorreporting;
 
-import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationNamesInfo;
 import com.intellij.openapi.application.ex.ApplicationInfoEx;
 import com.intellij.openapi.diagnostic.Attachment;
@@ -33,7 +32,7 @@ import java.util.LinkedHashMap;
  * Collects information about the running IDEA and the error
  */
 class IdeaInformationProxy {
-	static LinkedHashMap<String, String> getKeyValuePairs(GitHubErrorBean error, Application application, ApplicationInfoEx appInfo, ApplicationNamesInfo namesInfo) {
+	static LinkedHashMap<String, String> getKeyValuePairs(GitHubErrorBean error, ApplicationInfoEx appInfo, ApplicationNamesInfo namesInfo) {
 		LinkedHashMap<String, String> params = new LinkedHashMap<>(21);
 		params.put("error.description", error.getDescription());
 		params.put("Plugin Name", error.getPluginName());
@@ -47,11 +46,11 @@ class IdeaInformationProxy {
 		params.put("Is EAP", Boolean.toString(appInfo.isEAP()));
 		params.put("App Build", appInfo.getBuild().asString());
 		params.put("App Version", appInfo.getFullVersion());
-		params.put("Last Action", error.lastAction);
+		params.put("Last Action", error.getLastAction());
 		params.put("error.message", error.getMessage());
 		StringWriter sw = new StringWriter();
 		PrintWriter pw = new PrintWriter(sw);
-		error.throwable.printStackTrace(pw);
+		error.getThrowable().printStackTrace(pw);
 		params.put("error.stacktrace", sw.toString());
 		params.put("error.hash", error.getExceptionHash());
 		for (Attachment attachment : error.getAttachments()) {

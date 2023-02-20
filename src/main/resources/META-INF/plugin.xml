@@ -1,3 +1,23 @@
+<!--
+  ~ Copyright (c) 2023 Stephane Passignat - Exygen
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is furnished
+  ~ to do so, subject to the following conditions:
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+  ~ INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  ~ PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+  ~ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+  ~ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
+  ~ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+  -->
+
 <idea-plugin>
 	<!-- Unique id for this plugin. Must stay constant for the life of the plugin. -->
 	<id>pega.intellij.modeler</id>
@@ -6,10 +26,9 @@
 	<version>1.0.0</version>
 	<idea-version since-build="222.4167.9"/>
 	<depends>com.intellij.modules.platform</depends>
-	<depends optional="true">PlantUML integration</depends><!-- Text to display as description on Preferences/Settings | Plugin page -->
 	<description>
 		<![CDATA[
-      Pega Modeler helps developper to view Pega application architecture.<br> Generated diagrams use plantuml syntax.
+      Pega Modeler helps developer to view Pega application architecture.<br> Generated diagrams use plantuml syntax.
       It requires to install some rules in pega, available in https://github.com/spassignat/PegaModeler/pega-ruleset/
 
       There is actually no error report. Please open a case, for any error and feature suggestion.
@@ -34,14 +53,26 @@
 				nonDefaultProject="true"/>
 		<projectService
 				serviceImplementation="net.pega.intellij.modeler.config.PegaProjectSettings" />
-		<!--	OOOOOO KKKKKKKK    -->
-		<toolWindow id="Pega" secondary="true" icon="AllIcons.General.Modified" anchor="right"
+		<toolWindow id="Pega" secondary="true" icon="SdkIcons.PegaIcon" anchor="right"
 					factoryClass="net.pega.intellij.modeler.view.PegaWindowFactory"/>
-		<!--<projectConfigurable groupId="editor" groupWeight="110" dynamic="true"
-							 bundle="messages.PegaBundle"
-							 key="pega.plugin.display.name"
-							 id="pega-modeler"
-							 instance="net.pega.intellij.modeler.config.PegaProjectConfigurable"/>-->
+
 		<errorHandler implementation="net.pega.intellij.errorreporting.GitHubErrorReporter"/>
 	</extensions>
+	<actions>
+		<group id="PegaActionGroup" class="net.pega.intellij.modeler.action.PegaActionGroup" text="Pega"
+			   popup="true" compact="true"
+			   icon="SdkIcons.PegaIcon">
+			<add-to-group group-id="ToolsMenu" anchor="last"/>
+		</group>
+		<action id="net.pega.intellij.errorreporting.TriggerExceptionAction" class="net.pega.intellij.errorreporting.TriggerExceptionAction"
+				text="TriggerException" icon="AllIcons.Actions.Lightning">
+			<add-to-group group-id="PegaActionGroup" anchor="last"/>
+		</action>
+<!--		<group id="net.pega.intellij.modeler.action.PegaActionGroup" class="net.pega.intellij.modeler.action.PegaActionGroup" text="PegaDynActionGroup"/>-->
+		<action id="net.pega.intellij.modeler.uml.data.DataModelAction" class="net.pega.intellij.modeler.uml.data.DataModelAction" text="DataModel"
+		icon="SdkIcons.DataIcon">
+			<add-to-group group-id="PegaActionGroup" anchor="last"/>
+
+		</action>
+	</actions>
 </idea-plugin>

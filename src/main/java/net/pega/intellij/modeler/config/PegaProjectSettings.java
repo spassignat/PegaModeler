@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Stephane Passignat - Exygen
+ * Copyright (c) 2023-2023 Stephane Passignat - Exygen
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -12,7 +12,7 @@
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
  * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
  * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -35,6 +35,7 @@ import java.util.List;
 public class PegaProjectSettings implements PersistentStateComponent<PegaConfigState> {
 	@Transient
 	private final List<ChangeListener> listeners = new ArrayList<>();
+	@NotNull
 	private final PegaConfigState state = new PegaConfigState();
 
 	public PegaProjectSettings() {
@@ -50,13 +51,12 @@ public class PegaProjectSettings implements PersistentStateComponent<PegaConfigS
 
 	public void fireChangeEvent() {
 		final ChangeEvent e = new ChangeEvent(this);
-		for (int i = 0; i < listeners.size(); i++) {
-			ChangeListener changeListener = listeners.get(i);
+		for (ChangeListener changeListener : listeners) {
 			changeListener.stateChanged(e);
 		}
 	}
 
-	public PegaConfigState getState() {
+	public @NotNull PegaConfigState getState() {
 		return state;
 	}
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Stephane Passignat - Exygen
+ * Copyright (c) 2023-2023 Stephane Passignat - Exygen
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -12,7 +12,7 @@
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
  * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
  * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
@@ -23,6 +23,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
 import net.pega.intellij.modeler.uml.Context;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -33,7 +34,7 @@ import java.util.*;
 
 class MetadataLoader {
 	private final Map<String, MClass> classMap = new HashMap<>();
-	Context context = null;
+	Context context;
 
 	public MetadataLoader(Context context) {
 		this.context = context;
@@ -49,9 +50,7 @@ class MetadataLoader {
 				boolean pendingClasses = true;
 				int mxc = 100;
 				while (pendingClasses && mxc-- > 0) {
-					getClasses().stream().filter(c -> !c.analyzed).forEach(d -> {
-						analyseClass(d);
-					});
+					getClasses().stream().filter(c -> !c.analyzed).forEach(this::analyseClass);
 					pendingClasses = getClasses().stream().anyMatch(c -> !c.analyzed);
 				}
 			}
@@ -89,6 +88,7 @@ class MetadataLoader {
 			}
 		} catch (Exception e) {
 			context.log(e.toString());
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -144,15 +144,15 @@ class MetadataLoader {
 		String pyPageClass = jsonElement.get("pyPageClass").getAsString();
 		MClass declaringClass = getMClass(pyClassName);
 		if (declaringClass != null) {
-			pyProperty.page = pyPropertyMode.startsWith("Page");
-			pyProperty.reference = pyIsReference;
-			pyProperty.list = pyPropertyMode.equals("PageList");
-			pyProperty.name = pyPropertyName;
-			if (pyProperty.page) {
+			pyProperty.setPage(pyPropertyMode.startsWith("Page"));
+			pyProperty.setReference(pyIsReference);
+			pyProperty.setList(pyPropertyMode.equals("PageList"));
+			pyProperty.setName(pyPropertyName);
+			if (pyProperty.isPage()) {
 				MClass fieldType = getMClass(pyPageClass);
-				pyProperty.type = fieldType.name;
+				pyProperty.setType(fieldType.name);
 			} else {
-				pyProperty.type = pyPropertyMode;
+				pyProperty.setType(pyPropertyMode);
 			}
 			declaringClass.properties.put(pyPropertyName, pyProperty);
 		}
