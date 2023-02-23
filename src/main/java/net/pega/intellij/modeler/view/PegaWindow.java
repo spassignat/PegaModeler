@@ -25,13 +25,11 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
 import net.pega.intellij.modeler.config.PegaConfigState;
 import net.pega.intellij.modeler.config.PegaProjectSettings;
-import net.pega.intellij.modeler.uml.PegaClient;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import java.util.ServiceLoader;
 
 public class PegaWindow {
 	public JTextArea area;
@@ -44,20 +42,16 @@ public class PegaWindow {
 	public PegaWindow(ToolWindow toolWindow, @NotNull Project project) {
 		final PegaProjectSettings instance = PegaProjectSettings.getInstance(project);
 		final PegaConfigState state = instance.getState();
-		final ServiceLoader<PegaClient> load = ServiceLoader.load(PegaClient.class, PegaClient.class.getClassLoader());
-		for (PegaClient pegaClient : load) {
-			pegaClient.init(state, (MessageCallback) myToolWindowContent);
-			final Application application = ApplicationManager.getApplication();
-			generateDataModelButton.addActionListener(evt -> {
-				final MyRunnable dataModel = new MyRunnable((MessageCallback) myToolWindowContent, "DataModel", project, "data-model.puml");
-				application.invokeAndWait(dataModel);
-			});
-			connectButton.addActionListener(evt -> {
-				final MyRunnable connect = new MyRunnable((MessageCallback) myToolWindowContent, "Connect", project, "connect.txt");
-				application.invokeAndWait(connect);
-			});
-			clearButton.addActionListener(e -> area.setText(""));
-		}
+		final Application application = ApplicationManager.getApplication();
+		generateDataModelButton.addActionListener(evt -> {
+			final MyRunnable dataModel = new MyRunnable((MessageCallback) myToolWindowContent, "DataModel", project, "data-model.puml");
+			application.invokeAndWait(dataModel);
+		});
+		connectButton.addActionListener(evt -> {
+			final MyRunnable connect = new MyRunnable((MessageCallback) myToolWindowContent, "Connect", project, "connect.txt");
+			application.invokeAndWait(connect);
+		});
+		clearButton.addActionListener(e -> ((MyJPanel) myToolWindowContent).clear());
 		instance.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {

@@ -46,7 +46,9 @@ public class MyRunnable implements Runnable, MessageCallback {
 	public MyRunnable(MessageCallback responsesField, String pegaClientName, @NotNull Project project, String fileName) {
 		final ServiceLoader<PegaClient> load = ServiceLoader.load(PegaClient.class, PegaClient.class.getClassLoader());
 		final Optional<ServiceLoader.Provider<PegaClient>> first = load.stream().filter(elt -> Objects.equals(elt.get().getAnalysis(), pegaClientName)).findFirst();
-		this.pegaClient = first.get().get();
+		final PegaProjectSettings instance = PegaProjectSettings.getInstance(project);
+		final PegaConfigState state = instance.getState();	this.pegaClient = first.get().get();
+		this.pegaClient.init(state, this);
 		this.project = project;
 		this.fileName = fileName;
 		this.responsesField = responsesField;
