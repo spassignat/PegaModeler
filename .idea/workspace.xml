@@ -7,71 +7,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1cf70225-d520-4266-9950-27b31bba04d6" name="Changes" comment="fix inspection errors">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__unzipped_com_jetbrains_plugins_com_jetbrains_php_unzipped_com_jetbrains_plugins_221_5787_21.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/data/DataModelAction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/view/MyJPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/icons/database.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/icons/pega_13x13.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/copyright/exygen.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copyright/exygen.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+    <list default="true" id="1cf70225-d520-4266-9950-27b31bba04d6" name="Changes" comment="NPE on first run #12">
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/data/model/MClassType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_code_gson_gson_2_2_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__unzipped_com_jetbrains_plugins_com_jetbrains_php_unzipped_com_jetbrains_plugins_221_5787_21.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/pega_modeler.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/pega_modeler.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules/pega_modeler.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/pega_modeler.main.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules/pega_modeler.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/pega_modeler.test.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/icons/SdkIcons.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/icons/SdkIcons.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/errorreporting/AnonymousFeedback.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/errorreporting/AnonymousFeedback.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/errorreporting/AnonymousFeedbackTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/errorreporting/AnonymousFeedbackTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/errorreporting/ErrorBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/errorreporting/ErrorBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/errorreporting/ErrorReportBundle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/errorreporting/ErrorReportBundle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/errorreporting/GitHubAccessTokenScrambler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/errorreporting/GitHubErrorBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/errorreporting/GitHubErrorBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/errorreporting/GitHubErrorReporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/errorreporting/GitHubErrorReporter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/errorreporting/IdeaInformationProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/errorreporting/IdeaInformationProxy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/errorreporting/TriggerExceptionAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/errorreporting/TriggerExceptionAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/errorreporting/package-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/errorreporting/package-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/PegaBundle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/PegaBundle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/PegaPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/PegaPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/action/CustomDefaultActionGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/action/PegaActionGroup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/action/DynamicActionGroup.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/action/PopupDialogAction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/config/PegaConfigState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/config/PegaConfigState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/config/PegaProjectConfigurable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/config/PegaProjectConfigurable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/config/PegaProjectSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/config/PegaProjectSettings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/config/ui/PegaProjectSettingsForm.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/config/ui/PegaProjectSettingsForm.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/config/ui/PegaProjectSettingsForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/config/ui/PegaProjectSettingsForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/Context.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/Context.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/PegaClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/PegaClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/connect/Connect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/connect/Connect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/connect/ConnectForm.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/connect/ConnectForm.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/connect/ConnectForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/connect/ConnectForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/connect/ConnectState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/connect/ConnectState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/data/DataModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/data/DataModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/data/DataModelForm.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/data/DataModelForm.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/data/DataModelForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/data/DataModelForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/data/DataModelState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/data/DataModelState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/data/MClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/data/MClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/data/MProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/data/MProperty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/data/DataModelAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/data/DataModelAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/data/MClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/data/model/MClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/data/MProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/data/model/MProperty.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/data/MetadataLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/data/MetadataLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/data/UmlGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/data/UmlGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/view/MessageCallback.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/view/MessageCallback.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/view/MyRunnable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/view/MyRunnable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/view/PegaWindow.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/view/PegaWindow.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/view/PegaWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/view/PegaWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/view/PegaWindowFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/view/PegaWindowFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/pluginIcon.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/pluginIcon.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/services/net.pega.intellij.modeler.uml.PegaClient" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/services/net.pega.intellij.modeler.uml.PegaClient" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/i18n/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/i18n/about.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/i18n/about_en_US.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/i18n/about_en_US.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/i18n/about_fr_FR.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/i18n/about_fr_FR.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/i18n/connect_en_US.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/i18n/connect_en_US.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/i18n/datamodel_en_US.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/i18n/data-model_en_US.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/i18n/uml_en_US.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/i18n/uml_en_US.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/i18n/uml_fr_FR.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/i18n/uml_fr_FR.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/icons/sdk_16.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/icons/sdk_16.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/messages/ErrorReportBundle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/messages/ErrorReportBundle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/messages/PegaBundle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/messages/PegaBundle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/i18n/data-model_en_US.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/icons/database.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/icons/pega_13x13.svg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,12 +74,6 @@
                 <item name="pega_modeler" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="build setup" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="pega_modeler" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="intellij" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -182,7 +131,7 @@
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.27198124",
     "run.code.analysis.last.selected.profile": "pProject Default",
@@ -218,6 +167,9 @@
       <recent name="net.pega.intellij.modeler" />
       <recent name="net.pega.intellij.modeler.config" />
       <recent name="net.pega.intellij.modeler.view" />
+      <recent name="net.pega.intellij.modeler.uml.data" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="net.pega.intellij.modeler.uml.data" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
@@ -413,6 +365,13 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Gradle.PegaModeler [build]" />
+      <item itemvalue="Gradle.PegaModeler [buildPlugin]" />
+      <item itemvalue="Gradle.PegaModeler [prepareSandbox]" />
+      <item itemvalue="Gradle.PegaModeler [publishPlugin]" />
+      <item itemvalue="Gradle.PegaModeler [runIde]" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.PegaModeler [runIde]" />
@@ -557,6 +516,11 @@
             </State>
           </value>
         </entry>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
       </map>
     </option>
     <option name="OPEN_GENERIC_TABS">
@@ -579,7 +543,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/data/MetadataLoader.java</url>
-          <line>73</line>
+          <line>74</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>

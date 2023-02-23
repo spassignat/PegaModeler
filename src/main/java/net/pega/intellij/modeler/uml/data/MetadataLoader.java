@@ -23,8 +23,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonReader;
 import net.pega.intellij.modeler.uml.Context;
+import net.pega.intellij.modeler.uml.data.model.MClass;
+import net.pega.intellij.modeler.uml.data.model.MProperty;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 
@@ -41,17 +42,17 @@ class MetadataLoader {
 	}
 
 	void analyseClass(MClass mClass) {
-		if (Arrays.stream(context.getState().dataModelState.highestClasses).noneMatch(ac -> Objects.equals(ac, mClass.name))) {
-			final MClass mClass1 = getMClass(mClass.name);
+		if (Arrays.stream(context.getState().dataModelState.highestClasses).noneMatch(ac -> Objects.equals(ac, mClass.getName()))) {
+			final MClass mClass1 = getMClass(mClass.getName());
 			if (mClass1 != null) {
 				analyseInheritance(mClass1);
 				analyseProperties(mClass1);
-				mClass1.analyzed = true;
+				mClass1.setAnalyzed(true);
 				boolean pendingClasses = true;
 				int mxc = 100;
 				while (pendingClasses && mxc-- > 0) {
-					getClasses().stream().filter(c -> !c.analyzed).forEach(this::analyseClass);
-					pendingClasses = getClasses().stream().anyMatch(c -> !c.analyzed);
+					getClasses().stream().filter(c -> !c.isAnalyzed()).forEach(this::analyseClass);
+					pendingClasses = getClasses().stream().anyMatch(c -> !c.isAnalyzed());
 				}
 			}
 		}
@@ -62,8 +63,8 @@ class MetadataLoader {
 	}
 
 	private void analyseInheritance(MClass mClass) {
-		final HttpGet get = context.createRequest("/class/" + mClass.name);
-		context.log("analyseClass: " + mClass.name);
+		final HttpGet get = context.createRequest("/class/" + mClass.getName());
+		context.log("analyseClass: " + mClass.getName());
 		//		System.out.println(context.getState());
 		final InputStream content;
 		try (CloseableHttpResponse response = context.execute(get)) {
@@ -78,11 +79,11 @@ class MetadataLoader {
 				final String pyClassType = jsonElement1.get("pyClassType").getAsString();
 				final String pyClassName = jsonElement1.get("pyDerivesFrom").getAsString();
 				final boolean pyClassInheritance = jsonElement1.get("pyClassInheritance").getAsBoolean();
-				mClass.abs = "Abstract".equals(pyClassType);
-				mClass.inheritance = pyClassInheritance;
+				mClass.setAbs("Abstract".equals(pyClassType));
+				mClass.setInheritance(pyClassInheritance);
 				MClass declaringClass = getMClass(pyClassName);
 				if (declaringClass != null) {
-					mClass.parent = declaringClass.name;
+					mClass.setParent(declaringClass.getName());
 				}
 				context.log("  - " + jsonElement);
 			}
@@ -93,8 +94,8 @@ class MetadataLoader {
 	}
 
 	private void analyseProperties(MClass mClass) {
-		final HttpGet get = context.createRequest("/properties/" + mClass.name);
-		context.log("analyseproperties: " + mClass.name);
+		final HttpGet get = context.createRequest("/properties/" + mClass.getName());
+		context.log("analyseproperties: " + mClass.getName());
 		final InputStream content;
 		try (CloseableHttpResponse response = context.execute(get)) {
 			context.log(response.getStatusLine().toString());
@@ -150,11 +151,11 @@ class MetadataLoader {
 			pyProperty.setName(pyPropertyName);
 			if (pyProperty.isPage()) {
 				MClass fieldType = getMClass(pyPageClass);
-				pyProperty.setType(fieldType.name);
+				pyProperty.setType(fieldType.getName());
 			} else {
 				pyProperty.setType(pyPropertyMode);
 			}
-			declaringClass.properties.put(pyPropertyName, pyProperty);
+			declaringClass.getProperties().put(pyPropertyName, pyProperty);
 		}
 	}
 }

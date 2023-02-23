@@ -17,7 +17,6 @@
   ~ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
   ~ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
   -->
-
 <idea-plugin>
 	<!-- Unique id for this plugin. Must stay constant for the life of the plugin. -->
 	<id>pega.intellij.modeler</id>
@@ -52,10 +51,9 @@
 				displayName="Pega Project Settings"
 				nonDefaultProject="true"/>
 		<projectService
-				serviceImplementation="net.pega.intellij.modeler.config.PegaProjectSettings" />
+				serviceImplementation="net.pega.intellij.modeler.config.PegaProjectSettings"/>
 		<toolWindow id="Pega" secondary="true" icon="SdkIcons.PegaIcon" anchor="right"
 					factoryClass="net.pega.intellij.modeler.view.PegaWindowFactory"/>
-
 		<errorHandler implementation="net.pega.intellij.errorreporting.GitHubErrorReporter"/>
 	</extensions>
 	<actions>
@@ -68,11 +66,10 @@
 				text="TriggerException" icon="AllIcons.Actions.Lightning">
 			<add-to-group group-id="PegaActionGroup" anchor="last"/>
 		</action>
-<!--		<group id="net.pega.intellij.modeler.action.PegaActionGroup" class="net.pega.intellij.modeler.action.PegaActionGroup" text="PegaDynActionGroup"/>-->
+		<!--		<group id="net.pega.intellij.modeler.action.PegaActionGroup" class="net.pega.intellij.modeler.action.PegaActionGroup" text="PegaDynActionGroup"/>-->
 		<action id="net.pega.intellij.modeler.uml.data.DataModelAction" class="net.pega.intellij.modeler.uml.data.DataModelAction" text="DataModel"
-		icon="SdkIcons.DataIcon">
+				icon="SdkIcons.DataIcon">
 			<add-to-group group-id="PegaActionGroup" anchor="last"/>
-
 		</action>
 	</actions>
 </idea-plugin>

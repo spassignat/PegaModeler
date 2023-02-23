@@ -21,6 +21,8 @@ package net.pega.intellij.modeler.uml.data;
 
 import net.pega.intellij.modeler.config.PegaConfigState;
 import net.pega.intellij.modeler.uml.Context;
+import net.pega.intellij.modeler.uml.data.model.MClass;
+import net.pega.intellij.modeler.uml.data.model.MProperty;
 
 import java.io.PrintStream;
 import java.util.Collection;
@@ -34,8 +36,8 @@ class UmlGenerator {
 
 	void generateDataModel(PrintStream out, Collection<MClass> dataModel) {
 		for (MClass value : dataModel) {
-			out.println((value.abs ? "abstract " : "") + "class " + DataModel.snakeToCamel(value.name) + getTemplate(value) + " {");
-			for (MProperty mProperty : value.properties.values()) {
+			out.println((value.isAbs() ? "abstract " : "") + "class " + DataModel.snakeToCamel(value.getName()) + getTemplate(value) + " {");
+			for (MProperty mProperty : value.getProperties().values()) {
 				if (!mProperty.isPage()) {
 					out.println(DataModel.snakeToCamel(mProperty.getName()) + ":" + DataModel.snakeToCamel(mProperty.getType()));
 				}
@@ -43,18 +45,18 @@ class UmlGenerator {
 			out.println("}");
 		}
 		for (MClass value : dataModel) {
-			if (value.parent != null) {
-				final String s1 = DataModel.snakeToCamel(value.parent);
-				final String s2 = DataModel.snakeToCamel(value.name);
+			if (value.getParent() != null) {
+				final String s1 = DataModel.snakeToCamel(value.getParent());
+				final String s2 = DataModel.snakeToCamel(value.getName());
 				if (context.getState().dataModelState.abstractOnTop) {
 					out.println(s1 + " <|-- " + s2);
 				} else {
 					out.println(s2 + " --|> " + s1);
 				}
 			}
-			for (MProperty mProperty : value.properties.values()) {
+			for (MProperty mProperty : value.getProperties().values()) {
 				if (mProperty.isPage()) {
-					out.println(DataModel.snakeToCamel(value.name) + (mProperty.isReference() ? " -" : " *") + "->" + (mProperty.isList() ? " \"*\" " : " \"1\" ") + DataModel.snakeToCamel(mProperty.getType()) + " : " + DataModel.snakeToCamel(
+					out.println(DataModel.snakeToCamel(value.getName()) + (mProperty.isReference() ? " -" : " *") + "->" + (mProperty.isList() ? " \"*\" " : " \"1\" ") + DataModel.snakeToCamel(mProperty.getType()) + " : " + DataModel.snakeToCamel(
 							mProperty.getName()));
 				}
 			}
@@ -70,7 +72,7 @@ class UmlGenerator {
 	}
 
 	private String getTemplate(MClass aclass) {
-		switch (aclass.classType) {
+		switch (aclass.getClassType()) {
 			case CASE:
 				return "<<Work>>";
 			case ENTITY:

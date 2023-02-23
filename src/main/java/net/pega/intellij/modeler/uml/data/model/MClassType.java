@@ -17,32 +17,10 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler.view;
+package net.pega.intellij.modeler.uml.data.model;
 
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.wm.ToolWindow;
-import com.intellij.openapi.wm.ToolWindowFactory;
-import com.intellij.ui.content.Content;
-import com.intellij.ui.content.ContentFactory;
-import com.intellij.ui.content.ContentManager;
-import org.jetbrains.annotations.NotNull;
-
-public class PegaWindowFactory implements ToolWindowFactory {
-	public PegaWindowFactory() {
-	}
-
-	/**
-	 * Create the tool window content.
-	 *
-	 * @param project    current project
-	 * @param toolWindow current tool window
-	 */
-	public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
-		PegaWindow myToolWindow = new PegaWindow(toolWindow, project);
-		ContentFactory contentFactory = ApplicationManager.getApplication().getService(ContentFactory.class);
-		Content content = contentFactory.createContent(myToolWindow.getContent(), "", false);
-		final ContentManager contentManager = toolWindow.getContentManager();
-		contentManager.addContent(content);
-	}
+public enum MClassType {
+	CASE,
+	PAGE,
+	ENTITY
 }

@@ -21,17 +21,12 @@ package net.pega.intellij.modeler.uml.data;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowManager;
-import com.intellij.ui.content.Content;
 import net.pega.intellij.modeler.view.MessageCallback;
-import net.pega.intellij.modeler.view.MyJPanel;
 import net.pega.intellij.modeler.view.MyRunnable;
 import org.jetbrains.annotations.NotNull;
-
-import java.awt.*;
 
 /**
  * Provides functionality to throw a runtime exception when the action is invoked. It is used to test the error reporting
@@ -41,7 +36,6 @@ public class DataModelAction extends AnAction {
 	public void actionPerformed(@NotNull AnActionEvent e) {
 		final Project project = e.getProject();
 		ToolWindowManager toolWindowManager = ToolWindowManager.getInstance(project);
-
 		ToolWindow toolWindow = toolWindowManager.getToolWindow("Pega");
 		if (toolWindow != null) {
 			final MessageCallback component = (MessageCallback) toolWindow.getComponent().getComponent(0);

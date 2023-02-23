@@ -17,28 +17,66 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler.uml.data;
+package net.pega.intellij.modeler.uml.data.model;
 
 import java.util.HashMap;
 import java.util.Map;
 
-enum MClassType {
-	CASE,
-	PAGE,
-	ENTITY
-}
-
-class MClass {
-	final MClassType classType;
-	final String name;
-	final Map<String, MProperty> properties = new HashMap<>();
-	public boolean abs;
-	public boolean inheritance;
-	public String parent;
-	boolean analyzed = false;
+public class MClass {
+	private final MClassType classType;
+	private final String name;
+	private final Map<String, MProperty> properties = new HashMap<>();
+	private boolean abs;
+	private boolean inheritance;
+	private String parent;
+	private boolean analyzed = false;
 
 	public MClass(String pyPageClass) {
 		name = pyPageClass;
-		classType = name.indexOf("-Work-") > 0 ? MClassType.CASE : MClassType.PAGE;
+		classType = getName().indexOf("-Work-") > 0 ? MClassType.CASE : MClassType.PAGE;
+	}
+
+	public MClassType getClassType() {
+		return classType;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getParent() {
+		return parent;
+	}
+
+	public Map<String, MProperty> getProperties() {
+		return properties;
+	}
+
+	public boolean isAbs() {
+		return abs;
+	}
+
+	public boolean isAnalyzed() {
+		return analyzed;
+	}
+
+	public boolean isInheritance() {
+		return inheritance;
+	}
+
+	public void setAbs(boolean abs) {
+		this.abs = abs;
+	}
+
+	public void setAnalyzed(boolean analyzed) {
+		this.analyzed = analyzed;
+	}
+
+	public void setInheritance(boolean inheritance) {
+		this.inheritance = inheritance;
+	}
+
+	public void setParent(String parent) {
+		this.parent = parent;
 	}
 }

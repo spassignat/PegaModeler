@@ -20,11 +20,12 @@
 package net.pega.intellij.modeler.uml.data;
 
 import net.pega.intellij.modeler.uml.PegaClient;
+import net.pega.intellij.modeler.uml.data.model.MClass;
 
 import java.io.PrintStream;
 
 public class DataModel extends PegaClient {
-	static String snakeToCamel(String str) {
+	public static String snakeToCamel(String str) {
 		return str.replaceAll("-", "_");
 	}
 
