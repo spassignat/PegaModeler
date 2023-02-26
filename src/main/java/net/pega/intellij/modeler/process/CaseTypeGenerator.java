@@ -17,14 +17,31 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler;
+package net.pega.intellij.modeler.process;
 
-import com.intellij.util.messages.Topic;
+import net.pega.intellij.modeler.Generator;
+import net.pega.intellij.modeler.config.PegaConfigState;
+import net.pega.model.RuleObjCaseType;
+import net.pega.intellij.modeler.Context;
 
-public final class PegaPlugin {
-	public static final Topic<RuleListener> RULE_LISTENER_TOPIC = new Topic<>(RuleListener.class, Topic.BroadcastDirection.TO_CHILDREN);
+import java.io.PrintStream;
+import java.util.Collection;
 
-	public static String snakeToCamel(String str) {
-		return str.replaceAll("-", "_");
+class CaseTypeGenerator implements Generator <RuleObjCaseType> {
+	Context context;
+
+	public CaseTypeGenerator(Context context) {
+		this.context = context;
 	}
+
+	public void generateDiagram(PrintStream out, Collection<RuleObjCaseType> dataModel) {
+
+	}
+
+	public void generateHeader(PrintStream out, PegaConfigState state) {
+		out.println("skinparam class {");
+		out.println("BackgroundColor<<Work>> " + state.dataModelState.caseTypeColor);
+		out.println("}");
+	}
+
 }

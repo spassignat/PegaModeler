@@ -17,14 +17,39 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler;
+package net.pega.model;
 
-import com.intellij.util.messages.Topic;
+import net.pega.intellij.modeler.Rule;
 
-public final class PegaPlugin {
-	public static final Topic<RuleListener> RULE_LISTENER_TOPIC = new Topic<>(RuleListener.class, Topic.BroadcastDirection.TO_CHILDREN);
+public class RuleObjCaseType extends Rule {
+	String pyMethodStatus;
+	String pyPurpose;
+	String pyStreamName;
 
-	public static String snakeToCamel(String str) {
-		return str.replaceAll("-", "_");
+	public RuleObjCaseType() {
+	}
+
+	public String getPyMethodStatus() {
+		return pyMethodStatus;
+	}
+
+	public void setPyMethodStatus(String pyMethodStatus) {
+		this.pyMethodStatus = pyMethodStatus;
+	}
+
+	public String getPyPurpose() {
+		return pyPurpose;
+	}
+
+	public void setPyPurpose(String pyPurpose) {
+		this.pyPurpose = pyPurpose;
+	}
+
+	public String getPyStreamName() {
+		return pyStreamName;
+	}
+
+	public void setPyStreamName(String pyStreamName) {
+		this.pyStreamName = pyStreamName;
 	}
 }

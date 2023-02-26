@@ -1,3 +1,79 @@
+GET http://localhost:8090/prweb/api/UML/1.0/casetype/UML/01-01-01
+Authorization: Basic admin@uml Password2!
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=EBFEAF85DB69522B8C97F49C86241F3A
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-02-26T094242.200.json
+
+###
+
+GET http://localhost:8090/prweb/api/UML/1.0/casetype/UML/01-01-01
+Authorization: Basic admin@uml Password2!
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=223AE7794100D9DF679A3016BF27591C
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-02-26T094208.200.json
+
+###
+
+GET http://localhost:8090/prweb/api/UML/1.0/casetype/UML/01-01-01
+Authorization: Basic admin@uml Password2!
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=E618BCB349AA80804FE9DA4AF660E889
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-02-26T093957.200.json
+
+###
+
+GET http://localhost:8090/prweb/api/UML/1.0/casetype/UML/01-01-01
+Authorization: Basic admin@uml Password2!
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=8E6D542C37510DBD4E3CB4B3DA442ECC
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-02-26T093940.200.json
+
+###
+
+GET http://localhost:8090/prweb/api/UML/1.0/casetype/UML/01-01-01
+Authorization: Basic admin@uml Password2!
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=B983A1658BFFB7C863D66661BB559A40
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-02-26T093912.200.json
+
+###
+
+GET http://localhost:8090/prweb/api/UML/1.0/casetype/UML/01-01-01
+Authorization: Basic admin@uml Password2!
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Cookie: JSESSIONID=F9B860693DF24AD5B9BB2E6EED3A009F
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-02-26T093853.200.json
+
+###
+
+GET http://localhost:8090/prweb/api/UML/1.0/casetype/UML/01-01-01
+Authorization: Basic admin@uml Password2!
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.13 (Java/17.0.5)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-02-26T092708.200.json
+
+###
+
 GET http://localhost:8090/prweb/api/UML/1.0/properties/EXYGEN-UML-Work-DemoCase
 Authorization: Basic admin@uml Password2!
 Accept: application/json

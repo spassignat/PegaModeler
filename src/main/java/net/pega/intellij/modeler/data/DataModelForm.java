@@ -17,15 +17,13 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler.uml.data;
+package net.pega.intellij.modeler.data;
 
 import com.intellij.ui.JBColor;
 import net.pega.intellij.modeler.PegaBundle;
 import net.pega.intellij.modeler.config.PegaProjectSettings;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Arrays;

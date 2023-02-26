@@ -17,14 +17,35 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler;
+package net.pega.intellij.modeler.data;
 
-import com.intellij.util.messages.Topic;
+import com.intellij.openapi.project.Project;
+import net.pega.intellij.modeler.Generator;
+import net.pega.intellij.modeler.Loader;
+import net.pega.intellij.modeler.PegaClient;
+import net.pega.intellij.modeler.Rule;
+import net.pega.model.RuleObjClass;
 
-public final class PegaPlugin {
-	public static final Topic<RuleListener> RULE_LISTENER_TOPIC = new Topic<>(RuleListener.class, Topic.BroadcastDirection.TO_CHILDREN);
+import java.io.PrintStream;
 
-	public static String snakeToCamel(String str) {
-		return str.replaceAll("-", "_");
+public class DataModule extends PegaClient {
+	public DataModule(Project project) {
+		super(project);
+	}
+
+	public void analyse(PrintStream out, Project project, Rule rule) {
+		Generator generator = new UmlGenerator(this);
+		Loader loader = new DataLoader(this);
+		final RuleObjClass ruleObjClass = new RuleObjClass(configuration.dataModelState.baseClassName);
+		loader.analyse(ruleObjClass);
+		out.println("@startuml");
+		generator.generateHeader(out, configuration);
+		generator.generateDiagram(out, loader.getMetadatas());
+		out.println("@enduml");
+	}
+
+	@Override
+	public String getAnalysis() {
+		return "DataModel";
 	}
 }

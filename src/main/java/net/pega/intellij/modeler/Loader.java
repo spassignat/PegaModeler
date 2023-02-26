@@ -19,12 +19,10 @@
  */
 package net.pega.intellij.modeler;
 
-import com.intellij.util.messages.Topic;
+import java.util.Collection;
 
-public final class PegaPlugin {
-	public static final Topic<RuleListener> RULE_LISTENER_TOPIC = new Topic<>(RuleListener.class, Topic.BroadcastDirection.TO_CHILDREN);
+public interface Loader<X extends Rule> {
+	void analyse(X mClass);
 
-	public static String snakeToCamel(String str) {
-		return str.replaceAll("-", "_");
-	}
+	Collection<X> getMetadatas();
 }

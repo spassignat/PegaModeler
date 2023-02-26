@@ -17,15 +17,16 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler.uml.data;
+package net.pega.intellij.modeler.process;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import net.pega.intellij.modeler.uml.Context;
-import net.pega.intellij.modeler.uml.data.model.MClass;
-import net.pega.intellij.modeler.uml.data.model.MProperty;
+import net.pega.intellij.modeler.Context;
+import net.pega.intellij.modeler.Loader;
+import net.pega.model.Phase;
+import net.pega.model.RuleObjCaseType;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 
@@ -33,69 +34,32 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.*;
 
-class MetadataLoader {
-	private final Map<String, MClass> classMap = new HashMap<>();
+class CaseTypeLoader implements Loader<RuleObjCaseType> {
+	private final Map<String, RuleObjCaseType> classMap = new HashMap<>();
 	Context context;
 
-	public MetadataLoader(Context context) {
+	public CaseTypeLoader(Context context) {
 		this.context = context;
 	}
 
-	void analyseClass(MClass mClass) {
-		if (Arrays.stream(context.getState().dataModelState.highestClasses).noneMatch(ac -> Objects.equals(ac, mClass.getName()))) {
-			final MClass mClass1 = getMClass(mClass.getName());
+	@Override
+	public void analyse(RuleObjCaseType mClass) {
+		if (Arrays.stream(context.getConfiguration().dataModelState.highestClasses).noneMatch(ac -> Objects.equals(ac, mClass.getPyClassName()))) {
+			final RuleObjCaseType mClass1 = getCaseType(mClass.getPyClassName());
 			if (mClass1 != null) {
-				analyseInheritance(mClass1);
-				analyseProperties(mClass1);
-				mClass1.setAnalyzed(true);
-				boolean pendingClasses = true;
-				int mxc = 100;
-				while (pendingClasses && mxc-- > 0) {
-					getClasses().stream().filter(c -> !c.isAnalyzed()).forEach(this::analyseClass);
-					pendingClasses = getClasses().stream().anyMatch(c -> !c.isAnalyzed());
-				}
+				loadDetails(mClass1);
+				//				analysePhases(mClass1);
 			}
 		}
 	}
 
-	Collection<MClass> getClasses() {
+	public Collection<RuleObjCaseType> getMetadatas() {
 		return new ArrayList<>(classMap.values());
 	}
 
-	private void analyseInheritance(MClass mClass) {
-		final HttpGet get = context.createRequest("/class/" + mClass.getName());
-		context.log("analyseClass: " + mClass.getName());
-		//		System.out.println(context.getState());
-		final InputStream content;
-		try (CloseableHttpResponse response = context.execute(get)) {
-			context.log(response.getStatusLine().toString());
-			context.log(System.getProperty("line.separator"));
-			content = response.getEntity().getContent();
-			final InputStreamReader reader = new InputStreamReader(content);
-			JsonArray pxResults = JsonParser.parseReader(reader).getAsJsonArray();
-			for (int i = 0; i < pxResults.size(); i++) {
-				final JsonElement jsonElement = pxResults.get(i);
-				final JsonObject jsonElement1 = (JsonObject) jsonElement;
-				final String pyClassType = jsonElement1.get("pyClassType").getAsString();
-				final String pyClassName = jsonElement1.get("pyDerivesFrom").getAsString();
-				final boolean pyClassInheritance = jsonElement1.get("pyClassInheritance").getAsBoolean();
-				mClass.setAbs("Abstract".equals(pyClassType));
-				mClass.setInheritance(pyClassInheritance);
-				MClass declaringClass = getMClass(pyClassName);
-				if (declaringClass != null) {
-					mClass.setParent(declaringClass.getName());
-				}
-				context.log("  - " + jsonElement);
-			}
-		} catch (Exception e) {
-			context.log(e.toString());
-			throw new RuntimeException(e);
-		}
-	}
-
-	private void analyseProperties(MClass mClass) {
-		final HttpGet get = context.createRequest("/properties/" + mClass.getName());
-		context.log("analyseproperties: " + mClass.getName());
+	private void analysePhases(RuleObjCaseType mClass) {
+		final HttpGet get = context.createRequest("/phases/" + mClass.getPyClassName());
+		context.log("analyseproperties: " + mClass.getPyClassName());
 		final InputStream content;
 		try (CloseableHttpResponse response = context.execute(get)) {
 			context.log(response.getStatusLine().toString());
@@ -106,25 +70,49 @@ class MetadataLoader {
 			for (int i = 0; i < pxResults.size(); i++) {
 				final JsonElement jsonElement = pxResults.get(i);
 				context.log("    - " + jsonElement);
-				registerProperty((JsonObject) jsonElement);
+				registerPhase((JsonObject) jsonElement);
 			}
 		} catch (Exception e) {
 			context.log(e.toString());
 		}
 	}
 
-	private MClass getMClass(String pyPageClass) {
-		if (Arrays.stream(context.getState().dataModelState.highestClasses).noneMatch(ac -> Objects.equals(ac, pyPageClass)) && classMap.size() < context.getState().dataModelState.maxClass) {
+	private RuleObjCaseType getCaseType(String pyPageClass) {
+		if (Arrays.stream(context.getConfiguration().dataModelState.highestClasses).noneMatch(ac -> Objects.equals(ac,
+																												   pyPageClass)) && classMap.size() < context.getConfiguration().dataModelState.maxClass) {
 			if (!classMap.containsKey(pyPageClass)) {
-				classMap.put(pyPageClass, new MClass(pyPageClass));
+				final RuleObjCaseType value = new RuleObjCaseType();
+				value.setPyLabel(pyPageClass);
+				classMap.put(pyPageClass, value);
 			}
 			return classMap.get(pyPageClass);
 		}
 		return null;
 	}
 
-	private void registerProperty(JsonObject jsonElement) {
-		final MProperty pyProperty = new MProperty();
+	private void loadDetails(RuleObjCaseType mClass) {
+		final HttpGet get = context.createRequest("/casetype/" + mClass.getPyClassName());
+		context.log("analyseCaseType: " + mClass.getPyClassName());
+		//		System.out.println(context.getState());
+		final InputStream content;
+		try (CloseableHttpResponse response = context.execute(get)) {
+			context.log(response.getStatusLine().toString());
+			context.log(System.getProperty("line.separator"));
+			content = response.getEntity().getContent();
+			final InputStreamReader reader = new InputStreamReader(content);
+			JsonArray pxResults = JsonParser.parseReader(reader).getAsJsonArray();
+			for (int i = 0; i < pxResults.size(); i++) {
+				final JsonElement jsonElement = pxResults.get(i);
+				context.log("  - " + jsonElement);
+			}
+		} catch (Exception e) {
+			context.log(e.toString());
+			throw new RuntimeException(e);
+		}
+	}
+
+	private void registerPhase(JsonObject jsonElement) {
+		final Phase pyProperty = new Phase();
 		/*
 		the name of the property
 		 */
@@ -143,19 +131,5 @@ class MetadataLoader {
 		 * return "" or the class of the field
 		 */
 		String pyPageClass = jsonElement.get("pyPageClass").getAsString();
-		MClass declaringClass = getMClass(pyClassName);
-		if (declaringClass != null) {
-			pyProperty.setPage(pyPropertyMode.startsWith("Page"));
-			pyProperty.setReference(pyIsReference);
-			pyProperty.setList(pyPropertyMode.equals("PageList"));
-			pyProperty.setName(pyPropertyName);
-			if (pyProperty.isPage()) {
-				MClass fieldType = getMClass(pyPageClass);
-				pyProperty.setType(fieldType.getName());
-			} else {
-				pyProperty.setType(pyPropertyMode);
-			}
-			declaringClass.getProperties().put(pyPropertyName, pyProperty);
-		}
 	}
 }

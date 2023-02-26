@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2023 Stephane Passignat - Exygen
+ * Copyright (c) 2023 Stephane Passignat - Exygen
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -17,31 +17,18 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler.uml.data;
+package net.pega.intellij.modeler;
 
-import net.pega.intellij.modeler.uml.PegaClient;
-import net.pega.intellij.modeler.uml.data.model.MClass;
+import net.pega.model.RuleApplication;
+import net.pega.model.RuleSetVersion;
 
-import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 
-public class DataModel extends PegaClient {
-	public static String snakeToCamel(String str) {
-		return str.replaceAll("-", "_");
-	}
+public class PegaState {
+	private RuleApplication ruleApplication;
+	private RuleSetVersion ruleSetVersion;
 
-	public void analyse(PrintStream out) {
-		UmlGenerator generator = new UmlGenerator(this);
-		MetadataLoader loader = new MetadataLoader(this);
-		final MClass mClass = new MClass(state.dataModelState.baseClassName);
-		loader.analyseClass(mClass);
-		out.println("@startuml");
-		generator.generateHeader(out, state);
-		generator.generateDataModel(out, loader.getClasses());
-		out.println("@enduml");
-	}
+	private List<RuleApplication> allApplications=new ArrayList<RuleApplication>();
 
-	@Override
-	public String getAnalysis() {
-		return "DataModel";
-	}
 }

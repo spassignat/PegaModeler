@@ -121,7 +121,7 @@
       </item>
     </group>
     <group name="pega">
-      <item class="net.pega.intellij.modeler.uml.connect.ConnectForm" icon="" removable="true" auto-create-binding="true" can-attach-label="false">
+      <item class="net.pega.intellij.modeler.connect.ConnectForm" icon="" removable="true" auto-create-binding="true" can-attach-label="false">
         <default-constraints vsize-policy="7" hsize-policy="7" anchor="0" fill="3" />
       </item>
       <item class="net.pega.intellij.modeler.uml.data.DataModelForm" icon="" removable="true" auto-create-binding="false" can-attach-label="false">

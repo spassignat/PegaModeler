@@ -17,14 +17,10 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler;
+package net.pega.model;
 
-import com.intellij.util.messages.Topic;
-
-public final class PegaPlugin {
-	public static final Topic<RuleListener> RULE_LISTENER_TOPIC = new Topic<>(RuleListener.class, Topic.BroadcastDirection.TO_CHILDREN);
-
-	public static String snakeToCamel(String str) {
-		return str.replaceAll("-", "_");
-	}
+public enum ClassType {
+	CASE,
+	PAGE,
+	ENTITY
 }

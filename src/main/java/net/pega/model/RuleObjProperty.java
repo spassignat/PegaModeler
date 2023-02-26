@@ -17,66 +17,63 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler.uml.data.model;
+package net.pega.model;
 
-import java.util.HashMap;
-import java.util.Map;
+import net.pega.intellij.modeler.Rule;
 
-public class MClass {
-	private final MClassType classType;
-	private final String name;
-	private final Map<String, MProperty> properties = new HashMap<>();
-	private boolean abs;
-	private boolean inheritance;
-	private String parent;
-	private boolean analyzed = false;
+public class RuleObjProperty extends Rule {
+	private boolean list;
+	private boolean multiple;
+	private String pyPropertyName;
+	private boolean page;
+	private boolean reference;
+	private String pyPropertyMode;
 
-	public MClass(String pyPageClass) {
-		name = pyPageClass;
-		classType = getName().indexOf("-Work-") > 0 ? MClassType.CASE : MClassType.PAGE;
+	public String getPyPropertyName() {
+		return pyPropertyName;
 	}
 
-	public MClassType getClassType() {
-		return classType;
+	public void setPyPropertyName(String pyPropertyName) {
+		this.pyPropertyName = pyPropertyName;
 	}
 
-	public String getName() {
-		return name;
+	public String getPyPropertyMode() {
+		return pyPropertyMode;
 	}
 
-	public String getParent() {
-		return parent;
+	public void setPyPropertyMode(String pyPropertyMode) {
+		this.pyPropertyMode = pyPropertyMode;
 	}
 
-	public Map<String, MProperty> getProperties() {
-		return properties;
+	public boolean isList() {
+		return list;
 	}
 
-	public boolean isAbs() {
-		return abs;
+	public void setList(boolean list) {
+		this.list = list;
 	}
 
-	public boolean isAnalyzed() {
-		return analyzed;
+	public boolean isMultiple() {
+		return multiple;
 	}
 
-	public boolean isInheritance() {
-		return inheritance;
+	public void setMultiple(boolean multiple) {
+		this.multiple = multiple;
 	}
 
-	public void setAbs(boolean abs) {
-		this.abs = abs;
+	public boolean isPage() {
+		return page;
 	}
 
-	public void setAnalyzed(boolean analyzed) {
-		this.analyzed = analyzed;
+	public void setPage(boolean page) {
+		this.page = page;
 	}
 
-	public void setInheritance(boolean inheritance) {
-		this.inheritance = inheritance;
+	public boolean isReference() {
+		return reference;
 	}
 
-	public void setParent(String parent) {
-		this.parent = parent;
+	public void setReference(boolean reference) {
+		this.reference = reference;
 	}
 }

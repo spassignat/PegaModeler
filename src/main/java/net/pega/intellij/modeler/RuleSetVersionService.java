@@ -17,20 +17,12 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler.uml;
+package net.pega.intellij.modeler;
 
-import net.pega.intellij.modeler.config.PegaConfigState;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
+import com.intellij.openapi.progress.ProgressIndicator;
+import net.pega.model.RuleApplication;
+import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-
-public interface Context {
-	HttpGet createRequest(String s);
-
-	CloseableHttpResponse execute(HttpGet get) throws IOException;
-
-	PegaConfigState getState();
-
-	void log(String msg);
+public interface RuleSetVersionService {
+	void loadRuleSets(@NotNull ProgressIndicator indicator, RuleApplication selectedItem);
 }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PegaProjectSettings">
+    <option name="connectState">
+      <ConnectState>
+        <option name="login" value="" />
+        <option name="pwd" value="" />
+        <option name="url" value="" />
+      </ConnectState>
+    </option>
+    <option name="dataModelState">
+      <DataModelState>
+        <option name="baseClassName" value="" />
+        <option name="caseTypeColor" value="#2FE5C2" />
+        <option name="entityColor" value="#F85475" />
+        <option name="highestClasses">
+          <array>
+            <option value="Data-" />
+            <option value="Work-" />
+          </array>
+        </option>
+        <option name="pageColor" value="#2FA1E5" />
+      </DataModelState>
+    </option>
+    <option name="githubToken" value="" />
+    <option name="githubUser" value="spassignat" />
+  </component>
+</project>

@@ -19,8 +19,8 @@
  */
 package net.pega.intellij.modeler.config;
 
-import net.pega.intellij.modeler.uml.connect.ConnectState;
-import net.pega.intellij.modeler.uml.data.DataModelState;
+import net.pega.intellij.modeler.connect.ConnectState;
+import net.pega.intellij.modeler.data.DataModelState;
 
 import java.util.Objects;
 

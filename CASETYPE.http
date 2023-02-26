@@ -1,0 +1,2 @@
+GET http://localhost:8090/prweb/api/UML/1.0/casetype/UML/01-01-01
+Authorization: Basic admin@uml Password2!

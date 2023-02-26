@@ -21,44 +21,73 @@ package net.pega.intellij.modeler.view;
 
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.progress.ProgressIndicator;
+import com.intellij.openapi.progress.ProgressManager;
+import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
+import com.intellij.util.messages.MessageBus;
+import net.pega.intellij.modeler.Rule;
+import net.pega.intellij.modeler.RuleListener;
+import net.pega.intellij.modeler.ApplicationService;
+import net.pega.intellij.modeler.CaseTypeService;
 import net.pega.intellij.modeler.config.PegaConfigState;
 import net.pega.intellij.modeler.config.PegaProjectSettings;
+import net.pega.intellij.modeler.RuleSetVersionService;
+import net.pega.model.RuleApplication;
+import net.pega.model.RuleObjCaseType;
+import net.pega.model.RuleSetVersion;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeNode;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Enumeration;
+
+import static net.pega.intellij.modeler.PegaPlugin.RULE_LISTENER_TOPIC;
 
 public class PegaWindow {
 	public JTextArea area;
+	DefaultComboBoxModel<RuleApplication> appModel = new DefaultComboBoxModel<RuleApplication>();
+	DefaultComboBoxModel<RuleSetVersion> ruleSetVersionModel = new DefaultComboBoxModel<RuleSetVersion>();
+	private JComboBox<RuleApplication> appComboBox;
 	private JButton clearButton;
 	private JButton connectButton;
 	private JButton generateDataModelButton;
+	private JButton generateProcess;
+	private JButton loadAppsButton;
+	private JButton loadRuleSetButton;
 	private JPanel myToolWindowContent;
+	private JComboBox<RuleSetVersion> ruleSetsComboBox;
+	private JTree ruleTree;
+	private DefaultTreeModel ruleTreeModel;
 	private JLabel urlLabel;
+	private JButton validApp;
+	private JButton validRS;
 
 	public PegaWindow(ToolWindow toolWindow, @NotNull Project project) {
-		final PegaProjectSettings instance = PegaProjectSettings.getInstance(project);
-		final PegaConfigState state = instance.getState();
+		final PegaProjectSettings service = project.getService(PegaProjectSettings.class);
+		final PegaConfigState state = service.getState();
 		final Application application = ApplicationManager.getApplication();
-		generateDataModelButton.addActionListener(evt -> {
-			final MyRunnable dataModel = new MyRunnable((MessageCallback) myToolWindowContent, "DataModel", project, "data-model.puml");
-			application.invokeAndWait(dataModel);
-		});
-		connectButton.addActionListener(evt -> {
-			final MyRunnable connect = new MyRunnable((MessageCallback) myToolWindowContent, "Connect", project, "connect.txt");
-			application.invokeAndWait(connect);
-		});
-		clearButton.addActionListener(e -> ((MyJPanel) myToolWindowContent).clear());
-		instance.addChangeListener(new ChangeListener() {
+		service.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				updateView(state);
 			}
 		});
+		setupAppCombo();
+		setupButtons(project, application);
+		setupRulesetCombo();
+		setupTree();
 		updateView(state);
+		setupMessageBus(project);
 	}
 
 	public JPanel getContent() {
@@ -78,6 +107,224 @@ public class PegaWindow {
 			}
 		};
 		// TODO: place custom component creation code here
+	}
+
+	private DefaultMutableTreeNode findNodeByObject(Object obj, DefaultMutableTreeNode node) {
+		if (node.getUserObject() == obj) {
+			return node;
+		}
+		final Enumeration<TreeNode> children = node.children();
+		while (children.hasMoreElements()) {
+			TreeNode treeNode = children.nextElement();
+			final DefaultMutableTreeNode nodeByObject = findNodeByObject(obj, (DefaultMutableTreeNode) treeNode);
+			if (nodeByObject != null) {
+				return nodeByObject;
+			}
+		}
+		return null;
+	}
+
+	private void setupAppCombo() {
+		appComboBox.setModel(appModel);
+		appComboBox.setRenderer(new DefaultListCellRenderer() {
+			@Override
+			public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+				final String pyClassName;
+				if (value != null) {
+					pyClassName = ((RuleApplication) value).getPyLabel();
+				} else {
+					pyClassName = "null";
+				}
+				return super.getListCellRendererComponent(list, pyClassName, index, isSelected, cellHasFocus);
+			}
+		});
+	}
+
+	private void setupButtons(@NotNull Project project, Application application) {
+		generateDataModelButton.addActionListener(evt -> {
+			final MyRunnable dataModel = new MyRunnable((MessageCallback) myToolWindowContent, "DataModel", project, "data-model.puml");
+			application.invokeAndWait(dataModel);
+		});
+		connectButton.addActionListener(evt -> {
+			final MyRunnable connect = new MyRunnable((MessageCallback) myToolWindowContent, "Connect", project, "connect.txt");
+			application.invokeAndWait(connect);
+		});
+		generateProcess.addActionListener(evt -> {
+			final MyRunnable connect = new MyRunnable((MessageCallback) myToolWindowContent, "Process", project, "process.puml");
+			application.invokeAndWait(connect);
+		});
+		clearButton.addActionListener(e -> ((MyJPanel) myToolWindowContent).clear());
+		loadAppsButton.addActionListener(evt -> {
+			application.invokeLater(() -> {
+				project.getService(ApplicationService.class).loadApplications();
+			});
+			//			final MyRunnable connect = new MyRunnable((MessageCallback) myToolWindowContent, "Application", project, "applications.puml");
+			//			application.invokeAndWait(connect);
+		});
+		loadRuleSetButton.addActionListener(evt -> {
+			final Task.Backgroundable backgroundable = new Task.Backgroundable(project, "Load RuleSets") {
+				@Override
+				public void run(@NotNull ProgressIndicator indicator) {
+					try {
+						final RuleApplication selectedApplication = (RuleApplication) appComboBox.getSelectedItem();
+						final RuleSetVersionService service = project.getService(RuleSetVersionService.class);
+						service.loadRuleSets(indicator, selectedApplication);
+						project.getService(RuleSetVersionService.class).loadRuleSets(indicator, selectedApplication);
+					} catch (Exception e) {
+						throw new RuntimeException(e);
+					}
+				}
+			};
+			//			final MyRunnable connect = new MyRunnable((MessageCallback) myToolWindowContent, "Application", project, "applications.puml");
+			//			application.invokeAndWait(connect);
+		});
+		validApp.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				final Task.Backgroundable backgroundable = new Task.Backgroundable(project, "Load RuleSets") {
+					@Override
+					public void run(@NotNull ProgressIndicator indicator) {
+						try {
+							final RuleApplication selectedApplication = (RuleApplication) appComboBox.getSelectedItem();
+							final DefaultMutableTreeNode root = (DefaultMutableTreeNode) ruleTreeModel.getRoot();
+							final DefaultMutableTreeNode foundApp = findNodeByObject(selectedApplication, root);
+							if (foundApp == null) {
+								root.add(new DefaultMutableTreeNode(selectedApplication));
+								final RuleSetVersionService service = project.getService(RuleSetVersionService.class);
+								service.loadRuleSets(indicator, selectedApplication);
+								ruleTree.updateUI();
+							}
+						} catch (Exception ex) {
+							throw new RuntimeException(ex);
+						}
+					}
+				};
+				ProgressManager.getInstance().run(backgroundable);
+			}
+		});
+		validRS.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				final Task.Backgroundable backgroundable = new Task.Backgroundable(project, "Load RuleSets") {
+					@Override
+					public void run(@NotNull ProgressIndicator indicator) {
+						try {
+							final RuleSetVersion ruleSetVersion = (RuleSetVersion) ruleSetsComboBox.getSelectedItem();
+							final DefaultMutableTreeNode root = (DefaultMutableTreeNode) ruleTreeModel.getRoot();
+							final DefaultMutableTreeNode foundNode = findNodeByObject(ruleSetVersion, root);
+							if (foundNode == null) {
+								final RuleApplication selectedApplication = (RuleApplication) appComboBox.getSelectedItem();
+								final DefaultMutableTreeNode foundAppNode = findNodeByObject(selectedApplication, root);
+								if (foundAppNode != null) {
+									foundAppNode.add(new DefaultMutableTreeNode(ruleSetVersion));
+								}
+								CaseTypeService caseTypeService = project.getService(CaseTypeService.class);
+								caseTypeService.loadCaseTypes(indicator, selectedApplication, ruleSetVersion);
+								ruleTree.updateUI();
+							}
+						} catch (Exception ex) {
+							ex.printStackTrace();
+							throw new RuntimeException(ex);
+						}
+					}
+				};
+				ProgressManager.getInstance().run(backgroundable);
+			}
+		});
+	}
+
+	private void setupMessageBus(@NotNull Project project) {
+		final MessageBus messageBus = project.getMessageBus();
+		messageBus.connect().subscribe(RULE_LISTENER_TOPIC, new RuleListener() {
+			@Override
+			public void clearApplications() {
+				appModel.removeAllElements();
+			}
+
+			@Override
+			public void clearCaseTypes() {
+			}
+
+			@Override
+			public void clearRuleSetVersion() {
+				ruleSetVersionModel.removeAllElements();
+			}
+
+			@Override
+			public void onApplicationChanged(RuleApplication ruleApplication) {
+			}
+
+			@Override
+			public void onApplicationLoaded(RuleApplication app) {
+
+				appModel.addElement(app);
+			}
+
+			@Override
+			public void onCaseTypeLoaded(RuleObjCaseType rle) {
+				final RuleSetVersion ruleSetVersion = (RuleSetVersion) ruleSetsComboBox.getSelectedItem();
+				final DefaultMutableTreeNode root = (DefaultMutableTreeNode) ruleTreeModel.getRoot();
+				final DefaultMutableTreeNode foundNode = findNodeByObject(ruleSetVersion, root);
+				if (foundNode != null) {
+					foundNode.add(new DefaultMutableTreeNode(rle));
+				}
+			}
+
+			@Override
+			public void onRulesetVersionLoaded(RuleSetVersion ruleSetVersion) {
+				ruleSetVersionModel.addElement(ruleSetVersion);
+			}
+
+			@Override
+			public void logEnter(String message) {
+				area.append(message+"\n");
+			}
+
+			@Override
+			public void logExit(String message) {
+				area.append(message+"\n");
+			}
+
+			@Override
+			public void log(String message) {
+				area.append(message+"\n");
+			}
+		});
+	}
+
+	private void setupRulesetCombo() {
+		ruleSetsComboBox.setModel(ruleSetVersionModel);
+		ruleSetsComboBox.setRenderer(new DefaultListCellRenderer() {
+			@Override
+			public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+				final String pyClassName;
+				if (value != null) {
+					pyClassName = ((RuleSetVersion) value).getPyLabel();
+				} else {
+					pyClassName = "null";
+				}
+				return super.getListCellRendererComponent(list, pyClassName, index, isSelected, cellHasFocus);
+			}
+		});
+	}
+
+	@NotNull
+	private void setupTree() {
+		ruleTreeModel = new DefaultTreeModel(new DefaultMutableTreeNode("Pega"));
+		ruleTree.setModel(ruleTreeModel);
+		ruleTree.setCellRenderer(new DefaultTreeCellRenderer() {
+			@Override
+			public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus) {
+				if (value instanceof DefaultMutableTreeNode) {
+					final DefaultMutableTreeNode treeNode = (DefaultMutableTreeNode) value;
+					final Object userObject = treeNode.getUserObject();
+					if (userObject instanceof Rule) {
+						return super.getTreeCellRendererComponent(tree, ((Rule) userObject).getPyLabel(), sel, expanded, leaf, row, hasFocus);
+					}
+				}
+				return super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
+			}
+		});
 	}
 
 	private void updateView(PegaConfigState state) {

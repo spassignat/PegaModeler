@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2023 Stephane Passignat - Exygen
+ * Copyright (c) 2023 Stephane Passignat - Exygen
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -17,10 +17,27 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler.uml.data.model;
+package net.pega.model;
 
-public enum MClassType {
-	CASE,
-	PAGE,
-	ENTITY
+import net.pega.intellij.modeler.Rule;
+
+public class RuleSetVersion extends Rule {
+	String pyRuleSetVersionID;
+	String pyRuleSetType;
+
+	public String getPyRuleSetType() {
+		return pyRuleSetType;
+	}
+
+	public void setPyRuleSetType(String pyRuleSetType) {
+		this.pyRuleSetType = pyRuleSetType;
+	}
+
+	public String getPyRuleSetVersionID() {
+		return pyRuleSetVersionID;
+	}
+
+	public void setPyRuleSetVersionID(String pyRuleSetVersionID) {
+		this.pyRuleSetVersionID = pyRuleSetVersionID;
+	}
 }

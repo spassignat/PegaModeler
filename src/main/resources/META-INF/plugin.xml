@@ -43,8 +43,13 @@
 	<!-- Text to display as company information on Preferences/Settings | Plugin page -->
 	<vendor email="stephane.passignat@exygen.fr" url="https://github.com/spassignat/PegaModeler">Stephane Passignat</vendor>
 	<resource-bundle>messages.PegaBundle</resource-bundle>
+	<projectListeners>
+		<listener
+				class="net.pega.intellij.modeler.view.ApplicationModelListener"
+				topic="net.pega.intellij.modeler.RuleListener"/>
+	</projectListeners>
 	<extensions defaultExtensionNs="com.intellij">
-		<projectConfigurable
+	<projectConfigurable
 				parentId="tools"
 				instance="net.pega.intellij.modeler.config.PegaProjectConfigurable"
 				id="net.pega.intellij.modeler.config.PegaProjectConfigurable"
@@ -52,6 +57,12 @@
 				nonDefaultProject="true"/>
 		<projectService
 				serviceImplementation="net.pega.intellij.modeler.config.PegaProjectSettings"/>
+		<projectService serviceInterface="net.pega.intellij.modeler.RuleSetVersionService"
+						serviceImplementation="net.pega.intellij.modeler.modules.RuleSetVersionModule"/>
+		<projectService serviceInterface="net.pega.intellij.modeler.ApplicationService"
+						serviceImplementation="net.pega.intellij.modeler.modules.ApplicationModule"/>
+		<projectService serviceInterface="net.pega.intellij.modeler.CaseTypeService"
+						serviceImplementation="net.pega.intellij.modeler.modules.CaseTypeModule"/>
 		<toolWindow id="Pega" secondary="true" icon="SdkIcons.PegaIcon" anchor="right"
 					factoryClass="net.pega.intellij.modeler.view.PegaWindowFactory"/>
 		<errorHandler implementation="net.pega.intellij.errorreporting.GitHubErrorReporter"/>
@@ -67,7 +78,7 @@
 			<add-to-group group-id="PegaActionGroup" anchor="last"/>
 		</action>
 		<!--		<group id="net.pega.intellij.modeler.action.PegaActionGroup" class="net.pega.intellij.modeler.action.PegaActionGroup" text="PegaDynActionGroup"/>-->
-		<action id="net.pega.intellij.modeler.uml.data.DataModelAction" class="net.pega.intellij.modeler.uml.data.DataModelAction" text="DataModel"
+		<action id="net.pega.intellij.modeler.data.DataModelAction" class="net.pega.intellij.modeler.data.DataModelAction" text="DataModel"
 				icon="SdkIcons.DataIcon">
 			<add-to-group group-id="PegaActionGroup" anchor="last"/>
 		</action>

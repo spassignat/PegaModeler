@@ -22,13 +22,23 @@ package net.pega.intellij.modeler.config;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
-import com.intellij.openapi.project.Project;
 import com.intellij.util.xmlb.annotations.Transient;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicHeader;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 
 @State(name = "PegaProjectSettings", storages = @Storage(value = "pega.xml"))
@@ -41,12 +51,45 @@ public class PegaProjectSettings implements PersistentStateComponent<PegaConfigS
 	public PegaProjectSettings() {
 	}
 
-	public static PegaProjectSettings getInstance(@NotNull Project project) {
-		return project.getService(PegaProjectSettings.class);
-	}
-
 	public void addChangeListener(ChangeListener changeListener) {
 		listeners.add(changeListener);
+	}
+
+	public CloseableHttpClient createHttpClient() {
+		final UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(state.connectState.login, state.connectState.pwd);
+		final BasicCredentialsProvider credsProvider = new BasicCredentialsProvider();
+		credsProvider.setCredentials(AuthScope.ANY, credentials);
+		final HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
+		httpClientBuilder.setDefaultCredentialsProvider(credsProvider);
+		final String token = Base64.getEncoder().encodeToString((state.connectState.login + ":" + state.connectState.pwd).getBytes());
+		final List<BasicHeader>
+				defaultHeaders =
+				Arrays.asList(new BasicHeader("Cookie", "JSESSIONID=1234"),
+							  new BasicHeader("Accept", "application/json"),
+							  new BasicHeader("X-Application", "DataModel"),
+							  new BasicHeader("Authorization", "Basic " + token));
+		//		httpClientBuilder.setDefaultHeaders(defaultHeaders);
+		CloseableHttpClient client = httpClientBuilder.build();
+		return client;
+	}
+
+	public HttpGet createRequest(String... context) {
+		StringBuilder path = new StringBuilder();
+		for (int i = 0; i < context.length; i++) {
+			String s = context[i];
+			path.append("/").append(URLEncoder.encode(s, StandardCharsets.UTF_8));
+		}
+		path = new StringBuilder(path.toString().replaceAll("//", "/"));
+		path.insert(0, state.connectState.url);
+		final HttpGet get = new HttpGet(path.toString());
+		final String token = Base64.getEncoder().encodeToString((state.connectState.login + ":" + state.connectState.pwd).getBytes());
+		//		log(get.toString());
+		//		final HttpGet get = new HttpGet("http://localhost:8090/prweb/api/UML/1.0/datamodel");
+		get.setHeader("Cookie", "JSESSIONID=1234");
+		get.setHeader("Accept", "application/json");
+		get.setHeader("X-Application", "DataModel");
+		get.addHeader("Authorization", "Basic " + token);
+		return get;
 	}
 
 	public void fireChangeEvent() {

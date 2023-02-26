@@ -17,8 +17,9 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler.uml;
+package net.pega.intellij.modeler;
 
+import com.intellij.openapi.project.Project;
 import net.pega.intellij.modeler.config.PegaConfigState;
 import net.pega.intellij.modeler.view.MessageCallback;
 import org.apache.http.auth.AuthScope;
@@ -33,16 +34,26 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Base64;
 
+import static net.pega.intellij.modeler.PegaPlugin.RULE_LISTENER_TOPIC;
+
 public abstract class PegaClient implements Context {
 	protected CloseableHttpClient client;
-	protected PegaConfigState state;
+	protected PegaConfigState configuration;
 	MessageCallback log;
 	private String token;
+	Project project;
 
-	public abstract void analyse(PrintStream out);
+private PegaClient() {
+	}
+
+	public PegaClient(Project project) {
+		this.project = project;
+	}
+
+	public abstract void analyse(PrintStream out, Project project, Rule rule);
 
 	public HttpGet createRequest(String path) {
-		final HttpGet get = new HttpGet(state.connectState.url + path);
+		final HttpGet get = new HttpGet(configuration.connectState.url + path);
 		log(get.toString());
 		//		final HttpGet get = new HttpGet("http://localhost:8090/prweb/api/UML/1.0/datamodel");
 		get.setHeader("Cookie", "JSESSIONID=1234");
@@ -60,12 +71,13 @@ public abstract class PegaClient implements Context {
 	public abstract String getAnalysis();
 
 	@Override
-	public PegaConfigState getState() {
-		return state;
+	public PegaConfigState getConfiguration() {
+		return configuration;
 	}
 
 	public void init(PegaConfigState state, MessageCallback log) {
-		this.state = state;
+		this.configuration = state;
+		final RuleListener ruleListener = project.getMessageBus().syncPublisher(RULE_LISTENER_TOPIC);
 		this.log = log;
 		final UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(state.connectState.login, state.connectState.pwd);
 		final BasicCredentialsProvider credsProvider = new BasicCredentialsProvider();
@@ -76,6 +88,6 @@ public abstract class PegaClient implements Context {
 
 	@Override
 	public void log(String msg) {
-		log.log(msg);
+//		log.log(msg);
 	}
 }

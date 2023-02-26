@@ -25,8 +25,8 @@ import com.intellij.openapi.project.Project;
 import net.pega.intellij.modeler.PegaBundle;
 import net.pega.intellij.modeler.config.PegaConfigState;
 import net.pega.intellij.modeler.config.PegaProjectSettings;
-import net.pega.intellij.modeler.uml.connect.ConnectForm;
-import net.pega.intellij.modeler.uml.data.DataModelForm;
+import net.pega.intellij.modeler.connect.ConnectForm;
+import net.pega.intellij.modeler.data.DataModelForm;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;

@@ -14,7 +14,6 @@
             <preferred-size width="200" height="200"/>
           </grid>
         </constraints>
-        <properties/>
         <border type="none"/>
         <children>
           <grid id="f2a01" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -25,7 +24,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <nested-form id="5938c" form-file="net/pega/intellij/modeler/uml/connect/ConnectForm.form" binding="connectForm">
+              <nested-form id="5938c" form-file="net/pega/intellij/modeler/connect/ConnectForm.form" binding="connectForm">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -40,7 +39,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <nested-form id="f19c2" form-file="net/pega/intellij/modeler/uml/data/DataModelForm.form" binding="dataModelForm">
+              <nested-form id="f19c2" form-file="net/pega/intellij/modeler/data/DataModelForm.form" binding="dataModelForm">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>

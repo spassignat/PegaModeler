@@ -17,14 +17,44 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler;
+package net.pega.intellij.modeler.connect;
 
-import com.intellij.util.messages.Topic;
+import net.pega.intellij.modeler.PegaBundle;
 
-public final class PegaPlugin {
-	public static final Topic<RuleListener> RULE_LISTENER_TOPIC = new Topic<>(RuleListener.class, Topic.BroadcastDirection.TO_CHILDREN);
+import javax.swing.*;
 
-	public static String snakeToCamel(String str) {
-		return str.replaceAll("-", "_");
+public class ConnectForm {
+	private JPanel contentPane;
+	private JTextPane helpConnection;
+	private JTextField loginField;
+	private JLabel loginLabel;
+	private JPasswordField passwordField;
+	private JLabel passwordLabel;
+	private JTextField urlField;
+	private JLabel urlLabel;
+
+	public ConnectForm() {
+		helpConnection.setText(PegaBundle.getHelp("connect"));
+	}
+
+	public void apply(ConnectState state) {
+		state.login = loginField.getText();
+		state.pwd = new String(passwordField.getPassword());
+		state.url = urlField.getText();
+	}
+
+	public ConnectState currentState() {
+		return new ConnectState(loginField.getText(), new String(passwordField.getPassword()), urlField.getText());
+	}
+
+	public boolean isModified(ConnectState state) {
+		final ConnectState connectState = currentState();
+		return !connectState.equals(state);
+	}
+
+	public void reset(ConnectState state) {
+		passwordField.setText(state.pwd);
+		loginField.setText(state.login);
+		urlField.setText(state.url);
 	}
 }

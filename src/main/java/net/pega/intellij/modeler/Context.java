@@ -17,26 +17,20 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler.uml.connect;
+package net.pega.intellij.modeler;
 
-import net.pega.intellij.modeler.uml.PegaClient;
+import net.pega.intellij.modeler.config.PegaConfigState;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 
-import java.io.PrintStream;
+import java.io.IOException;
 
-public class Connect extends PegaClient {
-	public void analyse(PrintStream out) {
-		final HttpGet get = createRequest("/");
-		try (CloseableHttpResponse response = client.execute(get)) {
-			log(response.getStatusLine().toString());
-		} catch (Exception e) {
-			log(e.toString());
-		}
-	}
+public interface Context {
+	HttpGet createRequest(String s);
 
-	@Override
-	public String getAnalysis() {
-		return "Connect";
-	}
+	CloseableHttpResponse execute(HttpGet get) throws IOException;
+
+	PegaConfigState getConfiguration();
+
+	void log(String msg);
 }

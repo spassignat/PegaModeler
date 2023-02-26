@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2023 Stephane Passignat - Exygen
+ * Copyright (c) 2023 Stephane Passignat - Exygen
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,12 +19,26 @@
  */
 package net.pega.intellij.modeler;
 
-import com.intellij.util.messages.Topic;
+import net.pega.model.RuleApplication;
+import net.pega.model.RuleObjCaseType;
+import net.pega.model.RuleSetVersion;
 
-public final class PegaPlugin {
-	public static final Topic<RuleListener> RULE_LISTENER_TOPIC = new Topic<>(RuleListener.class, Topic.BroadcastDirection.TO_CHILDREN);
+public interface RuleListener {
+	void clearApplications();
 
-	public static String snakeToCamel(String str) {
-		return str.replaceAll("-", "_");
-	}
+	void clearCaseTypes();
+
+	void clearRuleSetVersion();
+
+	void onApplicationChanged(RuleApplication ruleApplication);
+
+	void onApplicationLoaded(RuleApplication app);
+
+	void onCaseTypeLoaded(RuleObjCaseType rle);
+
+	void onRulesetVersionLoaded(RuleSetVersion ruleSetVersion);
+	void logEnter(String message);
+	void logExit(String message);
+	void log(String message);
+
 }

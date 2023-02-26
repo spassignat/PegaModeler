@@ -24,13 +24,12 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import net.pega.intellij.modeler.PegaClient;
 import net.pega.intellij.modeler.PegaPlugin;
 import net.pega.intellij.modeler.config.PegaConfigState;
 import net.pega.intellij.modeler.config.PegaProjectSettings;
-import net.pega.intellij.modeler.uml.PegaClient;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.*;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Objects;
@@ -46,21 +45,22 @@ public class MyRunnable implements Runnable, MessageCallback {
 	public MyRunnable(MessageCallback responsesField, String pegaClientName, @NotNull Project project, String fileName) {
 		final ServiceLoader<PegaClient> load = ServiceLoader.load(PegaClient.class, PegaClient.class.getClassLoader());
 		final Optional<ServiceLoader.Provider<PegaClient>> first = load.stream().filter(elt -> Objects.equals(elt.get().getAnalysis(), pegaClientName)).findFirst();
-		final PegaProjectSettings instance = PegaProjectSettings.getInstance(project);
-		final PegaConfigState state = instance.getState();	this.pegaClient = first.get().get();
+		final PegaProjectSettings service = project.getService(PegaProjectSettings.class);
+		final PegaConfigState state = service.getState();
+		this.pegaClient = first.get().get();
 		this.pegaClient.init(state, this);
 		this.project = project;
 		this.fileName = fileName;
 		this.responsesField = responsesField;
 	}
 
-	public void log(String msg) {
-		responsesField.log(msg);
-	}
-
 	@Override
 	public void clear() {
 		responsesField.clear();
+	}
+
+	public void log(String msg) {
+		responsesField.log(msg);
 	}
 
 	@Override
@@ -69,8 +69,8 @@ public class MyRunnable implements Runnable, MessageCallback {
 		Logger.getInstance(PegaPlugin.class).info("Generate " + fileName);
 		try {
 			WriteAction.run(() -> {
-				final PegaProjectSettings instance = PegaProjectSettings.getInstance(project);
-				final PegaConfigState state = instance.getState();
+				final PegaProjectSettings service = project.getService(PegaProjectSettings.class);
+				final PegaConfigState state = service.getState();
 				pegaClient.init(state, this);
 				final VirtualFile root = project.getWorkspaceFile().getParent().getParent();
 				VirtualFile pegaFolder = root.findChild("pega");
@@ -80,7 +80,7 @@ public class MyRunnable implements Runnable, MessageCallback {
 				final VirtualFile dmFile = pegaFolder.findOrCreateChildData(this, fileName);
 				final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 				final PrintStream printStream = new PrintStream(byteArrayOutputStream);
-				pegaClient.analyse(printStream);
+				pegaClient.analyse(printStream, project, null);
 				printStream.flush();
 				VfsUtil.saveText(dmFile, byteArrayOutputStream.toString());
 			});

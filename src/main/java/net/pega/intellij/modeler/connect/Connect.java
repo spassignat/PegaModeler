@@ -17,44 +17,32 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler.uml.connect;
+package net.pega.intellij.modeler.connect;
 
-import net.pega.intellij.modeler.PegaBundle;
+import com.intellij.openapi.project.Project;
+import net.pega.intellij.modeler.PegaClient;
+import net.pega.intellij.modeler.Rule;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
 
-import javax.swing.*;
+import java.io.PrintStream;
 
-public class ConnectForm {
-	private JPanel contentPane;
-	private JTextPane helpConnection;
-	private JTextField loginField;
-	private JLabel loginLabel;
-	private JPasswordField passwordField;
-	private JLabel passwordLabel;
-	private JTextField urlField;
-	private JLabel urlLabel;
-
-	public ConnectForm() {
-		helpConnection.setText(PegaBundle.getHelp("connect"));
+public class Connect extends PegaClient {
+	public Connect(Project project) {
+		super(project);
 	}
 
-	public void apply(ConnectState state) {
-		state.login = loginField.getText();
-		state.pwd = new String(passwordField.getPassword());
-		state.url = urlField.getText();
+	public void analyse(PrintStream out, Project project, Rule rule) {
+		final HttpGet get = createRequest("/");
+		try (CloseableHttpResponse response = client.execute(get)) {
+			log(response.getStatusLine().toString());
+		} catch (Exception e) {
+			log(e.toString());
+		}
 	}
 
-	public ConnectState currentState() {
-		return new ConnectState(loginField.getText(), new String(passwordField.getPassword()), urlField.getText());
-	}
-
-	public boolean isModified(ConnectState state) {
-		final ConnectState connectState = currentState();
-		return !connectState.equals(state);
-	}
-
-	public void reset(ConnectState state) {
-		passwordField.setText(state.pwd);
-		loginField.setText(state.login);
-		urlField.setText(state.url);
+	@Override
+	public String getAnalysis() {
+		return "Connect";
 	}
 }

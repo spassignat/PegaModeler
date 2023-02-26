@@ -19,6 +19,7 @@
  */
 package net.pega.intellij.modeler.view;
 
+import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
@@ -39,8 +40,10 @@ public class PegaWindowFactory implements ToolWindowFactory {
 	 * @param toolWindow current tool window
 	 */
 	public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
+
 		PegaWindow myToolWindow = new PegaWindow(toolWindow, project);
-		ContentFactory contentFactory = ApplicationManager.getApplication().getService(ContentFactory.class);
+		final Application application = ApplicationManager.getApplication();
+		ContentFactory contentFactory = application.getService(ContentFactory.class);
 		Content content = contentFactory.createContent(myToolWindow.getContent(), "", false);
 		final ContentManager contentManager = toolWindow.getContentManager();
 		contentManager.addContent(content);

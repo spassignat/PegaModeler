@@ -41,6 +41,6 @@ public class PegaProjectConfigurable extends ConfigurableBase<PegaProjectSetting
 
 	@Override
 	protected @NotNull PegaProjectSettings getSettings() {
-		return PegaProjectSettings.getInstance(project);
+		return project.getService(PegaProjectSettings.class);
 	}
 }
