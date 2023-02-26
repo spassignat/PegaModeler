@@ -17,21 +17,19 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler.modules;
+package net.pega.intellij.modules;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.project.Project;
-import net.pega.intellij.modeler.BaseModule;
+import net.pega.intellij.BaseModule;
+import net.pega.intellij.modeler.CaseTypeService;
 import net.pega.intellij.modeler.Rule;
-import net.pega.intellij.modeler.RuleListener;
-import net.pega.intellij.modeler.RuleSetVersionService;
-import net.pega.intellij.modeler.config.PegaProjectSettings;
 import net.pega.model.RuleApplication;
+import net.pega.model.RuleObjCaseType;
 import net.pega.model.RuleSetVersion;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.InputStream;
@@ -39,23 +37,21 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.pega.intellij.modeler.PegaPlugin.RULE_LISTENER_TOPIC;
+public class CaseTypeModule extends BaseModule implements CaseTypeService {
+	List<RuleObjCaseType> allRuleSets = new ArrayList<>();
 
-public class RuleSetVersionModule extends BaseModule implements RuleSetVersionService {
-	List<RuleSetVersion> allRuleSets = new ArrayList<>();
-
-	public RuleSetVersionModule(@NotNull Project project) {
+	public CaseTypeModule(@NotNull Project project) {
 		super(project);
 	}
 
 	public void analyse(PrintStream out, Project project, Rule rule) {
-		try (CloseableHttpResponse response = execute("rulesets")) {
+		try (CloseableHttpResponse response = execute("casetypes")) {
 			final ObjectMapper objectMapper = new ObjectMapper();
 			final InputStream content = response.getEntity().getContent();
-			final List<RuleApplication> ruleApplications = objectMapper.readValue(content, new TypeReference<List<RuleApplication>>() {
+			final List<RuleObjCaseType> ruleApplications = objectMapper.readValue(content, new TypeReference<List<RuleObjCaseType>>() {
 			});
-			for (RuleApplication ruleApplication : ruleApplications) {
-				ruleListener.onApplicationLoaded(ruleApplication);
+			for (RuleObjCaseType ruleApplication : ruleApplications) {
+				ruleListener.onCaseTypeLoaded(ruleApplication);
 			}
 			log(response.getStatusLine().toString());
 		} catch (Exception e) {
@@ -64,16 +60,16 @@ public class RuleSetVersionModule extends BaseModule implements RuleSetVersionSe
 	}
 
 	@Override
-	public void loadRuleSets(@NotNull ProgressIndicator indicator, RuleApplication selectedItem) {
-		try (CloseableHttpResponse response = execute("rulesets", selectedItem.getPyRuleSet())) {
+	public void loadCaseTypes(@NotNull ProgressIndicator indicator, RuleApplication ruleApp, RuleSetVersion ruleSetVersion) {
+		try (CloseableHttpResponse response = execute("casetype", ruleSetVersion.getPyRuleSet(), ruleSetVersion.getPyRuleSetVersionID())) {
 			final InputStream content = response.getEntity().getContent();
-			final List<RuleSetVersion> ruleApplications = objectMapper.readValue(content, new TypeReference<List<RuleSetVersion>>() {
+			final List<RuleObjCaseType> ruleObjCaseTypes = objectMapper.readValue(content, new TypeReference<List<RuleObjCaseType>>() {
 			});
-			ruleListener.clearRuleSetVersion();
-			for (RuleSetVersion ruleSetVersion : ruleApplications) {
-				indicator.setText("add " + ruleSetVersion.getPyLabel());
-				allRuleSets.add(ruleSetVersion);
-				ruleListener.onRulesetVersionLoaded(ruleSetVersion);
+			ruleListener.clearCaseTypes();
+			for (RuleObjCaseType rle : ruleObjCaseTypes) {
+				indicator.setText("add " + rle.getPyLabel());
+				allRuleSets.add(rle);
+				ruleListener.onCaseTypeLoaded(rle);
 			}
 			//			log(response.getStatusLine().toString());
 		} catch (Exception e) {

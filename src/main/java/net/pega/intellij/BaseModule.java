@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Stephane Passignat - Exygen
+ * Copyright (c) 2023-2023 Stephane Passignat - Exygen
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -17,10 +17,11 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler;
+package net.pega.intellij;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.intellij.openapi.project.Project;
+import net.pega.intellij.modeler.RuleListener;
 import net.pega.intellij.modeler.config.PegaProjectSettings;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;

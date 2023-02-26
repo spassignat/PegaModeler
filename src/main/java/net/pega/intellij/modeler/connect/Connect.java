@@ -19,7 +19,6 @@
  */
 package net.pega.intellij.modeler.connect;
 
-import com.intellij.openapi.project.Project;
 import net.pega.intellij.modeler.PegaClient;
 import net.pega.intellij.modeler.Rule;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -28,11 +27,8 @@ import org.apache.http.client.methods.HttpGet;
 import java.io.PrintStream;
 
 public class Connect extends PegaClient {
-	public Connect(Project project) {
-		super(project);
-	}
 
-	public void analyse(PrintStream out, Project project, Rule rule) {
+	public void analyse(PrintStream out, Rule rule) {
 		final HttpGet get = createRequest("/");
 		try (CloseableHttpResponse response = client.execute(get)) {
 			log(response.getStatusLine().toString());

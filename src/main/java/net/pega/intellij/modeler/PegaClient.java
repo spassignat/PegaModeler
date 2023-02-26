@@ -19,7 +19,6 @@
  */
 package net.pega.intellij.modeler;
 
-import com.intellij.openapi.project.Project;
 import net.pega.intellij.modeler.config.PegaConfigState;
 import net.pega.intellij.modeler.view.MessageCallback;
 import org.apache.http.auth.AuthScope;
@@ -41,16 +40,8 @@ public abstract class PegaClient implements Context {
 	protected PegaConfigState configuration;
 	MessageCallback log;
 	private String token;
-	Project project;
 
-private PegaClient() {
-	}
-
-	public PegaClient(Project project) {
-		this.project = project;
-	}
-
-	public abstract void analyse(PrintStream out, Project project, Rule rule);
+	public abstract void analyse(PrintStream out, Rule rule);
 
 	public HttpGet createRequest(String path) {
 		final HttpGet get = new HttpGet(configuration.connectState.url + path);
@@ -77,7 +68,6 @@ private PegaClient() {
 
 	public void init(PegaConfigState state, MessageCallback log) {
 		this.configuration = state;
-		final RuleListener ruleListener = project.getMessageBus().syncPublisher(RULE_LISTENER_TOPIC);
 		this.log = log;
 		final UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(state.connectState.login, state.connectState.pwd);
 		final BasicCredentialsProvider credsProvider = new BasicCredentialsProvider();
@@ -88,6 +78,6 @@ private PegaClient() {
 
 	@Override
 	public void log(String msg) {
-//		log.log(msg);
+		//		log.log(msg);
 	}
 }

@@ -58,11 +58,11 @@
 		<projectService
 				serviceImplementation="net.pega.intellij.modeler.config.PegaProjectSettings"/>
 		<projectService serviceInterface="net.pega.intellij.modeler.RuleSetVersionService"
-						serviceImplementation="net.pega.intellij.modeler.modules.RuleSetVersionModule"/>
+						serviceImplementation="net.pega.intellij.modules.RuleSetVersionModule"/>
 		<projectService serviceInterface="net.pega.intellij.modeler.ApplicationService"
-						serviceImplementation="net.pega.intellij.modeler.modules.ApplicationModule"/>
+						serviceImplementation="net.pega.intellij.modules.ApplicationModule"/>
 		<projectService serviceInterface="net.pega.intellij.modeler.CaseTypeService"
-						serviceImplementation="net.pega.intellij.modeler.modules.CaseTypeModule"/>
+						serviceImplementation="net.pega.intellij.modules.CaseTypeModule"/>
 		<toolWindow id="Pega" secondary="true" icon="SdkIcons.PegaIcon" anchor="right"
 					factoryClass="net.pega.intellij.modeler.view.PegaWindowFactory"/>
 		<errorHandler implementation="net.pega.intellij.errorreporting.GitHubErrorReporter"/>

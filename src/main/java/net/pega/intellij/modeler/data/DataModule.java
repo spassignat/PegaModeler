@@ -19,7 +19,6 @@
  */
 package net.pega.intellij.modeler.data;
 
-import com.intellij.openapi.project.Project;
 import net.pega.intellij.modeler.Generator;
 import net.pega.intellij.modeler.Loader;
 import net.pega.intellij.modeler.PegaClient;
@@ -29,11 +28,7 @@ import net.pega.model.RuleObjClass;
 import java.io.PrintStream;
 
 public class DataModule extends PegaClient {
-	public DataModule(Project project) {
-		super(project);
-	}
-
-	public void analyse(PrintStream out, Project project, Rule rule) {
+	public void analyse(PrintStream out, Rule rule) {
 		Generator generator = new UmlGenerator(this);
 		Loader loader = new DataLoader(this);
 		final RuleObjClass ruleObjClass = new RuleObjClass(configuration.dataModelState.baseClassName);

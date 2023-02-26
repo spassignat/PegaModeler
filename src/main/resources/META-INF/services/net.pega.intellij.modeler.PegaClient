@@ -20,5 +20,3 @@
 
 net.pega.intellij.modeler.data.DataModule
 net.pega.intellij.modeler.connect.Connect
-net.pega.intellij.modeler.process.CaseTypeModule
-net.pega.intellij.modeler.modules.ApplicationModule

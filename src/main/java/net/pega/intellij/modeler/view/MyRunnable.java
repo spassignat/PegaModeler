@@ -80,7 +80,7 @@ public class MyRunnable implements Runnable, MessageCallback {
 				final VirtualFile dmFile = pegaFolder.findOrCreateChildData(this, fileName);
 				final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 				final PrintStream printStream = new PrintStream(byteArrayOutputStream);
-				pegaClient.analyse(printStream, project, null);
+				pegaClient.analyse(printStream, null);
 				printStream.flush();
 				VfsUtil.saveText(dmFile, byteArrayOutputStream.toString());
 			});

@@ -26,14 +26,11 @@ import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
+import com.intellij.openapi.wm.ToolWindowManager;
 import com.intellij.util.messages.MessageBus;
-import net.pega.intellij.modeler.Rule;
-import net.pega.intellij.modeler.RuleListener;
-import net.pega.intellij.modeler.ApplicationService;
-import net.pega.intellij.modeler.CaseTypeService;
+import net.pega.intellij.modeler.*;
 import net.pega.intellij.modeler.config.PegaConfigState;
 import net.pega.intellij.modeler.config.PegaProjectSettings;
-import net.pega.intellij.modeler.RuleSetVersionService;
 import net.pega.model.RuleApplication;
 import net.pega.model.RuleObjCaseType;
 import net.pega.model.RuleSetVersion;
@@ -42,13 +39,12 @@ import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeCellRenderer;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeNode;
+import javax.swing.tree.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Enumeration;
 
 import static net.pega.intellij.modeler.PegaPlugin.RULE_LISTENER_TOPIC;
@@ -56,6 +52,7 @@ import static net.pega.intellij.modeler.PegaPlugin.RULE_LISTENER_TOPIC;
 public class PegaWindow {
 	public JTextArea area;
 	DefaultComboBoxModel<RuleApplication> appModel = new DefaultComboBoxModel<RuleApplication>();
+	Project project;
 	DefaultComboBoxModel<RuleSetVersion> ruleSetVersionModel = new DefaultComboBoxModel<RuleSetVersion>();
 	private JComboBox<RuleApplication> appComboBox;
 	private JButton clearButton;
@@ -73,6 +70,7 @@ public class PegaWindow {
 	private JButton validRS;
 
 	public PegaWindow(ToolWindow toolWindow, @NotNull Project project) {
+		this.project = project;
 		final PegaProjectSettings service = project.getService(PegaProjectSettings.class);
 		final PegaConfigState state = service.getState();
 		final Application application = ApplicationManager.getApplication();
@@ -92,6 +90,41 @@ public class PegaWindow {
 
 	public JPanel getContent() {
 		return myToolWindowContent;
+	}
+
+	private JPopupMenu createPopup() {
+		JPopupMenu popupMenu = new JPopupMenu();
+		final TreePath[] selectionPaths = ruleTree.getSelectionPaths();
+		final TreePath selectionPath = selectionPaths[selectionPaths.length - 1];
+		final DefaultMutableTreeNode lastPathComponent = (DefaultMutableTreeNode) selectionPath.getLastPathComponent();
+		final Object userObject = lastPathComponent.getUserObject();
+		if (userObject instanceof RuleObjCaseType) {
+			JMenuItem menuItem1 = new JMenuItem("DataModel");
+			popupMenu.add(menuItem1);
+			menuItem1.addActionListener(e -> {
+				ToolWindowManager toolWindowManager = ToolWindowManager.getInstance(project);
+				ToolWindow toolWindow = toolWindowManager.getToolWindow("Pega");
+				if (toolWindow != null) {
+					final MessageCallback component = (MessageCallback) toolWindow.getComponent().getComponent(0);
+					toolWindow.show();
+					final MyRunnable dataModel = new MyRunnable(component, "DataModel", project, "data-model.puml");
+					ApplicationManager.getApplication().invokeLater(dataModel);
+				}
+			});
+			JMenuItem menuItem2 = new JMenuItem("Process");
+			menuItem2.addActionListener(e -> {
+				ToolWindowManager toolWindowManager = ToolWindowManager.getInstance(project);
+				ToolWindow toolWindow = toolWindowManager.getToolWindow("Pega");
+				if (toolWindow != null) {
+					final MessageCallback component = (MessageCallback) toolWindow.getComponent().getComponent(0);
+					toolWindow.show();
+					final MyRunnable dataModel = new MyRunnable(component, "Process", project, "data-model.puml");
+					ApplicationManager.getApplication().invokeLater(dataModel);
+				}
+			});
+			popupMenu.add(menuItem2);
+		}
+		return popupMenu;
 	}
 
 	private void createUIComponents() {
@@ -251,12 +284,26 @@ public class PegaWindow {
 			}
 
 			@Override
+			public void log(String message) {
+				area.append(message + "\n");
+			}
+
+			@Override
+			public void logEnter(String message) {
+				area.append(message + "\n");
+			}
+
+			@Override
+			public void logExit(String message) {
+				area.append(message + "\n");
+			}
+
+			@Override
 			public void onApplicationChanged(RuleApplication ruleApplication) {
 			}
 
 			@Override
 			public void onApplicationLoaded(RuleApplication app) {
-
 				appModel.addElement(app);
 			}
 
@@ -273,21 +320,6 @@ public class PegaWindow {
 			@Override
 			public void onRulesetVersionLoaded(RuleSetVersion ruleSetVersion) {
 				ruleSetVersionModel.addElement(ruleSetVersion);
-			}
-
-			@Override
-			public void logEnter(String message) {
-				area.append(message+"\n");
-			}
-
-			@Override
-			public void logExit(String message) {
-				area.append(message+"\n");
-			}
-
-			@Override
-			public void log(String message) {
-				area.append(message+"\n");
 			}
 		});
 	}
@@ -323,6 +355,21 @@ public class PegaWindow {
 					}
 				}
 				return super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
+			}
+		});
+		ruleTree.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				showPopupMenu(e);
+			}
+
+			public void mouseReleased(MouseEvent e) {
+				showPopupMenu(e);
+			}
+
+			private void showPopupMenu(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					createPopup().show(e.getComponent(), e.getX(), e.getY());
+				}
 			}
 		});
 	}

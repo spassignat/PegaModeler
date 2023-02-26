@@ -17,19 +17,16 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler.modules;
+package net.pega.intellij.modules;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.project.Project;
-import net.pega.intellij.modeler.BaseModule;
-import net.pega.intellij.modeler.CaseTypeService;
+import net.pega.intellij.modeler.ApplicationService;
+import net.pega.intellij.BaseModule;
 import net.pega.intellij.modeler.Rule;
 import net.pega.intellij.modeler.RuleListener;
 import net.pega.model.RuleApplication;
-import net.pega.model.RuleObjCaseType;
-import net.pega.model.RuleSetVersion;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.jetbrains.annotations.NotNull;
 
@@ -40,45 +37,67 @@ import java.util.List;
 
 import static net.pega.intellij.modeler.PegaPlugin.RULE_LISTENER_TOPIC;
 
-public class CaseTypeModule extends BaseModule implements CaseTypeService {
-	List<RuleObjCaseType> allRuleSets = new ArrayList<>();
+public class ApplicationModule extends BaseModule implements ApplicationService {
+	private List<RuleApplication> allApplications = new ArrayList<RuleApplication>();
+	private RuleApplication ruleApplication;
 
-	public CaseTypeModule(@NotNull Project project) {
+	public ApplicationModule(@NotNull Project project) {
 		super(project);
 	}
 
 	public void analyse(PrintStream out, Project project, Rule rule) {
-		try (CloseableHttpResponse response = execute("casetypes")) {
+		try (CloseableHttpResponse response = execute("applications")) {
 			final ObjectMapper objectMapper = new ObjectMapper();
 			final InputStream content = response.getEntity().getContent();
-			final List<RuleObjCaseType> ruleApplications = objectMapper.readValue(content, new TypeReference<List<RuleObjCaseType>>() {
+			final List<RuleApplication> ruleApplications = objectMapper.readValue(content, new TypeReference<List<RuleApplication>>() {
 			});
-			for (RuleObjCaseType ruleApplication : ruleApplications) {
-				ruleListener.onCaseTypeLoaded(ruleApplication);
+			ruleListener.clearApplications();
+			for (RuleApplication ruleApplication : ruleApplications) {
+				ruleListener.onApplicationLoaded(ruleApplication);
 			}
-			log(response.getStatusLine().toString());
+			//			log(response.getStatusLine().toString());
 		} catch (Exception e) {
-			log(e.toString());
+			//			log(e.toString());
 		}
 	}
 
 	@Override
-	public void loadCaseTypes(@NotNull ProgressIndicator indicator, RuleApplication ruleApp, RuleSetVersion ruleSetVersion) {
-		try (CloseableHttpResponse response = execute("casetype", ruleSetVersion.getPyRuleSet(), ruleSetVersion.getPyRuleSetVersionID())) {
+	public RuleApplication getRuleApplication() {
+		return ruleApplication;
+	}
+
+	@Override
+	public void loadApplications() {
+		allApplications.clear();
+		try (CloseableHttpResponse response = execute("applications")) {
 			final InputStream content = response.getEntity().getContent();
-			final List<RuleObjCaseType> ruleObjCaseTypes = objectMapper.readValue(content, new TypeReference<List<RuleObjCaseType>>() {
+			final List<RuleApplication> ruleApplications = objectMapper.readValue(content, new TypeReference<List<RuleApplication>>() {
 			});
-			ruleListener.clearCaseTypes();
-			for (RuleObjCaseType rle : ruleObjCaseTypes) {
-				indicator.setText("add " + rle.getPyLabel());
-				allRuleSets.add(rle);
-				ruleListener.onCaseTypeLoaded(rle);
+			ruleListener.clearApplications();
+			for (int i = 0; i < ruleApplications.size(); i++) {
+				RuleApplication ruleApplication = ruleApplications.get(i);
+				for (int j = i+1; j < ruleApplications.size(); j++) {
+					RuleApplication application = ruleApplications.get(j);
+					if (ruleApplication.getPyLabel().equals(application.getPyLabel())) {
+						ruleApplications.remove(j);
+						j--;
+					}
+				}
+			}
+			for (RuleApplication ruleApplication : ruleApplications) {
+				allApplications.add(ruleApplication);
+				ruleListener.onApplicationLoaded(ruleApplication);
 			}
 			//			log(response.getStatusLine().toString());
 		} catch (Exception e) {
 			e.printStackTrace();
-			log(e.toString());
+			//			log(e.toString());
 		}
-		indicator.stop();
+	}
+
+	public void setRuleApplication(Project project, RuleApplication ruleApplication) {
+		this.ruleApplication = ruleApplication;
+		final RuleListener ruleListener = project.getMessageBus().syncPublisher(RULE_LISTENER_TOPIC);
+		ruleListener.onApplicationChanged(ruleApplication);
 	}
 }

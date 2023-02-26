@@ -127,6 +127,44 @@
       <item class="net.pega.intellij.modeler.uml.data.DataModelForm" icon="" removable="true" auto-create-binding="false" can-attach-label="false">
         <default-constraints vsize-policy="7" hsize-policy="7" anchor="0" fill="3" />
       </item>
+      <item class="net.pega.intellij.modeler.view.PegaWindow" icon="" removable="true" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
+      </item>
+    </group>
+    <group name="JetBrains">
+      <item class="com.intellij.ui.components.JBLabel" icon="/com/intellij/uiDesigner/icons/label.svg" removable="true" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
+      </item>
+      <item class="com.intellij.ui.JBIntSpinner" icon="/com/intellij/uiDesigner/icons/spinner.svg" removable="true" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
+      </item>
+      <item class="com.intellij.ui.components.JBRadioButton" icon="/com/intellij/uiDesigner/icons/radioButton.svg" removable="true" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
+      </item>
+      <item class="com.intellij.ui.components.JBBox" icon="" removable="true" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
+      </item>
+      <item class="com.intellij.ui.components.JBList" icon="/com/intellij/uiDesigner/icons/list.svg" removable="true" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
+      </item>
+      <item class="com.intellij.ui.components.JBMenu" icon="" removable="true" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
+      </item>
+      <item class="com.intellij.ui.components.JBPasswordField" icon="/com/intellij/uiDesigner/icons/passwordField.svg" removable="true" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
+      </item>
+      <item class="com.intellij.ui.components.JBScrollBar" icon="/com/intellij/uiDesigner/icons/scrollbar.svg" removable="true" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
+      </item>
+      <item class="com.intellij.ui.components.JBTreeTable" icon="" removable="true" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
+      </item>
+      <item class="com.intellij.ui.components.JBTextArea" icon="/com/intellij/uiDesigner/icons/textArea.svg" removable="true" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
+      </item>
+      <item class="com.intellij.ui.components.JBTextField" icon="/com/intellij/uiDesigner/icons/textField.svg" removable="true" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="0" />
+      </item>
     </group>
   </component>
   <component name="uidesigner-configuration">
