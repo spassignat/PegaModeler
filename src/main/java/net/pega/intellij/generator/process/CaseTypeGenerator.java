@@ -42,7 +42,7 @@ class CaseTypeGenerator implements Generator<RuleObjCaseType> {
 				for (EmbedStage pyStage : ruleObjCaseType.getPyStages()) {
 					if (pyStage.isPyIsInitializationStage()) {
 						out.printf("|#lightgreen|%s|\n", pyStage.getPyStageName());
-						out.printf("start %s\n", pyStage.getPyStageName());
+						out.printf("start\n");
 					} else if (pyStage.isPyIsTerminalStage()) {
 						out.printf("|#pink|%s|\n", pyStage.getPyStageName());
 					} else{
