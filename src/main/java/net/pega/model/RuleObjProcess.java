@@ -17,10 +17,7 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler.view;
+package net.pega.model;
 
-import javax.swing.*;
-
-public abstract class MyJPanel extends JPanel implements MessageCallback {
-	public abstract void log(String message);
+public class RuleObjProcess extends RuleObj{
 }

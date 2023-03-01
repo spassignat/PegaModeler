@@ -19,7 +19,5 @@
  */
 package net.pega.model;
 
-import net.pega.intellij.modeler.Rule;
-
 public class RuleApplication extends Rule {
 }

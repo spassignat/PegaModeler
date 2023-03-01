@@ -17,10 +17,35 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler.view;
+package net.pega.model;
 
-import javax.swing.*;
+public class EmbedRulePrivilegeSecurity extends Rule{
+	String pzIndexOwnerKey;
+	String pyPrivilegeName;
 
-public abstract class MyJPanel extends JPanel implements MessageCallback {
-	public abstract void log(String message);
+	public String getPzIndexOwnerKey() {
+		return pzIndexOwnerKey;
+	}
+
+	public void setPzIndexOwnerKey(String pzIndexOwnerKey) {
+		this.pzIndexOwnerKey = pzIndexOwnerKey;
+	}
+
+	public String getPyPrivilegeName() {
+		return pyPrivilegeName;
+	}
+
+	public void setPyPrivilegeName(String pyPrivilegeName) {
+		this.pyPrivilegeName = pyPrivilegeName;
+	}
+
+	public String getPyPrivilegeClass() {
+		return pyPrivilegeClass;
+	}
+
+	public void setPyPrivilegeClass(String pyPrivilegeClass) {
+		this.pyPrivilegeClass = pyPrivilegeClass;
+	}
+
+	String pyPrivilegeClass;
 }

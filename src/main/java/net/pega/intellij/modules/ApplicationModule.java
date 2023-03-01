@@ -22,9 +22,9 @@ package net.pega.intellij.modules;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.intellij.openapi.project.Project;
-import net.pega.intellij.modeler.ApplicationService;
 import net.pega.intellij.BaseModule;
-import net.pega.intellij.modeler.Rule;
+import net.pega.intellij.modeler.ApplicationService;
+import net.pega.model.Rule;
 import net.pega.intellij.modeler.RuleListener;
 import net.pega.model.RuleApplication;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -33,6 +33,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import static net.pega.intellij.modeler.PegaPlugin.RULE_LISTENER_TOPIC;
@@ -76,7 +77,7 @@ public class ApplicationModule extends BaseModule implements ApplicationService 
 			ruleListener.clearApplications();
 			for (int i = 0; i < ruleApplications.size(); i++) {
 				RuleApplication ruleApplication = ruleApplications.get(i);
-				for (int j = i+1; j < ruleApplications.size(); j++) {
+				for (int j = i + 1; j < ruleApplications.size(); j++) {
 					RuleApplication application = ruleApplications.get(j);
 					if (ruleApplication.getPyLabel().equals(application.getPyLabel())) {
 						ruleApplications.remove(j);
@@ -84,6 +85,7 @@ public class ApplicationModule extends BaseModule implements ApplicationService 
 					}
 				}
 			}
+			ruleApplications.sort(Comparator.comparing(Rule::getPyLabel));
 			for (RuleApplication ruleApplication : ruleApplications) {
 				allApplications.add(ruleApplication);
 				ruleListener.onApplicationLoaded(ruleApplication);

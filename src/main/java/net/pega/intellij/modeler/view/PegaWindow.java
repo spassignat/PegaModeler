@@ -28,12 +28,13 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowManager;
 import com.intellij.util.messages.MessageBus;
+import net.pega.intellij.generator.CodeEngine;
+import net.pega.intellij.generator.datamodel.DatamodelCodeEngine;
+import net.pega.intellij.generator.process.ProcessCodeEngine;
 import net.pega.intellij.modeler.*;
 import net.pega.intellij.modeler.config.PegaConfigState;
 import net.pega.intellij.modeler.config.PegaProjectSettings;
-import net.pega.model.RuleApplication;
-import net.pega.model.RuleObjCaseType;
-import net.pega.model.RuleSetVersion;
+import net.pega.model.*;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -45,9 +46,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.Enumeration;
 
 import static net.pega.intellij.modeler.PegaPlugin.RULE_LISTENER_TOPIC;
+import static net.pega.intellij.modeler.PegaPlugin.saveToFile;
 
 public class PegaWindow {
 	public JTextArea area;
@@ -105,10 +110,19 @@ public class PegaWindow {
 				ToolWindowManager toolWindowManager = ToolWindowManager.getInstance(project);
 				ToolWindow toolWindow = toolWindowManager.getToolWindow("Pega");
 				if (toolWindow != null) {
-					final MessageCallback component = (MessageCallback) toolWindow.getComponent().getComponent(0);
 					toolWindow.show();
-					final MyRunnable dataModel = new MyRunnable(component, "DataModel", project, "data-model.puml");
-					ApplicationManager.getApplication().invokeLater(dataModel);
+					ApplicationManager.getApplication().invokeLater(() -> {
+						try {
+							final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+							final PrintStream printStream = new PrintStream(byteArrayOutputStream);
+							CodeEngine<RuleObjClass> engine = project.getService(DatamodelCodeEngine.class);
+							final RuleObjClass rule = new RuleObjClass(((RuleObjCaseType) userObject).getPyClassName());
+							engine.analyse(printStream, rule);
+							saveToFile(project, this, byteArrayOutputStream, "pega", ((RuleObjCaseType) userObject).getPyLabel(), "datamodel.puml");
+						} catch (IOException ex) {
+							throw new RuntimeException(ex);
+						}
+					});
 				}
 			});
 			JMenuItem menuItem2 = new JMenuItem("Process");
@@ -116,10 +130,18 @@ public class PegaWindow {
 				ToolWindowManager toolWindowManager = ToolWindowManager.getInstance(project);
 				ToolWindow toolWindow = toolWindowManager.getToolWindow("Pega");
 				if (toolWindow != null) {
-					final MessageCallback component = (MessageCallback) toolWindow.getComponent().getComponent(0);
 					toolWindow.show();
-					final MyRunnable dataModel = new MyRunnable(component, "Process", project, "data-model.puml");
-					ApplicationManager.getApplication().invokeLater(dataModel);
+					ApplicationManager.getApplication().invokeLater(() -> {
+						try {
+							final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+							final PrintStream printStream = new PrintStream(byteArrayOutputStream);
+							CodeEngine<RuleObjCaseType> engine = project.getService(ProcessCodeEngine.class);
+							engine.analyse(printStream, (RuleObjCaseType) userObject);
+							saveToFile(project, this, byteArrayOutputStream, "pega", ((RuleObjCaseType) userObject).getPyLabel(), "process.puml");
+						} catch (IOException ex) {
+							throw new RuntimeException(ex);
+						}
+					});
 				}
 			});
 			popupMenu.add(menuItem2);
@@ -174,7 +196,7 @@ public class PegaWindow {
 	}
 
 	private void setupButtons(@NotNull Project project, Application application) {
-		generateDataModelButton.addActionListener(evt -> {
+		/*generateDataModelButton.addActionListener(evt -> {
 			final MyRunnable dataModel = new MyRunnable((MessageCallback) myToolWindowContent, "DataModel", project, "data-model.puml");
 			application.invokeAndWait(dataModel);
 		});
@@ -185,7 +207,7 @@ public class PegaWindow {
 		generateProcess.addActionListener(evt -> {
 			final MyRunnable connect = new MyRunnable((MessageCallback) myToolWindowContent, "Process", project, "process.puml");
 			application.invokeAndWait(connect);
-		});
+		});*/
 		clearButton.addActionListener(e -> ((MyJPanel) myToolWindowContent).clear());
 		loadAppsButton.addActionListener(evt -> {
 			application.invokeLater(() -> {
@@ -311,9 +333,19 @@ public class PegaWindow {
 			public void onCaseTypeLoaded(RuleObjCaseType rle) {
 				final RuleSetVersion ruleSetVersion = (RuleSetVersion) ruleSetsComboBox.getSelectedItem();
 				final DefaultMutableTreeNode root = (DefaultMutableTreeNode) ruleTreeModel.getRoot();
-				final DefaultMutableTreeNode foundNode = findNodeByObject(ruleSetVersion, root);
-				if (foundNode != null) {
-					foundNode.add(new DefaultMutableTreeNode(rle));
+				 DefaultMutableTreeNode tn = findNodeByObject(rle, root);
+				if (tn==null) {
+					final DefaultMutableTreeNode foundNode = findNodeByObject(ruleSetVersion, root);
+					if (foundNode != null) {
+						tn=new DefaultMutableTreeNode(rle);
+						foundNode.add(tn);
+					}
+				}
+				if(rle.getPyStages()!=null&&rle.getPyStages().size()>0){
+					tn.removeAllChildren();
+					for (EmbedStage pyStage : rle.getPyStages()) {
+						tn.add(new DefaultMutableTreeNode(pyStage));
+					}
 				}
 			}
 

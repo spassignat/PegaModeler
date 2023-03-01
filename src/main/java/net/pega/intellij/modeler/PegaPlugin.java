@@ -19,10 +19,37 @@
  */
 package net.pega.intellij.modeler;
 
+import com.intellij.openapi.application.WriteAction;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.messages.Topic;
+
+import java.io.IOException;
+import java.io.OutputStream;
 
 public final class PegaPlugin {
 	public static final Topic<RuleListener> RULE_LISTENER_TOPIC = new Topic<>(RuleListener.class, Topic.BroadcastDirection.TO_CHILDREN);
+
+	public static void saveToFile(Project project, Object resquestor, OutputStream os, String... paths) throws IOException {
+		WriteAction.run(() -> {
+			VirtualFile currentFile = project.getWorkspaceFile().getParent().getParent();
+			for (int i = 0; i < paths.length; i++) {
+				String path = paths[i];
+				VirtualFile pegaFolder = currentFile.findChild(path);
+				if (pegaFolder == null || !pegaFolder.exists()) {
+					if (i == paths.length - 1) {
+						currentFile = currentFile.findOrCreateChildData(resquestor, path);
+					} else {
+						currentFile = currentFile.createChildDirectory(resquestor, path);
+					}
+				}else{
+					currentFile=pegaFolder;
+				}
+			}
+			VfsUtil.saveText(currentFile, os.toString());
+		});
+	}
 
 	public static String snakeToCamel(String str) {
 		return str.replaceAll("-", "_");

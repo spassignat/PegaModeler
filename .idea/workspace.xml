@@ -7,15 +7,63 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1cf70225-d520-4266-9950-27b31bba04d6" name="Changes" comment="Use service message bus&#10;add casetype load">
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+    <list default="true" id="1cf70225-d520-4266-9950-27b31bba04d6" name="Changes" comment="add popupmenu">
+      <change afterPath="$PROJECT_DIR$/process.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/generator/CodeEngine.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/generator/process/ProcessCodeEngine.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/pega/model/AlternateStage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/pega/model/Attachment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/pega/model/CallParam.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/pega/model/Chanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/pega/model/EmbedMethodParam.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/pega/model/EmbedPagesAndClasses.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/pega/model/EmbedReferenceRule.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/pega/model/EmbedRuleObjFlowFromTasks.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/pega/model/EmbedRulePrivilegeSecurity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/pega/model/EmbedStage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/pega/model/EmbededRuleWhen.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/pega/model/ExpressionBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/pega/model/RuleObj.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/pega/model/RuleObjFlow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/pega/model/RuleObjFlowAction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/pega/model/RuleObjProcess.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/pega/model/ShapeNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/test/json/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/json/CaseType.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/BaseModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/BaseModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/Generator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/generator/Generator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/Loader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/generator/Loader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/PegaClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/PegaClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/PegaPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/PegaPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/Rule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/model/Rule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/config/PegaConfigState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/config/PegaConfigState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/config/ui/PegaProjectSettingsForm.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/config/ui/PegaProjectSettingsForm.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/config/ui/PegaProjectSettingsForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/config/ui/PegaProjectSettingsForm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/connect/Connect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/connect/Connect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/data/DataModelAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/data/DataModelAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/data/DataModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/data/DataModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/view/MyRunnable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/view/MyRunnable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/data/DataLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/generator/datamodel/DataLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/data/DataModelAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/generator/datamodel/DataModelAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/data/DataModelForm.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/generator/datamodel/DataModelForm.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/data/DataModelForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/generator/datamodel/DataModelForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/data/DataModelState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/generator/datamodel/DataModelState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/data/DataModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/generator/datamodel/DatamodelCodeEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/data/UmlGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/generator/datamodel/UmlGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/process/CaseTypeGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/generator/process/CaseTypeGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/process/CaseTypeLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/generator/process/CaseTypeLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/view/MyJPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/view/MyJPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/view/MyRunnable.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/view/PegaWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/view/PegaWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modules/ApplicationModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modules/ApplicationModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modules/CaseTypeModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modules/CaseTypeModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modules/RuleSetVersionModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/intellij/modules/RuleSetVersionModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/model/Phase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/model/CaseAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/model/RuleApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/model/RuleApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/model/RuleObjCaseType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/model/RuleObjCaseType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/model/RuleObjClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/model/RuleObjClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/model/RuleObjProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/model/RuleObjProperty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/pega/model/RuleSetVersion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/pega/model/RuleSetVersion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/services/net.pega.intellij.modeler.PegaClient" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/services/net.pega.intellij.modeler.PegaClient" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,10 +123,10 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="UML Class" />
-        <option value="Interface" />
         <option value="HTML File" />
-        <option value="Class" />
         <option value="HTTP Request" />
+        <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -102,55 +150,56 @@
     <option name="showLibraryContents" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;DefaultPlantUmlFileTemplate&quot;: &quot;UML Class&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH&quot;: &quot;318&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;509&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;11&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/stephane/IdeaProjects/PegaModeler/src/main/java/net/pega/intellij/modeler/casetype&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.27198124&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propGUI&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "DefaultPlantUmlFileTemplate": "UML Class",
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH": "318",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "509",
+    "WebServerToolWindowFactoryState": "false",
+    "jdk.selected.JAVA_MODULE": "11",
+    "last_opened_file_path": "/home/stephane/IdeaProjects/PegaModeler",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.27198124",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.pathVariables",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ],
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;JSON&quot;,
-      &quot;csv&quot;
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "JSON",
+      "csv"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="net.pega.model" />
       <recent name="net.pega.intellij.modeler" />
       <recent name="net.pega.intellij.modeler.view" />
       <recent name="net.pega.intellij.errorreporting" />
       <recent name="net.pega.intellij.modeler.config" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src/test/resources/json" />
       <recent name="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/casetype" />
       <recent name="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml" />
       <recent name="$PROJECT_DIR$/src/main/resources/icons" />
-      <recent name="$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/uml/data" />
-      <recent name="$PROJECT_DIR$/src/main/resources/messages" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/idea-plugin/src/main/resources" />
@@ -161,6 +210,7 @@
       <recent name="net.pega.intellij.modeler.PegaPlugin" />
     </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="net.pega.intellij.generator.datamodel" />
       <recent name="net.pega.intellij.modeler" />
       <recent name="net.pega.intellij.modeler.application" />
       <recent name="net.pega.intellij.modeler.ruleset" />
@@ -173,20 +223,28 @@
       <recent name="net.pega.intellij.modeler.uml.data" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="net.pega.intellij.generator" />
       <recent name="net.pega.intellij.modeler.uml.data" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
       <recent name="net.pega.intellij" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="net.pega.intellij.generator.process" />
       <recent name="net.pega.intellij.modeler.ruleset" />
       <recent name="net.pega.intellij.modeler.application" />
       <recent name="net.pega.intellij.modeler.process" />
       <recent name="net.pega.intellij.modeler.process.model" />
-      <recent name="net.pega.intellij.modeler.uml.data" />
     </key>
   </component>
   <component name="RunManager" selected="Gradle.PegaModeler [runIde]">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="test.json.Main" />
+      <module name="pega_modeler.test" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="DjangoTestsConfigurationType">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -219,27 +277,6 @@
         <option name="taskNames">
           <list>
             <option value="buildPlugin" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="PegaModeler [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="build" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -352,7 +389,7 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Gradle.PegaModeler [build]" />
+      <item itemvalue="Application.Main" />
       <item itemvalue="Gradle.PegaModeler [buildPlugin]" />
       <item itemvalue="Gradle.PegaModeler [prepareSandbox]" />
       <item itemvalue="Gradle.PegaModeler [runIde]" />
@@ -361,10 +398,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.PegaModeler [runIde]" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="HTTP Request.CASETYPE | #1" />
         <item itemvalue="Gradle.PegaModeler [buildPlugin]" />
         <item itemvalue="Gradle.PegaModeler [prepareSandbox]" />
-        <item itemvalue="Gradle.PegaModeler [build]" />
       </list>
     </recent_temporary>
   </component>
@@ -395,7 +432,11 @@
       <workItem from="1676883628322" duration="3614000" />
       <workItem from="1676887255442" duration="25214000" />
       <workItem from="1677334114074" duration="30540000" />
-      <workItem from="1677405828107" duration="2437000" />
+      <workItem from="1677405828107" duration="15522000" />
+      <workItem from="1677482662626" duration="4579000" />
+      <workItem from="1677490901790" duration="12887000" />
+      <workItem from="1677572565058" duration="5449000" />
+      <workItem from="1677669816097" duration="13398000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <created>1675790197797</created>
@@ -481,7 +522,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677401194262</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="add popupmenu">
+      <created>1677409999145</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1677409999145</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -540,20 +588,31 @@
     <MESSAGE value="fix inspection errors" />
     <MESSAGE value="Refactoring" />
     <MESSAGE value="Use service message bus&#10;add casetype load" />
-    <option name="LAST_COMMIT_MESSAGE" value="Use service message bus&#10;add casetype load" />
+    <MESSAGE value="add popupmenu" />
+    <option name="LAST_COMMIT_MESSAGE" value="add popupmenu" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/process/CaseTypeLoader.java</url>
-          <line>114</line>
-          <option name="timeStamp" value="8" />
+          <url>file://$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/view/PegaWindow.java</url>
+          <line>281</line>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/net/pega/intellij/generator/process/CaseTypeLoader.java</url>
+          <line>69</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/net/pega/intellij/generator/process/CaseTypeGenerator.java</url>
+          <line>42</line>
+          <option name="timeStamp" value="43" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/net/pega/intellij/modeler/view/PegaWindow.java</url>
-          <line>259</line>
-          <option name="timeStamp" value="32" />
+          <line>343</line>
+          <option name="timeStamp" value="44" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

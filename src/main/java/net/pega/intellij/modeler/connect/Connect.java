@@ -20,7 +20,7 @@
 package net.pega.intellij.modeler.connect;
 
 import net.pega.intellij.modeler.PegaClient;
-import net.pega.intellij.modeler.Rule;
+import net.pega.model.Rule;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 

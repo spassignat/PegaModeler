@@ -17,30 +17,33 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler.data;
+package net.pega.intellij.generator.datamodel;
 
-import net.pega.intellij.modeler.Generator;
-import net.pega.intellij.modeler.Loader;
-import net.pega.intellij.modeler.PegaClient;
-import net.pega.intellij.modeler.Rule;
+import com.intellij.openapi.project.Project;
+import net.pega.intellij.BaseModule;
+import net.pega.intellij.generator.Generator;
+import net.pega.intellij.generator.CodeEngine;
 import net.pega.model.RuleObjClass;
+import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.io.PrintStream;
+import java.util.Collection;
 
-public class DataModule extends PegaClient {
-	public void analyse(PrintStream out, Rule rule) {
-		Generator generator = new UmlGenerator(this);
-		Loader loader = new DataLoader(this);
-		final RuleObjClass ruleObjClass = new RuleObjClass(configuration.dataModelState.baseClassName);
-		loader.analyse(ruleObjClass);
-		out.println("@startuml");
-		generator.generateHeader(out, configuration);
-		generator.generateDiagram(out, loader.getMetadatas());
-		out.println("@enduml");
+public class DatamodelCodeEngine extends BaseModule implements CodeEngine<RuleObjClass> {
+	public DatamodelCodeEngine(@NotNull Project project) {
+		super(project);
 	}
 
 	@Override
-	public String getAnalysis() {
-		return "DataModel";
+	public void analyse(PrintStream out, RuleObjClass rule) throws IOException {
+		Generator<RuleObjClass> generator = new UmlGenerator(this);
+		DataLoader loader = new DataLoader(this);
+		final RuleObjClass ruleObjClass = new RuleObjClass(getSettings().getState().dataModelState.baseClassName);
+		final Collection<RuleObjClass> load = loader.load(ruleObjClass);
+		out.println("@startuml");
+		generator.generateHeader(out, getSettings().getState());
+		generator.generateDiagram(out, load);
+		out.println("@enduml");
 	}
 }

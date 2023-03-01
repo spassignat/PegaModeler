@@ -19,18 +19,16 @@
  */
 package net.pega.model;
 
-import net.pega.intellij.modeler.Rule;
-
 import java.util.HashMap;
 import java.util.Map;
 
-public class RuleObjClass extends Rule {
+public class RuleObjClass extends RuleObj {
 	private final ClassType classType;
 	private final Map<String, RuleObjProperty> properties = new HashMap<>();
 	private boolean abs;
+	private boolean analyzed = false;
 	private boolean inheritance;
 	private String parent;
-	private boolean analyzed = false;
 
 	public RuleObjClass(String pyPageClass) {
 		setPyClassName(pyPageClass);
@@ -41,9 +39,12 @@ public class RuleObjClass extends Rule {
 		return classType;
 	}
 
-
 	public String getParent() {
 		return parent;
+	}
+
+	public void setParent(String parent) {
+		this.parent = parent;
 	}
 
 	public Map<String, RuleObjProperty> getProperties() {
@@ -54,27 +55,23 @@ public class RuleObjClass extends Rule {
 		return abs;
 	}
 
-	public boolean isAnalyzed() {
-		return analyzed;
-	}
-
-	public boolean isInheritance() {
-		return inheritance;
-	}
-
 	public void setAbs(boolean abs) {
 		this.abs = abs;
+	}
+
+	public boolean isAnalyzed() {
+		return analyzed;
 	}
 
 	public void setAnalyzed(boolean analyzed) {
 		this.analyzed = analyzed;
 	}
 
-	public void setInheritance(boolean inheritance) {
-		this.inheritance = inheritance;
+	public boolean isInheritance() {
+		return inheritance;
 	}
 
-	public void setParent(String parent) {
-		this.parent = parent;
+	public void setInheritance(boolean inheritance) {
+		this.inheritance = inheritance;
 	}
 }

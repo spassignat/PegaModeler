@@ -17,7 +17,7 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler.data;
+package net.pega.intellij.generator.datamodel;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -25,11 +25,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowManager;
 import net.pega.intellij.modeler.view.MessageCallback;
-import net.pega.intellij.modeler.view.MyRunnable;
 import org.jetbrains.annotations.NotNull;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Provides functionality to throw a runtime exception when the action is invoked. It is used to test the error reporting
@@ -45,7 +41,7 @@ public class DataModelAction extends AnAction  {
 		if (toolWindow != null) {
 			final MessageCallback component = (MessageCallback) toolWindow.getComponent().getComponent(0);
 			toolWindow.show();
-			new MyRunnable(component, "DataModel", project, "data-model.puml").run();
+//			new MyRunnable(component, "DataModel", project, "data-model.puml").run();
 		}
 	}
 }

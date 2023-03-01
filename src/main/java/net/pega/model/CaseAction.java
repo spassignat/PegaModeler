@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2023 Stephane Passignat - Exygen
+ * Copyright (c) 2023 Stephane Passignat - Exygen
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -17,15 +17,43 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler;
+package net.pega.model;
 
-import net.pega.intellij.modeler.config.PegaConfigState;
+public class CaseAction extends Rule {
+	String pyActionLabel;
+	String pyActionName;
+	boolean pyAllowWhenCaseIsResolved;
+	String pyWhen;
 
-import java.io.PrintStream;
-import java.util.Collection;
+	public String getPyActionLabel() {
+		return pyActionLabel;
+	}
 
-public interface Generator<X extends Rule> {
-	void generateDiagram(PrintStream out, Collection<X> classes);
+	public void setPyActionLabel(String pyActionLabel) {
+		this.pyActionLabel = pyActionLabel;
+	}
 
-	void generateHeader(PrintStream out, PegaConfigState state);
+	public String getPyActionName() {
+		return pyActionName;
+	}
+
+	public void setPyActionName(String pyActionName) {
+		this.pyActionName = pyActionName;
+	}
+
+	public String getPyWhen() {
+		return pyWhen;
+	}
+
+	public void setPyWhen(String pyWhen) {
+		this.pyWhen = pyWhen;
+	}
+
+	public boolean isPyAllowWhenCaseIsResolved() {
+		return pyAllowWhenCaseIsResolved;
+	}
+
+	public void setPyAllowWhenCaseIsResolved(boolean pyAllowWhenCaseIsResolved) {
+		this.pyAllowWhenCaseIsResolved = pyAllowWhenCaseIsResolved;
+	}
 }

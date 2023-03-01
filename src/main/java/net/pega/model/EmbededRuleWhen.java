@@ -17,10 +17,16 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler.view;
+package net.pega.model;
 
-import javax.swing.*;
+public class EmbededRuleWhen extends Rule {
+	String pyWhenName;
 
-public abstract class MyJPanel extends JPanel implements MessageCallback {
-	public abstract void log(String message);
+	public String getPyWhenName() {
+		return pyWhenName;
+	}
+
+	public void setPyWhenName(String pyWhenName) {
+		this.pyWhenName = pyWhenName;
+	}
 }

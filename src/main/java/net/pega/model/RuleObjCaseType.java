@@ -19,14 +19,41 @@
  */
 package net.pega.model;
 
-import net.pega.intellij.modeler.Rule;
+import java.util.List;
 
-public class RuleObjCaseType extends Rule {
+public class RuleObjCaseType extends RuleObj {
+	List<AlternateStage> pyAlternateStages;
+	List<RuleObjProcess> pyCaseOptionalProcesses;
+	List<CaseAction> pyCaseWideLocalActions;
 	String pyMethodStatus;
 	String pyPurpose;
+	List<EmbedStage> pyStages;
 	String pyStreamName;
-
 	public RuleObjCaseType() {
+	}
+
+	public List<AlternateStage> getPyAlternateStages() {
+		return pyAlternateStages;
+	}
+
+	public void setPyAlternateStages(List<AlternateStage> pyAlternateStages) {
+		this.pyAlternateStages = pyAlternateStages;
+	}
+
+	public List<RuleObjProcess> getPyCaseOptionalProcesses() {
+		return pyCaseOptionalProcesses;
+	}
+
+	public void setPyCaseOptionalProcesses(List<RuleObjProcess> pyCaseOptionalProcesses) {
+		this.pyCaseOptionalProcesses = pyCaseOptionalProcesses;
+	}
+
+	public List<CaseAction> getPyCaseWideLocalActions() {
+		return pyCaseWideLocalActions;
+	}
+
+	public void setPyCaseWideLocalActions(List<CaseAction> pyCaseWideLocalActions) {
+		this.pyCaseWideLocalActions = pyCaseWideLocalActions;
 	}
 
 	public String getPyMethodStatus() {
@@ -43,6 +70,14 @@ public class RuleObjCaseType extends Rule {
 
 	public void setPyPurpose(String pyPurpose) {
 		this.pyPurpose = pyPurpose;
+	}
+
+	public List<EmbedStage> getPyStages() {
+		return pyStages;
+	}
+
+	public void setPyStages(List<EmbedStage> pyEmbedStages) {
+		this.pyStages = pyEmbedStages;
 	}
 
 	public String getPyStreamName() {

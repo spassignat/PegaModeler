@@ -20,7 +20,7 @@
 package net.pega.intellij.modeler.config;
 
 import net.pega.intellij.modeler.connect.ConnectState;
-import net.pega.intellij.modeler.data.DataModelState;
+import net.pega.intellij.generator.datamodel.DataModelState;
 
 import java.util.Objects;
 

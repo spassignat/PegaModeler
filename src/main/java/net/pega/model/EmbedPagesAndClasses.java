@@ -17,10 +17,35 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler.view;
+package net.pega.model;
 
-import javax.swing.*;
+public class EmbedPagesAndClasses extends Rule{
+	String pyPagesAndClassesClass;
+	String pyPagesAndClassesPage;
 
-public abstract class MyJPanel extends JPanel implements MessageCallback {
-	public abstract void log(String message);
+	public String getPyPagesAndClassesClass() {
+		return pyPagesAndClassesClass;
+	}
+
+	public void setPyPagesAndClassesClass(String pyPagesAndClassesClass) {
+		this.pyPagesAndClassesClass = pyPagesAndClassesClass;
+	}
+
+	public String getPyPagesAndClassesPage() {
+		return pyPagesAndClassesPage;
+	}
+
+	public void setPyPagesAndClassesPage(String pyPagesAndClassesPage) {
+		this.pyPagesAndClassesPage = pyPagesAndClassesPage;
+	}
+
+	public String getPyPagesAndClassesMode() {
+		return pyPagesAndClassesMode;
+	}
+
+	public void setPyPagesAndClassesMode(String pyPagesAndClassesMode) {
+		this.pyPagesAndClassesMode = pyPagesAndClassesMode;
+	}
+
+	String pyPagesAndClassesMode;
 }

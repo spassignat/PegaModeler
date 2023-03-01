@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Stephane Passignat - Exygen
+ * Copyright (c) 2023-2023 Stephane Passignat - Exygen
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -17,18 +17,31 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler;
+package net.pega.model;
 
-public abstract class Rule {
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.intellij.openapi.project.Project;
+import net.pega.intellij.modules.ApplicationModule;
+import org.apache.http.client.methods.CloseableHttpResponse;
+
+import java.io.InputStream;
+import java.io.PrintStream;
+import java.util.Comparator;
+import java.util.List;
+
+public class Rule {
+	List<Rule> pyRuleVersionsList;
 	private String pxObjClass;
 	private boolean pyBaseRule;
 	private String pyCategory;
 	private String pyClassName;
 	private String pyLabel;
-	private String pyRuleName;
 	private String pyRuleSet;
 	private String pyRuleSetVersion;
+	private String pyValue;
 	private String pzInsKey;
+
 
 	public String getPxObjClass() {
 		return pxObjClass;
@@ -62,13 +75,6 @@ public abstract class Rule {
 		this.pyLabel = pyLabel;
 	}
 
-	public String getPyRuleName() {
-		return pyRuleName;
-	}
-
-	public void setPyRuleName(String pyRuleName) {
-		this.pyRuleName = pyRuleName;
-	}
 
 	public String getPyRuleSet() {
 		return pyRuleSet;
@@ -84,6 +90,22 @@ public abstract class Rule {
 
 	public void setPyRuleSetVersion(String pyRuleSetVersion) {
 		this.pyRuleSetVersion = pyRuleSetVersion;
+	}
+
+	public List<Rule> getPyRuleVersionsList() {
+		return pyRuleVersionsList;
+	}
+
+	public void setPyRuleVersionsList(List<Rule> pyRuleVersionsList) {
+		this.pyRuleVersionsList = pyRuleVersionsList;
+	}
+
+	public String getPyValue() {
+		return pyValue;
+	}
+
+	public void setPyValue(String pyValue) {
+		this.pyValue = pyValue;
 	}
 
 	public String getPzInsKey() {

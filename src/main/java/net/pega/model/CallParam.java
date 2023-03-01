@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2023 Stephane Passignat - Exygen
+ * Copyright (c) 2023 Stephane Passignat - Exygen
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,10 +19,5 @@
  */
 package net.pega.model;
 
-import java.util.Map;
-
-public class Phase {
-	private	String name;
-	Map<String,Step> phases;
-
+public class CallParam {
 }

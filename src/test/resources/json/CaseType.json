@@ -1,0 +1,1921 @@
+{
+  "pxObjClass":              "Rule-Obj-CaseType",
+  "pyCaseOptionalProcesses": [],
+  "pyCaseWideLocalActions":  [
+	{
+	  "pyActionLabel": "Edit details",
+	  "pxObjClass":    "Embed-Pega-AssignAction",
+	  "pyClassName":   "Work-",
+	  "pyLabel":       "Edit details",
+	  "pyActionName":  "pyUpdateCaseDetails"
+	},
+	{
+	  "pyActionLabel": "Change stage",
+	  "pxObjClass":    "Embed-Pega-AssignAction",
+	  "pyClassName":   "Work-",
+	  "pyLabel":       "Change stage",
+	  "pyActionName":  "pyChangeStage"
+	},
+	{
+	  "pyAllowWhenCaseIsResolved": true,
+	  "pyActionLabel":             "Reopen",
+	  "pxObjClass":                "Embed-Pega-AssignAction",
+	  "pyWhen":                    "Resolved",
+	  "pyClassName":               "Work-",
+	  "pyLabel":                   "Reopen",
+	  "pyActionName":              "pyReopen"
+	}
+  ],
+  "pyAlternateStages":       [
+	{
+	  "pyCleanupProcess":     "true",
+	  "pyProcesses":          [],
+	  "pyClassName":          "EXYGEN-UML-Work-DemoCase",
+	  "pyStageTransition":    "resolution",
+	  "pyIsTerminalStage":    true,
+	  "pyExposedStatusList":  [
+		"Resolved-Completed"
+	  ],
+	  "pyOptionalProcesses":  [],
+	  "pyStageWorkStatus":    "Resolved-Completed",
+	  "pyStageID":            "ALT1",
+	  "pxObjClass":           "Embed-Stage",
+	  "pyChannelMenuLabel":   "Add channel process",
+	  "pyStageName":          "Approval Rejection",
+	  "pyRequiredCategories": [],
+	  "pyChildCaseStatus":    "Resolved-Completed",
+	  "pyLocalActions":       []
+	}
+  ],
+  "pyStages":                [
+	{
+	  "pyAttachments":           [],
+	  "pyChannels":              [
+		{
+		  "pxObjClass":    "Data-Channel-Configuration",
+		  "pyLabel":       "Default",
+		  "pyShowChannel": true,
+		  "pzChannelName": "Default"
+		}
+	  ],
+	  "pyProcesses":             [
+		{
+		  "pzRuleParametersShowSkills": false,
+		  "pyChannelName":              "Default",
+		  "pyExpressionGadget":         {
+			"pxObjClass":           "PegaGadget-ExpressionBuilder",
+			"pyShowCustomPages":    true,
+			"pyShowLocalVariables": false,
+			"pyShowParameters":     true,
+			"pyEditable":           true,
+			"pyIsLaunchAsOverlay":  false
+		  },
+		  "pySLAType":                  "Never",
+		  "pyCallParams":               {},
+		  "pyShapeNodes":               [
+			{
+			  "pxObjClass":                 "Embed-ShapeNode",
+			  "pyShapeType":                "AssignmentSF",
+			  "pyShapeImpl":                "Temp18697658848.pyStages(1).pyProcesses(1).pyFlowPage.pyModelProcess.pyShapes(AssignmentSF1)",
+			  "pyShapeID":                  "AssignmentSF1",
+			  "pzConversationIndex":        0,
+			  "pyHelpContentID":            "5059",
+			  "pyCheckedOutOrLocked":       "",
+			  "pyStepPlaceHolder":          "Collect Information",
+			  "pyDescription":              "",
+			  "pyShapeIcon":                "pi pi-clipboard",
+			  "pyShapeName":                "Create",
+			  "pyMoreInformationContentID": "5065"
+			},
+			{
+			  "pxObjClass":                 "Embed-ShapeNode",
+			  "pyShapeType":                "AssignmentSF",
+			  "pyShapeImpl":                "Temp18697658848.pyStages(1).pyProcesses(1).pyFlowPage.pyModelProcess.pyShapes(AssignmentSF2)",
+			  "pyShapeID":                  "AssignmentSF2",
+			  "pzConversationIndex":        0,
+			  "pyCheckedOutOrLocked":       "",
+			  "pyHelpContentID":            "5059",
+			  "pyStepPlaceHolder":          "Collect Information",
+			  "pyDescription":              "",
+			  "pyShapeName":                "Saisie information",
+			  "pyShapeIcon":                "pi pi-clipboard",
+			  "pyMoreInformationContentID": "5065"
+			}
+		  ],
+		  "pyFlowName":                 "CreateForm_Default",
+		  "pyLaunchOnReentry":          false,
+		  "pySkipOrAllowType":          "when",
+		  "pyWhenToSkip":               "!pxIsEmail",
+		  "pyFlowPage":                 {
+			"pyModelerGuideModeON":            true,
+			"pyRuleName":                      "CreateForm_Default",
+			"pxUpdateSystemID":                "pega",
+			"pyXMLSignature":                  "<?xml version=\"1.0\"?><methodSignature><pyStepsCallParams></pyStepsCallParams><pyParamArray><rowdata></rowdata></pyParamArray></methodSignature>",
+			"pyStencils":                      [
+			  ""
+			],
+			"pyValueChanged":                  "false",
+			"pxUpdateDateTime":                "2023-02-24T14:56:58.260Z",
+			"pzRuleSetVersionMinor":           1,
+			"pyRuleVersionsList":              [
+			  {
+				"pxObjClass": "Rule-",
+				"pyValue":    "3",
+				"pzInsKey":   "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CREATEFORM_DEFAULT #20230224T145658.260 GMT",
+				"pyLabel":    "01-01-02 (Available)"
+			  },
+			  {
+				"pxObjClass": "Rule-",
+				"pyValue":    "3",
+				"pzInsKey":   "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CREATEFORM_DEFAULT #20230202T090333.746 GMT",
+				"pyLabel":    "01-01-01 (Available)"
+			  }
+			],
+			"pyCoveredByCount":                0,
+			"pzRuleSetVersionMajor":           1,
+			"pySystemFlow":                    false,
+			"pySkipNewHarness":                true,
+			"pzCaseTypeExistsInCoverClass":    false,
+			"pyModifiedWithPM":                true,
+			"pyBaseRule":                      false,
+			"pyNextAssignment":                true,
+			"pxOriginalCreateSystemID":        "",
+			"pyUsage":                         "",
+			"pyShowGrid":                      "true",
+			"pyJavaStream":                    "",
+			"pxCreateDateTime":                "2023-02-24T14:56:58.260Z",
+			"pxOriginalCreateDateTime":        "1970-01-01T00:00:00.000Z",
+			"pyCanCreateWorkObjectOld":        "false",
+			"pxOriginalCreateOpName":          "",
+			"pyAssociatedImage":               "",
+			"pyInterface":                     "",
+			"pxInstanceLockedCreateDateTime":  "1970-01-01T00:00:00.000Z",
+			"pxInstanceLockedBy":              "",
+			"pxInsName":                       "EXYGEN-UML-WORK-DEMOCASE!CREATEFORM_DEFAULT",
+			"pxSaveDateTime":                  "2023-02-24T14:56:58.265Z",
+			"pyCircumstanceProp":              "",
+			"pyParameters":                    [
+			  {
+				"pxObjClass":                         "Embed-MethodParams",
+				"pyParametersParamIntelliValidateAs": "",
+				"pyParametersParamName":              "",
+				"pyParametersParamSize":              "",
+				"pyParametersParamIntelliRule":       "",
+				"pyParametersParamIntelliBaseClass":  "PageClass",
+				"pyParametersParamDesc":              "",
+				"pyParametersParamInOut":             "",
+				"pyParametersParamType":              "String",
+				"pyParametersParamReq":               ""
+			  }
+			],
+			"pzInsKey":                        "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CREATEFORM_DEFAULT #20230224T145658.260 GMT",
+			"pyWhensList":                     [
+			  {
+				"pxObjClass": "Embed-Rule-Whens",
+				"pyWhenName": ""
+			  }
+			],
+			"pyPostVisio2000Saved":            false,
+			"pyAlphaSortLocalActions":         false,
+			"pyPlaceGlobalLocalsAtTop":        false,
+			"pyDoHarvesting":                  true,
+			"pyPageOrientation":               "Landscape",
+			"pyLabelOld":                      "Create",
+			"pyProcessModel":                  "",
+			"pyRelativePath":                  "",
+			"pyVisioJpeg":                     "",
+			"pxInsId":                         "!CREATEFORM_DEFAULT",
+			"pyStartingHarnessOld":            "New",
+			"pyOverlayView":                   "None",
+			"pyRuleParamsStreamName":          "",
+			"pyRuleSetVersion":                "01-01-02",
+			"pyUseCaseLinks":                  [
+			  {
+				"pxLinkedRefTo":        "Create",
+				"pyImplementationType": "",
+				"pyTaskName":           "Create",
+				"pyApplicationName":    "App03",
+				"pyWorkTypeName":       "Test13",
+				"pyUseCaseName":        "Create",
+				"pxLinkedClassTo":      "Rule-Obj-FlowAction",
+				"pxObjClass":           "Link-UseCase",
+				"pyLinkedClassName":    "EXYGEN-UML-Work-DemoCase",
+				"pyTaskID":             "AssignmentSF1",
+				"pyFlowKey":            "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CREATEFORM_DEFAULT #20230224T145658.260 GMT",
+				"pyLabel":              "Application Link",
+				"pyFlowType":           "CreateForm_Default"
+			  }
+			],
+			"pxDataReferences":                [],
+			"pyRegenStartingFlows":            2,
+			"pyStartingModelOld":              "pyDefault",
+			"pxUpdateOpName":                  "admin",
+			"pxUpdateOperator":                "admin@uml",
+			"pxOriginalCreateOperator":        "",
+			"pzChecksum":                      24830643,
+			"pyStartActivity":                 "Start62",
+			"pyCanStartInteractively":         false,
+			"pyVisioDocVersion":               0,
+			"pxInstanceLockedKey":             "",
+			"pyDeferErrors":                   false,
+			"pyPagesAndClasses":               [
+			  {
+				"pxObjClass":             "Embed-PagesAndClasses",
+				"pyPagesAndClassesClass": "",
+				"pyPagesAndClassesPage":  "",
+				"pyPagesAndClassesMode":  ""
+			  }
+			],
+			"pxObjClass":                      "Rule-Obj-Flow",
+			"pyCategory":                      "ScreenFlow",
+			"pyCircumstanceDate":              "1970-01-01T00:00:00.000Z",
+			"pyVisioRFB":                      "",
+			"pyWorkClass":                     "EXYGEN-UML-Work-DemoCase",
+			"pxCreateSystemID":                "pega",
+			"pyPreviousValues":                {
+			  "pxObjClass":            "Rule-Obj-Flow",
+			  "pyRuleAvailable":       "Yes",
+			  "pyPrivilegeList":       [
+				{
+				  "pxObjClass":       "Embed-Rule-PrivilegeSecurity",
+				  "pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CREATEFORM_DEFAULT #20230224T145658.260 GMT",
+				  "pyPrivilegeName":  "",
+				  "pyPrivilegeClass": "EXYGEN-UML-Work-DemoCase"
+				}
+			  ],
+			  "pyLabel":               "Create",
+			  "pyCanCreateWorkObject": false
+			},
+			"pzOriginalInstanceKey":           "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CREATEFORM_DEFAULT #20230224T072732.971 GMT",
+			"pxCommitDateTime":                "2023-02-24T14:56:58.272Z",
+			"pyCanCreateWorkObject":           false,
+			"pxNamedPageReferences":           [],
+			"pyStreamName":                    "",
+			"pyModelerDefaultClickMode":       "Pan",
+			"pyRuleAvailable":                 "Yes",
+			"pyPrivilegeList":                 [
+			  {
+				"pxObjClass":       "Embed-Rule-PrivilegeSecurity",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CREATEFORM_DEFAULT #20230224T145658.260 GMT",
+				"pyPrivilegeName":  "",
+				"pyPrivilegeClass": "EXYGEN-UML-Work-DemoCase"
+			  }
+			],
+			"pyJavaClassName":                 "Rule_Obj_Flow_EXYGEN_UML_Work_DemoCase_CreateForm_Default_Action_20230224T073138_976_GMT",
+			"pzIndexCount":                    48,
+			"pySubCategory":                   "",
+			"pyClassName":                     "EXYGEN-UML-Work-DemoCase",
+			"pyNextAssignmentWorkBasket":      false,
+			"pySortDateCircumWithinRSMajor":   true,
+			"pyRuleFormStatusTime":            "20230228T094059.096 GMT",
+			"pyLocalActions":                  [
+			  {
+				"pxObjClass":           "Embed-Pega-AssignAction",
+				"pyUseCaseApplication": "",
+				"pyUseCaseName":        "",
+				"pyUseCaseWorkType":    "",
+				"pyActionName":         ""
+			  }
+			],
+			"pzRuleSetVersionPatch":           2,
+			"pyModifiers":                     "",
+			"pxHostId":                        "b8ce93f41a670ed1d7c1bddfecef12dd",
+			"pyRuleSet":                       "UML",
+			"pyFromTasks":                     [
+			  {
+				"pxObjClass":     "Embed-Rule-Obj-Flow-FromTasks",
+				"pyFromTaskName": "AssignmentSF2"
+			  },
+			  {
+				"pxObjClass":     "Embed-Rule-Obj-Flow-FromTasks",
+				"pyFromTaskName": "Start62"
+			  },
+			  {
+				"pxObjClass":     "Embed-Rule-Obj-Flow-FromTasks",
+				"pyFromTaskName": "AssignmentSF1"
+			  }
+			],
+			"pyScreenFlowHarness":             "",
+			"pyToolBarSettings":               {
+			  "pyFavorites":        true,
+			  "pyRecover":          false,
+			  "pyForward":          true,
+			  "pyRestore":          false,
+			  "pyBranchOut":        true,
+			  "pySave":             true,
+			  "pyLaunch":           true,
+			  "pyHasQualifiers":    false,
+			  "pyRequiresCheckOut": false,
+			  "pySiblings":         true,
+			  "pyCheckIn":          false,
+			  "pyAvailability":     true,
+			  "pyHelpRef":          "/rule-/rule-obj-/rule-obj-flow/main",
+			  "pyDelegates":        false,
+			  "pyRefresh":          true,
+			  "pyStandardUser":     false,
+			  "pyPreview":          false,
+			  "pyRun":              true,
+			  "pyCheckOut":         false,
+			  "pyRuleData":         true,
+			  "pyVersionSecure":    false,
+			  "pyRuleResolution":   true,
+			  "pyCurrentlyOpen":    true,
+			  "pxObjClass":         "Embed-WBSettings-ToolBar",
+			  "pyDelete":           true,
+			  "pyNew":              true,
+			  "pyShowJava":         true,
+			  "pyBack":             true,
+			  "pyHelpURI":          "https://community.pega.com/help_v87/rule-/rule-obj-/rule-obj-flow/main",
+			  "pySaveAs":           true,
+			  "pyPropertyPane":     false,
+			  "pyUsesInheritance":  true
+			},
+			"pyDraftModeON":                   true,
+			"pyCircumstanceDateProp":          "",
+			"pyCircumstanceVal":               "",
+			"pyShowJavaWindowName":            "GeneratedJava20230228T094059.109 GMT",
+			"pyMethodStatus":                  "",
+			"pxInstanceLockedRuleSetVersion":  "",
+			"pyPurpose":                       false,
+			"pxInstanceLockedDateTime":        "1970-01-01T00:00:00.000Z",
+			"pyJavaGenerateVersion":           "5.5",
+			"pyForecasterAvailable":           "",
+			"pyTaskStatusXml":                 "<pagedata><TaskStatus></TaskStatus></pagedata>",
+			"pyModelProcess":                  {
+			  "pxObjClass":        "Embed-Rule-Obj-Flow-ProcessModel",
+			  "pyRefreshViewHint": true
+			},
+			"pxAPIMethodReferences":           [],
+			"pzIsAutoGenerated":               false,
+			"pyWorkPartiesRule":               "Default",
+			"pyConfirmChoice":                 "Harness",
+			"pzImplVersion":                   "06.02.01",
+			"pyCoveredBy":                     [
+			  {
+				"pxObjClass":          "Embed-Rule-Obj-Flow-CoveredBy",
+				"pySubTaskModel":      "",
+				"pyCoveringWorkClass": "",
+				"pzIndexOwnerKey":     "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CREATEFORM_DEFAULT #20230224T145658.260 GMT",
+				"pySubTaskHarness":    ""
+			  }
+			],
+			"pyRuleFormStatus":                "Good",
+			"pyOriginalRFB":                   "",
+			"pxInstanceLockedRuleSet":         "",
+			"pxWarnings":                      [
+			  {
+				"pxObjClass":              "Embed-Warning",
+				"pxWarningSeverity":       3,
+				"pzIndexOwnerKey":         "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CREATEFORM_DEFAULT #20230224T145658.260 GMT",
+				"pxWarningMessage":        "(Rule-Obj-Flow)pxDraftMode",
+				"pxWarningType":           "Functionality",
+				"pxWarningCreateOperator": "admin@uml",
+				"pxWarningRuleSetType":    "PEGA",
+				"pxWarningCreatedTime":    "2023-02-24T07:27:32.982Z",
+				"pxWarningName":           "Flow in draft mode",
+				"pxWarningDetails":        "(Rule-Obj-Flow)pxDraftMode"
+			  }
+			],
+			"pyEndingActivities":              [
+			  "END66"
+			],
+			"pyVisioJpegName":                 "",
+			"pyModelerGridModeON":             false,
+			"pyDeferCommit":                   false,
+			"pyCircumstanceType":              "",
+			"pyStatus":                        "",
+			"pzCaseTypeExistsInClass":         true,
+			"pyDescription":                   "",
+			"pyVisioBinary":                   "",
+			"pyHistoryObject":                 false,
+			"pyNextAssignmentWorkBasketAdhoc": false,
+			"pySLAName":                       "",
+			"pyShowLikelihoods":               "Hide",
+			"pyStartingModel":                 "pyDefault",
+			"pyNextAssignmentAdhoc":           true,
+			"pyStructureType":                 "Simple",
+			"pxRuleReferences":                [
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyConfirmationNote",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CREATEFORM_DEFAULT #20230224T145658.260 GMT",
+				"pxRuleObjClass":   "Rule-Obj-Property",
+				"pxRuleFamilyName": "PYCONFIRMATIONNOTE"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "Create",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CREATEFORM_DEFAULT #20230224T145658.260 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FlowAction",
+				"pxRuleFamilyName": "CREATE"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyConfirmationNote pyStepRoutedConfirmation",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CREATEFORM_DEFAULT #20230224T145658.260 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYCONFIRMATIONNOTE!PYSTEPROUTEDCONFIRMATION"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "@baseclass",
+				"pyRuleName":       "pyLabel Create",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CREATEFORM_DEFAULT #20230224T145658.260 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYLABEL!CREATE"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "WorkList",
+				"pyMethodStatus":   "API",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CREATEFORM_DEFAULT #20230224T145658.260 GMT",
+				"pxRuleObjClass":   "Rule-Obj-Activity",
+				"pxRuleFamilyName": "WORKLIST"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyActionPrompt Create",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CREATEFORM_DEFAULT #20230224T145658.260 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYACTIONPROMPT!CREATE"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyActionPrompt Saisie information",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CREATEFORM_DEFAULT #20230224T145658.260 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYACTIONPROMPT!SAISIE INFORMATION"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyButtonLabel Create",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CREATEFORM_DEFAULT #20230224T145658.260 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYBUTTONLABEL!CREATE"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "ToCurrentOperator",
+				"pyMethodStatus":   "API",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CREATEFORM_DEFAULT #20230224T145658.260 GMT",
+				"pxRuleObjClass":   "Rule-Obj-Activity",
+				"pxRuleFamilyName": "TOCURRENTOPERATOR"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyCaption [End]",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CREATEFORM_DEFAULT #20230224T145658.260 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYCAPTION![END]"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "EXYGEN-UML-Work-DemoCase",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CREATEFORM_DEFAULT #20230224T145658.260 GMT",
+				"pxRuleObjClass":   "Rule-Obj-Class",
+				"pxRuleFamilyName": "EXYGEN-UML-WORK-DEMOCASE"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyButtonLabel Saisie information",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CREATEFORM_DEFAULT #20230224T145658.260 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYBUTTONLABEL!SAISIE INFORMATION"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "@baseclass",
+				"pyRuleName":       "pyCaption Create",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CREATEFORM_DEFAULT #20230224T145658.260 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYCAPTION!CREATE"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "@baseclass",
+				"pyRuleName":       "pyCaption Saisie information",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CREATEFORM_DEFAULT #20230224T145658.260 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYCAPTION!SAISIE INFORMATION"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyActionPrompt [End]",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CREATEFORM_DEFAULT #20230224T145658.260 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYACTIONPROMPT![END]"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyCaption Create",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CREATEFORM_DEFAULT #20230224T145658.260 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYCAPTION!CREATE"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyButtonLabel [End]",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CREATEFORM_DEFAULT #20230224T145658.260 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYBUTTONLABEL![END]"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "SaisieInformation",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CREATEFORM_DEFAULT #20230224T145658.260 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FlowAction",
+				"pxRuleFamilyName": "SAISIEINFORMATION"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "@baseclass",
+				"pyRuleName":       "@baseclass",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CREATEFORM_DEFAULT #20230224T145658.260 GMT",
+				"pxRuleObjClass":   "Rule-Obj-Class",
+				"pxRuleFamilyName": "@BASECLASS"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "",
+				"pyRuleName":       "App03 Test13 Create",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CREATEFORM_DEFAULT #20230224T145658.260 GMT",
+				"pxRuleObjClass":   "Rule-Application-UseCase",
+				"pxRuleFamilyName": "APP03!TEST13!CREATE"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyCaption Saisie information",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CREATEFORM_DEFAULT #20230224T145658.260 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYCAPTION!SAISIE INFORMATION"
+			  }
+			],
+			"pyStartingHarness":               "New",
+			"pyVisioCompatFlag":               "false",
+			"pxCreateOperator":                "admin@uml",
+			"pyRuleStarts":                    "1970-01-01T00:00:00.000Z",
+			"pyRuleEnds":                      "1970-01-01T00:00:00.000Z",
+			"pyCreatesTemporaryObject":        false,
+			"pyVisioScaleFactor":              100,
+			"pyConfirmHarness":                "Confirm",
+			"pyLabel":                         "Create",
+			"pxCreateOpName":                  "admin",
+			"pyFlowType":                      "CreateForm_Default"
+		  },
+		  "pxObjClass":                 "Embed-StageProcess",
+		  "pyStepType":                 "Simple",
+		  "pxFlowID":                   "FLOW0",
+		  "pyLabel":                    "Create",
+		  "pyStepTypeLabel":            "Simple Flow",
+		  "pyStartWhen":                "!pxIsEmail",
+		  "pyStartType":                "PARALLEL"
+		}
+	  ],
+	  "pyIsInitializationStage": true,
+	  "pyClassName":             "EXYGEN-UML-Work-DemoCase",
+	  "pyStageTransition":       "automatic",
+	  "pyIsTerminalStage":       false,
+	  "pxFlowIDMax":             0,
+	  "pyOptionalProcesses":     [],
+	  "pyStageID":               "PRIM0",
+	  "pxObjClass":              "Embed-Stage",
+	  "pyStageName":             "Create",
+	  "pyChannelMenuLabel":      "Add create process",
+	  "pyRequiredCategories":    [],
+	  "pyLocalActions":          []
+	},
+	{
+	  "pyChannels":                      [],
+	  "pyProcesses":                     [
+		{
+		  "pzRuleParametersShowSkills": false,
+		  "pyExpressionGadget":         {
+			"pxObjClass":           "PegaGadget-ExpressionBuilder",
+			"pyShowCustomPages":    true,
+			"pyShowLocalVariables": false,
+			"pyShowParameters":     true,
+			"pyEditable":           true,
+			"pyIsLaunchAsOverlay":  false
+		  },
+		  "pySLAType":                  "Never",
+		  "pyCallParams":               {},
+		  "pyFlowName":                 "Traitement_Flow",
+		  "pyShapeNodes":               [
+			{
+			  "pxObjClass":                 "Embed-ShapeNode",
+			  "pyShapeType":                "Assignment",
+			  "pyShapeImpl":                "Temp18697658848.pyStages(2).pyProcesses(1).pyFlowPage.pyModelProcess.pyShapes(Assignment1)",
+			  "pyShapeID":                  "Assignment1",
+			  "pzConversationIndex":        0,
+			  "pyCheckedOutOrLocked":       "",
+			  "pyHelpContentID":            "5059",
+			  "pyStepPlaceHolder":          "Collect Information",
+			  "pyDescription":              "",
+			  "pyShapeIcon":                "pi pi-clipboard",
+			  "pyShapeName":                "Saisie Produits",
+			  "pyMoreInformationContentID": "5065"
+			}
+		  ],
+		  "pyLaunchOnReentry":          true,
+		  "pySkipOrAllowType":          "always",
+		  "pyFlowPage":                 {
+			"pyModelerGuideModeON":            true,
+			"pxUpdateSystemID":                "pega",
+			"pyRuleName":                      "Traitement_Flow",
+			"pyXMLSignature":                  "<?xml version=\"1.0\"?><methodSignature><pyStepsCallParams></pyStepsCallParams><pyParamArray><rowdata></rowdata></pyParamArray></methodSignature>",
+			"pyValueChanged":                  "false",
+			"pyStencils":                      [
+			  ""
+			],
+			"pxUpdateDateTime":                "2023-02-24T14:56:58.332Z",
+			"pzRuleSetVersionMinor":           1,
+			"pyCoveredByCount":                0,
+			"pyRuleVersionsList":              [
+			  {
+				"pxObjClass": "Rule-",
+				"pyValue":    "3",
+				"pzInsKey":   "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE TRAITEMENT_FLOW #20230224T145658.332 GMT",
+				"pyLabel":    "01-01-02 (Available)"
+			  }
+			],
+			"pySystemFlow":                    false,
+			"pzRuleSetVersionMajor":           1,
+			"pyShowGrid":                      "true",
+			"pyJavaStream":                    "",
+			"pySkipNewHarness":                true,
+			"pxCreateDateTime":                "2023-02-24T14:56:58.332Z",
+			"pyCanCreateWorkObjectOld":        "false",
+			"pzCaseTypeExistsInCoverClass":    false,
+			"pyModifiedWithPM":                true,
+			"pxInstanceLockedCreateDateTime":  "1970-01-01T00:00:00.000Z",
+			"pyBaseRule":                      false,
+			"pzHideCaseCreationSettings":      true,
+			"pxInsName":                       "EXYGEN-UML-WORK-DEMOCASE!TRAITEMENT_FLOW",
+			"pxSaveDateTime":                  "2023-02-24T14:56:58.337Z",
+			"pyNextAssignment":                true,
+			"pyCircumstanceProp":              "",
+			"pyParameters":                    [
+			  {
+				"pxObjClass":                        "Embed-MethodParams",
+				"pyParametersParamIntelliRule":      "",
+				"pyParametersParamIntelliBaseClass": "PageClass",
+				"pyParametersParamType":             "String"
+			  }
+			],
+			"pzInsKey":                        "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE TRAITEMENT_FLOW #20230224T145658.332 GMT",
+			"pyWhensList":                     [
+			  {
+				"pxObjClass": "Embed-Rule-Whens",
+				"pyWhenName": ""
+			  }
+			],
+			"pyPostVisio2000Saved":            false,
+			"pyPageOrientation":               "Landscape",
+			"pyAlphaSortLocalActions":         false,
+			"pyRelativePath":                  "",
+			"pyVisioJpeg":                     "",
+			"pyPlaceGlobalLocalsAtTop":        false,
+			"pxInsId":                         "!TRAITEMENT_FLOW",
+			"pyStartingHarnessOld":            "New",
+			"pyOverlayView":                   "None",
+			"pyRuleSetVersion":                "01-01-02",
+			"pyUseCaseLinks":                  [
+			  {
+				"pxLinkedRefTo":        "New",
+				"pyImplementationType": "",
+				"pyTaskName":           "",
+				"pyApplicationName":    "RaniRApp",
+				"pyUseCaseName":        "pzStubStep_StartingScreen",
+				"pyWorkTypeName":       "By",
+				"pxLinkedClassTo":      "Rule-HTML-Harness",
+				"pxObjClass":           "Link-UseCase",
+				"pyLinkedClassName":    "EXYGEN-UML-Work-DemoCase",
+				"pyTaskID":             "Start1",
+				"pyFlowKey":            "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE TRAITEMENT_FLOW #20230224T145658.332 GMT",
+				"pyLabel":              "Application Link",
+				"pyFlowType":           "Traitement_Flow"
+			  }
+			],
+			"pyDoHarvesting":                  true,
+			"pxDataReferences":                [],
+			"pyRegenStartingFlows":            2,
+			"pyStartingModelOld":              "pyDefault",
+			"pxUpdateOpName":                  "admin",
+			"pxUpdateOperator":                "admin@uml",
+			"pzChecksum":                      1402755426,
+			"pyStartActivity":                 "Start1",
+			"pyCanStartInteractively":         false,
+			"pxInstanceLockedKey":             "",
+			"pyDeferErrors":                   false,
+			"pyPagesAndClasses":               [
+			  {
+				"pxObjClass":            "Embed-PagesAndClasses",
+				"pyPagesAndClassesPage": ""
+			  }
+			],
+			"pxObjClass":                      "Rule-Obj-Flow",
+			"pyCategory":                      "FlowStandard",
+			"pyVisioRFB":                      "",
+			"pyWorkClass":                     "EXYGEN-UML-Work-DemoCase",
+			"pyPreviousValues":                {
+			  "pxObjClass":            "Rule-Obj-Flow",
+			  "pyRuleAvailable":       "Yes",
+			  "pyPrivilegeList":       [
+				{
+				  "pxObjClass":       "Embed-Rule-PrivilegeSecurity",
+				  "pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE TRAITEMENT_FLOW #20230224T145658.332 GMT",
+				  "pyPrivilegeClass": "EXYGEN-UML-Work-DemoCase"
+				}
+			  ],
+			  "pyLabel":               "Le process de selection",
+			  "pyCanCreateWorkObject": false
+			},
+			"pxCreateSystemID":                "pega",
+			"pxCommitDateTime":                "2023-02-24T14:56:58.343Z",
+			"pzOriginalInstanceKey":           "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE TRAITEMENT_FLOW #20230224T072531.894 GMT",
+			"pyCanCreateWorkObject":           false,
+			"pxNamedPageReferences":           [],
+			"pyStreamName":                    "",
+			"pyModelerDefaultClickMode":       "Pan",
+			"pyRuleAvailable":                 "Yes",
+			"pyPrivilegeList":                 [
+			  {
+				"pxObjClass":       "Embed-Rule-PrivilegeSecurity",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE TRAITEMENT_FLOW #20230224T145658.332 GMT",
+				"pyPrivilegeClass": "EXYGEN-UML-Work-DemoCase"
+			  }
+			],
+			"pyJavaClassName":                 "Rule_Obj_Flow_EXYGEN_UML_Work_DemoCase_Traitement_Flow_Action_20230224T075843_402_GMT",
+			"pzIndexCount":                    40,
+			"pyNextAssignmentWorkBasket":      false,
+			"pyClassName":                     "EXYGEN-UML-Work-DemoCase",
+			"pySortDateCircumWithinRSMajor":   true,
+			"pyRuleFormStatusTime":            "20230228T094059.129 GMT",
+			"pyLocalActions":                  [
+			  {
+				"pxObjClass": "Embed-Pega-AssignAction"
+			  }
+			],
+			"pzRuleSetVersionPatch":           2,
+			"pyModifiers":                     "",
+			"pxHostId":                        "b8ce93f41a670ed1d7c1bddfecef12dd",
+			"pyRuleSet":                       "UML",
+			"pyFromTasks":                     [
+			  {
+				"pxObjClass":     "Embed-Rule-Obj-Flow-FromTasks",
+				"pyFromTaskName": "Assignment1"
+			  },
+			  {
+				"pxObjClass":     "Embed-Rule-Obj-Flow-FromTasks",
+				"pyFromTaskName": "Start1"
+			  }
+			],
+			"pyToolBarSettings":               {
+			  "pyFavorites":        true,
+			  "pyRecover":          false,
+			  "pyForward":          true,
+			  "pyRestore":          false,
+			  "pyBranchOut":        true,
+			  "pySave":             true,
+			  "pyLaunch":           true,
+			  "pyHasQualifiers":    false,
+			  "pyCheckIn":          false,
+			  "pySiblings":         true,
+			  "pyRequiresCheckOut": false,
+			  "pyAvailability":     true,
+			  "pyHelpRef":          "/rule-/rule-obj-/rule-obj-flow/main",
+			  "pyDelegates":        false,
+			  "pyRefresh":          true,
+			  "pyStandardUser":     false,
+			  "pyPreview":          false,
+			  "pyCheckOut":         false,
+			  "pyRun":              true,
+			  "pyRuleData":         true,
+			  "pyVersionSecure":    false,
+			  "pyRuleResolution":   true,
+			  "pyCurrentlyOpen":    true,
+			  "pxObjClass":         "Embed-WBSettings-ToolBar",
+			  "pyDelete":           true,
+			  "pyShowJava":         true,
+			  "pyNew":              true,
+			  "pyBack":             true,
+			  "pyHelpURI":          "https://community.pega.com/help_v87/rule-/rule-obj-/rule-obj-flow/main",
+			  "pySaveAs":           true,
+			  "pyPropertyPane":     false,
+			  "pyUsesInheritance":  true
+			},
+			"pyDraftModeON":                   true,
+			"pyCircumstanceDateProp":          "",
+			"pyShowJavaWindowName":            "GeneratedJava20230228T094059.140 GMT",
+			"pyPurpose":                       false,
+			"pxInstanceLockedRuleSetVersion":  "",
+			"pyJavaGenerateVersion":           "5.5",
+			"pyTaskStatusXml":                 "<pagedata><TaskStatus></TaskStatus></pagedata>",
+			"pxAPIMethodReferences":           [],
+			"pyModelProcess":                  {
+			  "pxObjClass":        "Embed-Rule-Obj-Flow-ProcessModel",
+			  "pyRefreshViewHint": true
+			},
+			"pzIsAutoGenerated":               true,
+			"pyWorkPartiesRule":               "Default",
+			"pyConfirmChoice":                 "Harness",
+			"pzImplVersion":                   "06.02.01",
+			"pyCoveredBy":                     [
+			  {
+				"pxObjClass":          "Embed-Rule-Obj-Flow-CoveredBy",
+				"pySubTaskModel":      "",
+				"pyCoveringWorkClass": "",
+				"pzIndexOwnerKey":     "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE TRAITEMENT_FLOW #20230224T145658.332 GMT",
+				"pySubTaskHarness":    ""
+			  }
+			],
+			"pyRuleFormStatus":                "Good",
+			"pxWarnings":                      [
+			  {
+				"pxObjClass":              "Embed-Warning",
+				"pxWarningSeverity":       3,
+				"pzIndexOwnerKey":         "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE TRAITEMENT_FLOW #20230224T145658.332 GMT",
+				"pxWarningMessage":        "(Rule-Obj-Flow)pxDraftMode",
+				"pxWarningType":           "Functionality",
+				"pxWarningCreateOperator": "admin@uml",
+				"pxWarningRuleSetType":    "PEGA",
+				"pxWarningCreatedTime":    "2023-02-24T07:27:33.510Z",
+				"pxWarningName":           "Flow in draft mode",
+				"pxWarningDetails":        "(Rule-Obj-Flow)pxDraftMode"
+			  }
+			],
+			"pxInstanceLockedRuleSet":         "",
+			"pyEndingActivities":              [
+			  "END52"
+			],
+			"pyModelerGridModeON":             false,
+			"pyDeferCommit":                   false,
+			"pyStatus":                        "",
+			"pzCaseTypeExistsInClass":         true,
+			"pyHistoryObject":                 false,
+			"pyNextAssignmentWorkBasketAdhoc": false,
+			"pySLAName":                       "",
+			"pyStartingModel":                 "pyDefault",
+			"pyShowLikelihoods":               "Hide",
+			"pyNextAssignmentAdhoc":           true,
+			"pyStructureType":                 "Simple",
+			"pxRuleReferences":                [
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyButtonLabel Saisie Produits",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE TRAITEMENT_FLOW #20230224T145658.332 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYBUTTONLABEL!SAISIE PRODUITS"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyActionPrompt Saisie Produits",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE TRAITEMENT_FLOW #20230224T145658.332 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYACTIONPROMPT!SAISIE PRODUITS"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyConfirmationNote",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE TRAITEMENT_FLOW #20230224T145658.332 GMT",
+				"pxRuleObjClass":   "Rule-Obj-Property",
+				"pxRuleFamilyName": "PYCONFIRMATIONNOTE"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyConfirmationNote pyStepRoutedConfirmation",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE TRAITEMENT_FLOW #20230224T145658.332 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYCONFIRMATIONNOTE!PYSTEPROUTEDCONFIRMATION"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "WorkList",
+				"pyMethodStatus":   "API",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE TRAITEMENT_FLOW #20230224T145658.332 GMT",
+				"pxRuleObjClass":   "Rule-Obj-Activity",
+				"pxRuleFamilyName": "WORKLIST"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "ToCurrentOperator",
+				"pyMethodStatus":   "API",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE TRAITEMENT_FLOW #20230224T145658.332 GMT",
+				"pxRuleObjClass":   "Rule-Obj-Activity",
+				"pxRuleFamilyName": "TOCURRENTOPERATOR"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyCaption Le process de selection",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE TRAITEMENT_FLOW #20230224T145658.332 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYCAPTION!LE PROCESS DE SELECTION"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "@baseclass",
+				"pyRuleName":       "pyCaption Saisie Produits",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE TRAITEMENT_FLOW #20230224T145658.332 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYCAPTION!SAISIE PRODUITS"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyCaption [End]",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE TRAITEMENT_FLOW #20230224T145658.332 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYCAPTION![END]"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "@baseclass",
+				"pyRuleName":       "pyLabel Le process de selection",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE TRAITEMENT_FLOW #20230224T145658.332 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYLABEL!LE PROCESS DE SELECTION"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "EXYGEN-UML-Work-DemoCase",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE TRAITEMENT_FLOW #20230224T145658.332 GMT",
+				"pxRuleObjClass":   "Rule-Obj-Class",
+				"pxRuleFamilyName": "EXYGEN-UML-WORK-DEMOCASE"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyButtonLabel Le process de selection",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE TRAITEMENT_FLOW #20230224T145658.332 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYBUTTONLABEL!LE PROCESS DE SELECTION"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyActionPrompt [End]",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE TRAITEMENT_FLOW #20230224T145658.332 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYACTIONPROMPT![END]"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyCaption Saisie Produits",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE TRAITEMENT_FLOW #20230224T145658.332 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYCAPTION!SAISIE PRODUITS"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "SaisieProduits",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE TRAITEMENT_FLOW #20230224T145658.332 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FlowAction",
+				"pxRuleFamilyName": "SAISIEPRODUITS"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyButtonLabel [End]",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE TRAITEMENT_FLOW #20230224T145658.332 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYBUTTONLABEL![END]"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "@baseclass",
+				"pyRuleName":       "@baseclass",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE TRAITEMENT_FLOW #20230224T145658.332 GMT",
+				"pxRuleObjClass":   "Rule-Obj-Class",
+				"pxRuleFamilyName": "@BASECLASS"
+			  }
+			],
+			"pyStartingHarness":               "New",
+			"pyVisioCompatFlag":               "false",
+			"pxCreateOperator":                "admin@uml",
+			"pyCreatesTemporaryObject":        false,
+			"pyVisioScaleFactor":              100,
+			"pyConfirmHarness":                "Confirm",
+			"pyLabel":                         "Le process de selection",
+			"pxCreateOpName":                  "admin",
+			"pyFlowType":                      "Traitement_Flow"
+		  },
+		  "pxObjClass":                 "Embed-StageProcess",
+		  "pyStepType":                 "Simple",
+		  "pxFlowID":                   "FLOW0",
+		  "pyLabel":                    "Le process de selection",
+		  "pyStepTypeLabel":            "Simple Flow",
+		  "pyStartType":                "PARALLEL"
+		},
+		{
+		  "pzRuleParametersShowSkills": false,
+		  "pyExpressionGadget":         {
+			"pxObjClass":           "PegaGadget-ExpressionBuilder",
+			"pyShowCustomPages":    true,
+			"pyShowLocalVariables": false,
+			"pyShowParameters":     true,
+			"pyEditable":           true,
+			"pyIsLaunchAsOverlay":  false
+		  },
+		  "pySLAType":                  "Never",
+		  "pyCallParams":               {},
+		  "pyFlowName":                 "Calcul",
+		  "pyShapeNodes":               [
+			{
+			  "pxObjClass":                 "Embed-ShapeNode",
+			  "pyShapeType":                "Assignment",
+			  "pyShapeID":                  "ASSIGNMENT63",
+			  "pyShapeImpl":                "Temp18697658848.pyStages(2).pyProcesses(2).pyFlowPage.pyModelProcess.pyShapes(ASSIGNMENT63)",
+			  "pzConversationIndex":        0,
+			  "pyHelpContentID":            "5059",
+			  "pyCheckedOutOrLocked":       "",
+			  "pyStepPlaceHolder":          "Collect Information",
+			  "pyDescription":              "",
+			  "pyShapeIcon":                "pi pi-clipboard",
+			  "pyShapeName":                "Calcul primes",
+			  "pyMoreInformationContentID": "5065"
+			}
+		  ],
+		  "pyLaunchOnReentry":          true,
+		  "pySkipOrAllowType":          "always",
+		  "pyFlowPage":                 {
+			"pyModelerGuideModeON":            true,
+			"pxUpdateSystemID":                "pega",
+			"pyRuleName":                      "Calcul",
+			"pyXMLSignature":                  "<?xml version=\"1.0\"?><methodSignature><pyStepsCallParams></pyStepsCallParams><pyParamArray><rowdata></rowdata></pyParamArray></methodSignature>",
+			"pyValueChanged":                  "false",
+			"pyStencils":                      [
+			  ""
+			],
+			"pxUpdateDateTime":                "2023-02-24T14:56:57.999Z",
+			"pzRuleSetVersionMinor":           1,
+			"pyCoveredByCount":                0,
+			"pyRuleVersionsList":              [
+			  {
+				"pxObjClass": "Rule-",
+				"pyValue":    "3",
+				"pzInsKey":   "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CALCUL #20230224T145657.999 GMT",
+				"pyLabel":    "01-01-02 (Available)"
+			  }
+			],
+			"pySystemFlow":                    false,
+			"pzRuleSetVersionMajor":           1,
+			"pyShowGrid":                      "true",
+			"pyJavaStream":                    "",
+			"pySkipNewHarness":                true,
+			"pxCreateDateTime":                "2023-02-24T14:56:57.999Z",
+			"pyCanCreateWorkObjectOld":        "false",
+			"pzCaseTypeExistsInCoverClass":    false,
+			"pxInstanceLockedCreateDateTime":  "1970-01-01T00:00:00.000Z",
+			"pyModifiedWithPM":                true,
+			"pzHideCaseCreationSettings":      true,
+			"pyBaseRule":                      false,
+			"pxInsName":                       "EXYGEN-UML-WORK-DEMOCASE!CALCUL",
+			"pxSaveDateTime":                  "2023-02-24T14:56:58.037Z",
+			"pyCircumstanceProp":              "",
+			"pyNextAssignment":                true,
+			"pyParameters":                    [
+			  {
+				"pxObjClass":                        "Embed-MethodParams",
+				"pyParametersParamIntelliRule":      "",
+				"pyParametersParamIntelliBaseClass": "PageClass",
+				"pyParametersParamType":             "String"
+			  }
+			],
+			"pzInsKey":                        "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CALCUL #20230224T145657.999 GMT",
+			"pyWhensList":                     [
+			  {
+				"pxObjClass": "Embed-Rule-Whens",
+				"pyWhenName": ""
+			  }
+			],
+			"pyPostVisio2000Saved":            false,
+			"pyPageOrientation":               "Landscape",
+			"pyAlphaSortLocalActions":         false,
+			"pyVisioJpeg":                     "",
+			"pyRelativePath":                  "",
+			"pyPlaceGlobalLocalsAtTop":        false,
+			"pxInsId":                         "!CALCUL",
+			"pyStartingHarnessOld":            "New",
+			"pyOverlayView":                   "None",
+			"pyRuleSetVersion":                "01-01-02",
+			"pyDoHarvesting":                  true,
+			"pyUseCaseLinks":                  [
+			  {
+				"pxLinkedRefTo":        "New",
+				"pyImplementationType": "",
+				"pyTaskName":           "",
+				"pyApplicationName":    "RaniRApp",
+				"pyWorkTypeName":       "By",
+				"pyUseCaseName":        "pzStubStep_StartingScreen",
+				"pxLinkedClassTo":      "Rule-HTML-Harness",
+				"pxObjClass":           "Link-UseCase",
+				"pyLinkedClassName":    "EXYGEN-UML-Work-DemoCase",
+				"pyTaskID":             "Start1",
+				"pyFlowKey":            "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CALCUL #20230224T145657.999 GMT",
+				"pyLabel":              "Application Link",
+				"pyFlowType":           "Calcul"
+			  }
+			],
+			"pyRegenStartingFlows":            2,
+			"pxDataReferences":                [],
+			"pyStartingModelOld":              "pyDefault",
+			"pxUpdateOpName":                  "admin",
+			"pxUpdateOperator":                "admin@uml",
+			"pyStartActivity":                 "Start1",
+			"pzChecksum":                      901782219,
+			"pyCanStartInteractively":         false,
+			"pxInstanceLockedKey":             "",
+			"pyDeferErrors":                   false,
+			"pyPagesAndClasses":               [
+			  {
+				"pxObjClass":            "Embed-PagesAndClasses",
+				"pyPagesAndClassesPage": ""
+			  }
+			],
+			"pxObjClass":                      "Rule-Obj-Flow",
+			"pyCategory":                      "FlowStandard",
+			"pyVisioRFB":                      "",
+			"pyWorkClass":                     "EXYGEN-UML-Work-DemoCase",
+			"pyPreviousValues":                {
+			  "pxObjClass":            "Rule-Obj-Flow",
+			  "pyRuleAvailable":       "Yes",
+			  "pyPrivilegeList":       [
+				{
+				  "pxObjClass":       "Embed-Rule-PrivilegeSecurity",
+				  "pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CALCUL #20230224T145657.999 GMT",
+				  "pyPrivilegeClass": "EXYGEN-UML-Work-DemoCase"
+				}
+			  ],
+			  "pyLabel":               "Le process de calcul",
+			  "pyCanCreateWorkObject": false
+			},
+			"pxCreateSystemID":                "pega",
+			"pxCommitDateTime":                "2023-02-24T14:56:58.045Z",
+			"pzOriginalInstanceKey":           "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CALCUL #20230224T072614.006 GMT",
+			"pxNamedPageReferences":           [],
+			"pyCanCreateWorkObject":           false,
+			"pyStreamName":                    "",
+			"pyModelerDefaultClickMode":       "Pan",
+			"pyRuleAvailable":                 "Yes",
+			"pyPrivilegeList":                 [
+			  {
+				"pxObjClass":       "Embed-Rule-PrivilegeSecurity",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CALCUL #20230224T145657.999 GMT",
+				"pyPrivilegeClass": "EXYGEN-UML-Work-DemoCase"
+			  }
+			],
+			"pyJavaClassName":                 "Rule_Obj_Flow_EXYGEN_UML_Work_DemoCase_Calcul_Action_20230224T075843_622_GMT",
+			"pzIndexCount":                    36,
+			"pyClassName":                     "EXYGEN-UML-Work-DemoCase",
+			"pyNextAssignmentWorkBasket":      false,
+			"pySortDateCircumWithinRSMajor":   true,
+			"pyRuleFormStatusTime":            "20230228T094059.151 GMT",
+			"pyLocalActions":                  [
+			  {
+				"pxObjClass": "Embed-Pega-AssignAction"
+			  }
+			],
+			"pyModifiers":                     "",
+			"pzRuleSetVersionPatch":           2,
+			"pxHostId":                        "b8ce93f41a670ed1d7c1bddfecef12dd",
+			"pyRuleSet":                       "UML",
+			"pyFromTasks":                     [
+			  {
+				"pxObjClass":     "Embed-Rule-Obj-Flow-FromTasks",
+				"pyFromTaskName": "ASSIGNMENT63"
+			  },
+			  {
+				"pxObjClass":     "Embed-Rule-Obj-Flow-FromTasks",
+				"pyFromTaskName": "Start1"
+			  }
+			],
+			"pyToolBarSettings":               {
+			  "pyFavorites":        true,
+			  "pyRecover":          false,
+			  "pyForward":          true,
+			  "pyRestore":          false,
+			  "pyBranchOut":        true,
+			  "pySave":             true,
+			  "pyLaunch":           true,
+			  "pyHasQualifiers":    false,
+			  "pyRequiresCheckOut": false,
+			  "pyCheckIn":          false,
+			  "pySiblings":         true,
+			  "pyAvailability":     true,
+			  "pyHelpRef":          "/rule-/rule-obj-/rule-obj-flow/main",
+			  "pyDelegates":        false,
+			  "pyRefresh":          true,
+			  "pyStandardUser":     false,
+			  "pyPreview":          false,
+			  "pyRun":              true,
+			  "pyCheckOut":         false,
+			  "pyRuleData":         true,
+			  "pyVersionSecure":    false,
+			  "pyRuleResolution":   true,
+			  "pyCurrentlyOpen":    true,
+			  "pxObjClass":         "Embed-WBSettings-ToolBar",
+			  "pyNew":              true,
+			  "pyShowJava":         true,
+			  "pyDelete":           true,
+			  "pyBack":             true,
+			  "pyHelpURI":          "https://community.pega.com/help_v87/rule-/rule-obj-/rule-obj-flow/main",
+			  "pySaveAs":           true,
+			  "pyPropertyPane":     false,
+			  "pyUsesInheritance":  true
+			},
+			"pyDraftModeON":                   true,
+			"pyCircumstanceDateProp":          "",
+			"pyShowJavaWindowName":            "GeneratedJava20230228T094059.160 GMT",
+			"pyPurpose":                       false,
+			"pxInstanceLockedRuleSetVersion":  "",
+			"pyJavaGenerateVersion":           "5.5",
+			"pyTaskStatusXml":                 "<pagedata><TaskStatus></TaskStatus></pagedata>",
+			"pxAPIMethodReferences":           [],
+			"pyModelProcess":                  {
+			  "pxObjClass":        "Embed-Rule-Obj-Flow-ProcessModel",
+			  "pyRefreshViewHint": true
+			},
+			"pzIsAutoGenerated":               true,
+			"pyWorkPartiesRule":               "Default",
+			"pyConfirmChoice":                 "Harness",
+			"pzImplVersion":                   "06.02.01",
+			"pyCoveredBy":                     [
+			  {
+				"pxObjClass":          "Embed-Rule-Obj-Flow-CoveredBy",
+				"pySubTaskModel":      "",
+				"pyCoveringWorkClass": "",
+				"pzIndexOwnerKey":     "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CALCUL #20230224T145657.999 GMT",
+				"pySubTaskHarness":    ""
+			  }
+			],
+			"pyRuleFormStatus":                "Good",
+			"pxInstanceLockedRuleSet":         "",
+			"pxWarnings":                      [
+			  {
+				"pxObjClass":              "Embed-Warning",
+				"pxWarningSeverity":       3,
+				"pzIndexOwnerKey":         "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CALCUL #20230224T145657.999 GMT",
+				"pxWarningMessage":        "(Rule-Obj-Flow)pxDraftMode",
+				"pxWarningType":           "Functionality",
+				"pxWarningCreateOperator": "admin@uml",
+				"pxWarningRuleSetType":    "PEGA",
+				"pxWarningCreatedTime":    "2023-02-24T07:27:33.693Z",
+				"pxWarningName":           "Flow in draft mode",
+				"pxWarningDetails":        "(Rule-Obj-Flow)pxDraftMode"
+			  }
+			],
+			"pyEndingActivities":              [
+			  "END52"
+			],
+			"pyModelerGridModeON":             false,
+			"pyDeferCommit":                   false,
+			"pyStatus":                        "",
+			"pzCaseTypeExistsInClass":         true,
+			"pyHistoryObject":                 false,
+			"pyNextAssignmentWorkBasketAdhoc": false,
+			"pySLAName":                       "",
+			"pyShowLikelihoods":               "Hide",
+			"pyStartingModel":                 "pyDefault",
+			"pyStructureType":                 "Simple",
+			"pyNextAssignmentAdhoc":           true,
+			"pxRuleReferences":                [
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyCaption Le process de calcul",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CALCUL #20230224T145657.999 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYCAPTION!LE PROCESS DE CALCUL"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "@baseclass",
+				"pyRuleName":       "pyCaption Calcul primes",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CALCUL #20230224T145657.999 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYCAPTION!CALCUL PRIMES"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "WorkList",
+				"pyMethodStatus":   "API",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CALCUL #20230224T145657.999 GMT",
+				"pxRuleObjClass":   "Rule-Obj-Activity",
+				"pxRuleFamilyName": "WORKLIST"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "@baseclass",
+				"pyRuleName":       "pyLabel Le process de calcul",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CALCUL #20230224T145657.999 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYLABEL!LE PROCESS DE CALCUL"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyCaption Calcul primes",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CALCUL #20230224T145657.999 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYCAPTION!CALCUL PRIMES"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyButtonLabel Le process de calcul",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CALCUL #20230224T145657.999 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYBUTTONLABEL!LE PROCESS DE CALCUL"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "CalculPrimes",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CALCUL #20230224T145657.999 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FlowAction",
+				"pxRuleFamilyName": "CALCULPRIMES"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "ToCurrentOperator",
+				"pyMethodStatus":   "API",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CALCUL #20230224T145657.999 GMT",
+				"pxRuleObjClass":   "Rule-Obj-Activity",
+				"pxRuleFamilyName": "TOCURRENTOPERATOR"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyCaption [End]",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CALCUL #20230224T145657.999 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYCAPTION![END]"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "EXYGEN-UML-Work-DemoCase",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CALCUL #20230224T145657.999 GMT",
+				"pxRuleObjClass":   "Rule-Obj-Class",
+				"pxRuleFamilyName": "EXYGEN-UML-WORK-DEMOCASE"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyActionPrompt [End]",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CALCUL #20230224T145657.999 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYACTIONPROMPT![END]"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyActionPrompt Calcul primes",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CALCUL #20230224T145657.999 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYACTIONPROMPT!CALCUL PRIMES"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyButtonLabel [End]",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CALCUL #20230224T145657.999 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYBUTTONLABEL![END]"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyButtonLabel Calcul primes",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CALCUL #20230224T145657.999 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYBUTTONLABEL!CALCUL PRIMES"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "@baseclass",
+				"pyRuleName":       "@baseclass",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CALCUL #20230224T145657.999 GMT",
+				"pxRuleObjClass":   "Rule-Obj-Class",
+				"pxRuleFamilyName": "@BASECLASS"
+			  }
+			],
+			"pyStartingHarness":               "New",
+			"pyVisioCompatFlag":               "false",
+			"pxCreateOperator":                "admin@uml",
+			"pyCreatesTemporaryObject":        false,
+			"pyVisioScaleFactor":              100,
+			"pyConfirmHarness":                "Confirm",
+			"pyLabel":                         "Le process de calcul",
+			"pxCreateOpName":                  "admin",
+			"pyFlowType":                      "Calcul"
+		  },
+		  "pxObjClass":                 "Embed-StageProcess",
+		  "pyStepType":                 "Simple",
+		  "pxFlowID":                   "FLOW1",
+		  "pyLabel":                    "Le process de calcul",
+		  "pyStepTypeLabel":            "Simple Flow",
+		  "pyStartType":                "SEQUENTIAL"
+		}
+	  ],
+	  "pyClassName":                     "EXYGEN-UML-Work-DemoCase",
+	  "pyIsTerminalStage":               false,
+	  "D_pzSkipOrAllowOptions":          "",
+	  "pyStageTransition":               "automatic",
+	  "pzUpdateWhenContextNeedsRefresh": "20230224T072531.950 GMT",
+	  "pySLAType":                       "Never",
+	  "pxFlowIDMax":                     1,
+	  "pyOptionalProcesses":             [],
+	  "pyStageID":                       "PRIM1",
+	  "pyIsDirty":                       true,
+	  "pySkipOrAllowType":               "never",
+	  "pxObjClass":                      "Embed-Stage",
+	  "pyChannelMenuLabel":              "Add channel process",
+	  "pyStageName":                     "Traitement",
+	  "pyRequiredCategories":            [],
+	  "pyLocalActions":                  [],
+	  "D_pzGetStageTransitions":         ""
+	},
+	{
+	  "pyChannels":                      [],
+	  "pyCleanupProcess":                "true",
+	  "pyProcesses":                     [
+		{
+		  "pySLAType":         "Never",
+		  "pyCallParams":      {},
+		  "pyShapeNodes":      [
+			{
+			  "pxObjClass":                 "Embed-ShapeNode",
+			  "pyShapeType":                "SubProcess",
+			  "pyShapeImpl":                "Temp18697658848.pyStages(3).pyProcesses(1).pyFlowPage.pyModelProcess.pyShapes(SubProcess1)",
+			  "pyShapeID":                  "SubProcess1",
+			  "pzConversationIndex":        0,
+			  "pyCheckedOutOrLocked":       "",
+			  "pyHelpContentID":            "5068",
+			  "pyStepPlaceHolder":          "Approve/Reject",
+			  "pyDescription":              "",
+			  "pyShapeIcon":                "pi pi-check",
+			  "pyShapeName":                "Approve",
+			  "pyMoreInformationContentID": "5069"
+			}
+		  ],
+		  "pyFlowName":        "Cloture_Flow",
+		  "pyLaunchOnReentry": true,
+		  "pySkipOrAllowType": "always",
+		  "pyFlowPage":        {
+			"pyModelerGuideModeON":            true,
+			"pxUpdateSystemID":                "pega",
+			"pyRuleName":                      "Cloture_Flow",
+			"pyXMLSignature":                  "<?xml version=\"1.0\"?><methodSignature><pyStepsCallParams></pyStepsCallParams><pyParamArray><rowdata></rowdata></pyParamArray></methodSignature>",
+			"pyValueChanged":                  "false",
+			"pyStencils":                      [
+			  ""
+			],
+			"pxUpdateDateTime":                "2023-02-24T14:56:58.184Z",
+			"pzRuleSetVersionMinor":           1,
+			"pyCoveredByCount":                0,
+			"pyRuleVersionsList":              [
+			  {
+				"pxObjClass": "Rule-",
+				"pyValue":    "3",
+				"pzInsKey":   "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CLOTURE_FLOW #20230224T145658.184 GMT",
+				"pyLabel":    "01-01-02 (Available)"
+			  }
+			],
+			"pySystemFlow":                    false,
+			"pyShowGrid":                      "true",
+			"pzRuleSetVersionMajor":           1,
+			"pyJavaStream":                    "",
+			"pySkipNewHarness":                true,
+			"pxCreateDateTime":                "2023-02-24T14:56:58.184Z",
+			"pyCanCreateWorkObjectOld":        "false",
+			"pzCaseTypeExistsInCoverClass":    false,
+			"pyModifiedWithPM":                true,
+			"pxInstanceLockedCreateDateTime":  "1970-01-01T00:00:00.000Z",
+			"pzHideCaseCreationSettings":      true,
+			"pyBaseRule":                      false,
+			"pxInsName":                       "EXYGEN-UML-WORK-DEMOCASE!CLOTURE_FLOW",
+			"pxSaveDateTime":                  "2023-02-24T14:56:58.190Z",
+			"pyNextAssignment":                true,
+			"pyCircumstanceProp":              "",
+			"pyParameters":                    [
+			  {
+				"pxObjClass":                        "Embed-MethodParams",
+				"pyParametersParamIntelliRule":      "",
+				"pyParametersParamIntelliBaseClass": "PageClass",
+				"pyParametersParamType":             "String"
+			  }
+			],
+			"pzInsKey":                        "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CLOTURE_FLOW #20230224T145658.184 GMT",
+			"pyWhensList":                     [
+			  {
+				"pxObjClass": "Embed-Rule-Whens",
+				"pyWhenName": ""
+			  }
+			],
+			"pyPostVisio2000Saved":            false,
+			"pyPageOrientation":               "Landscape",
+			"pyAlphaSortLocalActions":         false,
+			"pyVisioJpeg":                     "",
+			"pyRelativePath":                  "",
+			"pyPlaceGlobalLocalsAtTop":        false,
+			"pxInsId":                         "!CLOTURE_FLOW",
+			"pyStartingHarnessOld":            "New",
+			"pyOverlayView":                   "None",
+			"pyRuleSetVersion":                "01-01-02",
+			"pyDoHarvesting":                  true,
+			"pyUseCaseLinks":                  [
+			  {
+				"pxLinkedRefTo":        "New",
+				"pyImplementationType": "",
+				"pyTaskName":           "",
+				"pyApplicationName":    "RaniRApp",
+				"pyUseCaseName":        "pzStubStep_StartingScreen",
+				"pyWorkTypeName":       "By",
+				"pxLinkedClassTo":      "Rule-HTML-Harness",
+				"pxObjClass":           "Link-UseCase",
+				"pyLinkedClassName":    "EXYGEN-UML-Work-DemoCase",
+				"pyTaskID":             "Start1",
+				"pyFlowKey":            "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CLOTURE_FLOW #20230224T145658.184 GMT",
+				"pyLabel":              "Application Link",
+				"pyFlowType":           "Cloture_Flow"
+			  }
+			],
+			"pyRegenStartingFlows":            2,
+			"pxDataReferences":                [],
+			"pyStartingModelOld":              "pyDefault",
+			"pxUpdateOpName":                  "admin",
+			"pxUpdateOperator":                "admin@uml",
+			"pzChecksum":                      -966740385,
+			"pyStartActivity":                 "Start1",
+			"pyCanStartInteractively":         false,
+			"pxInstanceLockedKey":             "",
+			"pyDeferErrors":                   false,
+			"pyPagesAndClasses":               [
+			  {
+				"pxObjClass":            "Embed-PagesAndClasses",
+				"pyPagesAndClassesPage": ""
+			  }
+			],
+			"pxObjClass":                      "Rule-Obj-Flow",
+			"pyCategory":                      "FlowStandard",
+			"pyVisioRFB":                      "",
+			"pyWorkClass":                     "EXYGEN-UML-Work-DemoCase",
+			"pyPreviousValues":                {
+			  "pxObjClass":            "Rule-Obj-Flow",
+			  "pyRuleAvailable":       "Yes",
+			  "pyPrivilegeList":       [
+				{
+				  "pxObjClass":       "Embed-Rule-PrivilegeSecurity",
+				  "pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CLOTURE_FLOW #20230224T145658.184 GMT",
+				  "pyPrivilegeClass": "EXYGEN-UML-Work-DemoCase"
+				}
+			  ],
+			  "pyLabel":               "Cloture",
+			  "pyCanCreateWorkObject": false
+			},
+			"pxCreateSystemID":                "pega",
+			"pzOriginalInstanceKey":           "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CLOTURE_FLOW #20230224T072804.505 GMT",
+			"pxCommitDateTime":                "2023-02-24T14:56:58.199Z",
+			"pxNamedPageReferences":           [],
+			"pyCanCreateWorkObject":           false,
+			"pyStreamName":                    "",
+			"pyModelerDefaultClickMode":       "Pan",
+			"pyRuleAvailable":                 "Yes",
+			"pyPrivilegeList":                 [
+			  {
+				"pxObjClass":       "Embed-Rule-PrivilegeSecurity",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CLOTURE_FLOW #20230224T145658.184 GMT",
+				"pyPrivilegeClass": "EXYGEN-UML-Work-DemoCase"
+			  }
+			],
+			"pyJavaClassName":                 "Rule_Obj_Flow_EXYGEN_UML_Work_DemoCase_Cloture_Flow_Action_20230224T075153_874_GMT",
+			"pzIndexCount":                    28,
+			"pyClassName":                     "EXYGEN-UML-Work-DemoCase",
+			"pyNextAssignmentWorkBasket":      false,
+			"pySortDateCircumWithinRSMajor":   true,
+			"pyRuleFormStatusTime":            "20230228T094059.180 GMT",
+			"pyLocalActions":                  [
+			  {
+				"pxObjClass": "Embed-Pega-AssignAction"
+			  }
+			],
+			"pzRuleSetVersionPatch":           2,
+			"pyModifiers":                     "",
+			"pxHostId":                        "b8ce93f41a670ed1d7c1bddfecef12dd",
+			"pyRuleSet":                       "UML",
+			"pyFromTasks":                     [
+			  {
+				"pxObjClass":     "Embed-Rule-Obj-Flow-FromTasks",
+				"pyFromTaskName": "SubProcess1"
+			  },
+			  {
+				"pxObjClass":     "Embed-Rule-Obj-Flow-FromTasks",
+				"pyFromTaskName": "Start1"
+			  }
+			],
+			"pyToolBarSettings":               {
+			  "pyFavorites":        true,
+			  "pyRecover":          false,
+			  "pyForward":          true,
+			  "pyRestore":          false,
+			  "pyBranchOut":        true,
+			  "pySave":             true,
+			  "pyLaunch":           true,
+			  "pyHasQualifiers":    false,
+			  "pySiblings":         true,
+			  "pyRequiresCheckOut": false,
+			  "pyCheckIn":          false,
+			  "pyAvailability":     true,
+			  "pyHelpRef":          "/rule-/rule-obj-/rule-obj-flow/main",
+			  "pyDelegates":        false,
+			  "pyRefresh":          true,
+			  "pyStandardUser":     false,
+			  "pyPreview":          false,
+			  "pyRun":              false,
+			  "pyCheckOut":         false,
+			  "pyRuleData":         true,
+			  "pyVersionSecure":    false,
+			  "pyRuleResolution":   true,
+			  "pyCurrentlyOpen":    true,
+			  "pxObjClass":         "Embed-WBSettings-ToolBar",
+			  "pyDelete":           true,
+			  "pyNew":              true,
+			  "pyShowJava":         true,
+			  "pyBack":             true,
+			  "pyHelpURI":          "https://community.pega.com/help_v87/rule-/rule-obj-/rule-obj-flow/main",
+			  "pySaveAs":           true,
+			  "pyPropertyPane":     false,
+			  "pyUsesInheritance":  true
+			},
+			"pyDraftModeON":                   false,
+			"pyCircumstanceDateProp":          "",
+			"pyShowJavaWindowName":            "GeneratedJava20230228T094059.191 GMT",
+			"pyPurpose":                       false,
+			"pxInstanceLockedRuleSetVersion":  "",
+			"pyJavaGenerateVersion":           "5.5",
+			"pyTaskStatusXml":                 "<pagedata><TaskStatus></TaskStatus></pagedata>",
+			"pyModelProcess":                  {
+			  "pxObjClass":        "Embed-Rule-Obj-Flow-ProcessModel",
+			  "pyRefreshViewHint": true
+			},
+			"pxAPIMethodReferences":           [],
+			"pzIsAutoGenerated":               true,
+			"pyWorkPartiesRule":               "Default",
+			"pyConfirmChoice":                 "Harness",
+			"pyCoveredBy":                     [
+			  {
+				"pxObjClass":          "Embed-Rule-Obj-Flow-CoveredBy",
+				"pySubTaskModel":      "",
+				"pyCoveringWorkClass": "",
+				"pzIndexOwnerKey":     "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CLOTURE_FLOW #20230224T145658.184 GMT",
+				"pySubTaskHarness":    ""
+			  }
+			],
+			"pzImplVersion":                   "06.02.01",
+			"pyRuleFormStatus":                "Good",
+			"pxInstanceLockedRuleSet":         "",
+			"pxWarnings":                      [],
+			"pyEndingActivities":              [
+			  "END52"
+			],
+			"pyModelerGridModeON":             false,
+			"pyDeferCommit":                   false,
+			"pyStatus":                        "",
+			"pzCaseTypeExistsInClass":         true,
+			"pyHistoryObject":                 false,
+			"pyNextAssignmentWorkBasketAdhoc": false,
+			"pySLAName":                       "",
+			"pyShowLikelihoods":               "Hide",
+			"pyStartingModel":                 "pyDefault",
+			"pyNextAssignmentAdhoc":           true,
+			"pyStructureType":                 "Simple",
+			"pxRuleReferences":                [
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyCaption [End]",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CLOTURE_FLOW #20230224T145658.184 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYCAPTION![END]"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "EXYGEN-UML-Work-DemoCase",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CLOTURE_FLOW #20230224T145658.184 GMT",
+				"pxRuleObjClass":   "Rule-Obj-Class",
+				"pxRuleFamilyName": "EXYGEN-UML-WORK-DEMOCASE"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyCaption Cloture",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CLOTURE_FLOW #20230224T145658.184 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYCAPTION!CLOTURE"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyActionPrompt [End]",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CLOTURE_FLOW #20230224T145658.184 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYACTIONPROMPT![END]"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "@baseclass",
+				"pyRuleName":       "pyLabel Cloture",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CLOTURE_FLOW #20230224T145658.184 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYLABEL!CLOTURE"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pxApproval",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CLOTURE_FLOW #20230224T145658.184 GMT",
+				"pxRuleObjClass":   "Rule-Obj-Flow",
+				"pxRuleFamilyName": "PXAPPROVAL"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyButtonLabel Approve",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CLOTURE_FLOW #20230224T145658.184 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYBUTTONLABEL!APPROVE"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyButtonLabel [End]",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CLOTURE_FLOW #20230224T145658.184 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYBUTTONLABEL![END]"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyCaption Approve",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CLOTURE_FLOW #20230224T145658.184 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYCAPTION!APPROVE"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyButtonLabel Cloture",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CLOTURE_FLOW #20230224T145658.184 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYBUTTONLABEL!CLOTURE"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "@baseclass",
+				"pyRuleName":       "@baseclass",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CLOTURE_FLOW #20230224T145658.184 GMT",
+				"pxRuleObjClass":   "Rule-Obj-Class",
+				"pxRuleFamilyName": "@BASECLASS"
+			  },
+			  {
+				"pxObjClass":       "Embed-Reference-Rule",
+				"pxRuleClassName":  "EXYGEN-UML-Work-DemoCase",
+				"pyRuleName":       "pyActionPrompt Approve",
+				"pyMethodStatus":   "",
+				"pzIndexOwnerKey":  "RULE-OBJ-FLOW EXYGEN-UML-WORK-DEMOCASE CLOTURE_FLOW #20230224T145658.184 GMT",
+				"pxRuleObjClass":   "Rule-Obj-FieldValue",
+				"pxRuleFamilyName": "PYACTIONPROMPT!APPROVE"
+			  }
+			],
+			"pyStartingHarness":               "New",
+			"pyVisioCompatFlag":               "false",
+			"pxCreateOperator":                "admin@uml",
+			"pyCreatesTemporaryObject":        false,
+			"pyVisioScaleFactor":              100,
+			"pyConfirmHarness":                "Confirm",
+			"pyLabel":                         "Cloture",
+			"pxCreateOpName":                  "admin",
+			"pyFlowType":                      "Cloture_Flow"
+		  },
+		  "pxObjClass":        "Embed-StageProcess",
+		  "pyStepType":        "Simple",
+		  "pxFlowID":          "FLOW0",
+		  "pyLabel":           "Cloture",
+		  "pyStepTypeLabel":   "Simple Flow",
+		  "pyStartType":       "PARALLEL"
+		}
+	  ],
+	  "pyClassName":                     "EXYGEN-UML-Work-DemoCase",
+	  "pyIsTerminalStage":               true,
+	  "pyStageTransition":               "resolution",
+	  "pzUpdateWhenContextNeedsRefresh": "20230224T072804.521 GMT",
+	  "pyExposedStatusList":             [
+		"Resolved-Completed",
+		"Resolved-Rejected"
+	  ],
+	  "pySLAType":                       "Never",
+	  "pxFlowIDMax":                     0,
+	  "pyOptionalProcesses":             [],
+	  "pyStageWorkStatus":               "Resolved-Completed",
+	  "pyIsDirty":                       true,
+	  "pyStageID":                       "PRIM2",
+	  "pySkipOrAllowType":               "never",
+	  "pxObjClass":                      "Embed-Stage",
+	  "pyChannelMenuLabel":              "Add channel process",
+	  "pyStageName":                     "Cloture",
+	  "pyRequiredCategories":            [],
+	  "pyChildCaseStatus":               "Resolved-Completed",
+	  "pyLocalActions":                  [],
+	  "D_pzGetStageTransitions":         "",
+	  "pyResolveChildCases":             "false"
+	}
+  ]
+}

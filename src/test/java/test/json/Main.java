@@ -17,10 +17,26 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler.view;
+package test.json;
 
-import javax.swing.*;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import net.pega.model.RuleObjCaseType;
 
-public abstract class MyJPanel extends JPanel implements MessageCallback {
-	public abstract void log(String message);
+import java.io.IOException;
+import java.io.InputStream;
+
+public class Main {
+	public static void main(String[] args) {
+		final ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		final RuleObjCaseType ruleObjCaseType;
+		try {
+			final InputStream resourceAsStream = Main.class.getClassLoader().getResourceAsStream("json/CaseType.json");
+			ruleObjCaseType = objectMapper.readValue(resourceAsStream, RuleObjCaseType.class);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		System.out.println("ruleObjCaseType = " + ruleObjCaseType);
+	}
 }

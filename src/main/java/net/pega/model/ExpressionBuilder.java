@@ -17,10 +17,53 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler.view;
+package net.pega.model;
 
-import javax.swing.*;
+public class ExpressionBuilder extends Rule {
+	boolean pyShowCustomPages;
+	boolean pyShowLocalVariables;
+	boolean pyShowParameters;
+	boolean pyEditable;
 
-public abstract class MyJPanel extends JPanel implements MessageCallback {
-	public abstract void log(String message);
+	public boolean isPyShowCustomPages() {
+		return pyShowCustomPages;
+	}
+
+	public void setPyShowCustomPages(boolean pyShowCustomPages) {
+		this.pyShowCustomPages = pyShowCustomPages;
+	}
+
+	public boolean isPyShowLocalVariables() {
+		return pyShowLocalVariables;
+	}
+
+	public void setPyShowLocalVariables(boolean pyShowLocalVariables) {
+		this.pyShowLocalVariables = pyShowLocalVariables;
+	}
+
+	public boolean isPyShowParameters() {
+		return pyShowParameters;
+	}
+
+	public void setPyShowParameters(boolean pyShowParameters) {
+		this.pyShowParameters = pyShowParameters;
+	}
+
+	public boolean isPyEditable() {
+		return pyEditable;
+	}
+
+	public void setPyEditable(boolean pyEditable) {
+		this.pyEditable = pyEditable;
+	}
+
+	public boolean isPyIsLaunchAsOverlay() {
+		return pyIsLaunchAsOverlay;
+	}
+
+	public void setPyIsLaunchAsOverlay(boolean pyIsLaunchAsOverlay) {
+		this.pyIsLaunchAsOverlay = pyIsLaunchAsOverlay;
+	}
+
+	boolean pyIsLaunchAsOverlay;
 }

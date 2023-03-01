@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2023 Stephane Passignat - Exygen
+ * Copyright (c) 2023 Stephane Passignat - Exygen
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -17,12 +17,16 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler;
+package net.pega.model;
 
-import java.util.Collection;
+public class RuleObj extends Rule{
+	private String pyRuleName;
 
-public interface Loader<X extends Rule> {
-	void analyse(X mClass);
+	public String getPyRuleName() {
+		return pyRuleName;
+	}
 
-	Collection<X> getMetadatas();
+	public void setPyRuleName(String pyRuleName) {
+		this.pyRuleName = pyRuleName;
+	}
 }

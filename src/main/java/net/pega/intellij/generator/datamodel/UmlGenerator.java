@@ -17,9 +17,10 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler.data;
+package net.pega.intellij.generator.datamodel;
 
-import net.pega.intellij.modeler.Generator;
+import net.pega.intellij.BaseModule;
+import net.pega.intellij.generator.Generator;
 import net.pega.intellij.modeler.PegaPlugin;
 import net.pega.intellij.modeler.config.PegaConfigState;
 import net.pega.intellij.modeler.Context;
@@ -30,9 +31,9 @@ import java.io.PrintStream;
 import java.util.Collection;
 
 class UmlGenerator implements Generator<RuleObjClass> {
-	Context context;
+	BaseModule context;
 
-	public UmlGenerator(Context context) {
+	public UmlGenerator(BaseModule context) {
 		this.context = context;
 	}
 
@@ -58,7 +59,7 @@ class UmlGenerator implements Generator<RuleObjClass> {
 			if (value.getParent() != null) {
 				final String s1 = PegaPlugin.snakeToCamel(value.getParent());
 				final String s2 = PegaPlugin.snakeToCamel(value.getPyClassName());
-				if (context.getConfiguration().dataModelState.abstractOnTop) {
+				if (context.getSettings().getState().dataModelState.abstractOnTop) {
 					out.println(s1 + " <|-- " + s2);
 				} else {
 					out.println(s2 + " --|> " + s1);

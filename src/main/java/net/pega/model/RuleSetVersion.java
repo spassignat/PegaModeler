@@ -19,9 +19,7 @@
  */
 package net.pega.model;
 
-import net.pega.intellij.modeler.Rule;
-
-public class RuleSetVersion extends Rule {
+public class RuleSetVersion extends RuleObj {
 	String pyRuleSetVersionID;
 	String pyRuleSetType;
 

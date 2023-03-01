@@ -17,10 +17,52 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler.view;
+package net.pega.model;
 
-import javax.swing.*;
+public class EmbedRuleObjFlowFromTasks extends Rule {
+	String pyActionName;
+	String pyFromTaskName;
+	String pyUseCaseApplication;
+	String pyUseCaseName;
+	String pyUseCaseWorkType;
 
-public abstract class MyJPanel extends JPanel implements MessageCallback {
-	public abstract void log(String message);
+	public String getPyActionName() {
+		return pyActionName;
+	}
+
+	public void setPyActionName(String pyActionName) {
+		this.pyActionName = pyActionName;
+	}
+
+	public String getPyFromTaskName() {
+		return pyFromTaskName;
+	}
+
+	public void setPyFromTaskName(String pyFromTaskName) {
+		this.pyFromTaskName = pyFromTaskName;
+	}
+
+	public String getPyUseCaseApplication() {
+		return pyUseCaseApplication;
+	}
+
+	public void setPyUseCaseApplication(String pyUseCaseApplication) {
+		this.pyUseCaseApplication = pyUseCaseApplication;
+	}
+
+	public String getPyUseCaseName() {
+		return pyUseCaseName;
+	}
+
+	public void setPyUseCaseName(String pyUseCaseName) {
+		this.pyUseCaseName = pyUseCaseName;
+	}
+
+	public String getPyUseCaseWorkType() {
+		return pyUseCaseWorkType;
+	}
+
+	public void setPyUseCaseWorkType(String pyUseCaseWorkType) {
+		this.pyUseCaseWorkType = pyUseCaseWorkType;
+	}
 }

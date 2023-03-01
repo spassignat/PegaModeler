@@ -19,6 +19,7 @@
  */
 package net.pega.intellij;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.intellij.openapi.project.Project;
 import net.pega.intellij.modeler.RuleListener;
@@ -33,26 +34,32 @@ import java.io.IOException;
 import static net.pega.intellij.modeler.PegaPlugin.RULE_LISTENER_TOPIC;
 
 public class BaseModule {
-	protected final ObjectMapper objectMapper = new ObjectMapper();
+	public final ObjectMapper objectMapper = new ObjectMapper();
 	protected final Project project;
 	protected final RuleListener ruleListener;
+	private PegaProjectSettings settings;
 
 	public BaseModule(@NotNull Project project) {
 		this.project = project;
 		ruleListener = project.getMessageBus().syncPublisher(RULE_LISTENER_TOPIC);
+		settings = project.getService(PegaProjectSettings.class);
+		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 	}
 
 	public CloseableHttpResponse execute(String... context) throws IOException {
-		final PegaProjectSettings service = project.getService(PegaProjectSettings.class);
-		final HttpGet get = service.createRequest(context);
+		final HttpGet get = settings.createRequest(context);
 		log("Execute " + get);
-		final CloseableHttpClient httpClient = service.createHttpClient();
+		final CloseableHttpClient httpClient = settings.createHttpClient();
 		final CloseableHttpResponse execute = httpClient.execute(get);
 		log(" response= " + execute);
 		return execute;
 	}
 
-	protected void log(String message) {
+	public PegaProjectSettings getSettings() {
+		return settings;
+	}
+
+	public void log(String message) {
 		ruleListener.log(message);
 	}
 

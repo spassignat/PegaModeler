@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2023 Stephane Passignat - Exygen
+ * Copyright (c) 2023 Stephane Passignat - Exygen
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -17,31 +17,25 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler.process;
+package net.pega.model;
 
-import net.pega.intellij.modeler.Generator;
-import net.pega.intellij.modeler.config.PegaConfigState;
-import net.pega.model.RuleObjCaseType;
-import net.pega.intellij.modeler.Context;
+public class Chanel extends Rule {
+	boolean pyShowChannel;
+	String pzChannelName;
 
-import java.io.PrintStream;
-import java.util.Collection;
-
-class CaseTypeGenerator implements Generator <RuleObjCaseType> {
-	Context context;
-
-	public CaseTypeGenerator(Context context) {
-		this.context = context;
+	public String getPzChannelName() {
+		return pzChannelName;
 	}
 
-	public void generateDiagram(PrintStream out, Collection<RuleObjCaseType> dataModel) {
-
+	public void setPzChannelName(String pzChannelName) {
+		this.pzChannelName = pzChannelName;
 	}
 
-	public void generateHeader(PrintStream out, PegaConfigState state) {
-		out.println("skinparam class {");
-		out.println("BackgroundColor<<Work>> " + state.dataModelState.caseTypeColor);
-		out.println("}");
+	public boolean isPyShowChannel() {
+		return pyShowChannel;
 	}
 
+	public void setPyShowChannel(boolean pyShowChannel) {
+		this.pyShowChannel = pyShowChannel;
+	}
 }

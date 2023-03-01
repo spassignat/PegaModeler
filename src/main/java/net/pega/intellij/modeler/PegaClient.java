@@ -21,6 +21,7 @@ package net.pega.intellij.modeler;
 
 import net.pega.intellij.modeler.config.PegaConfigState;
 import net.pega.intellij.modeler.view.MessageCallback;
+import net.pega.model.Rule;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -32,8 +33,6 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Base64;
-
-import static net.pega.intellij.modeler.PegaPlugin.RULE_LISTENER_TOPIC;
 
 public abstract class PegaClient implements Context {
 	protected CloseableHttpClient client;

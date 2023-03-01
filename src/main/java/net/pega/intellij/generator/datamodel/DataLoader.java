@@ -17,33 +17,35 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.intellij.modeler.data;
+package net.pega.intellij.generator.datamodel;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import net.pega.intellij.modeler.Loader;
-import net.pega.intellij.modeler.Context;
+import net.pega.intellij.BaseModule;
+import net.pega.intellij.generator.Loader;
 import net.pega.model.RuleObjClass;
 import net.pega.model.RuleObjProperty;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.*;
 
 class DataLoader implements Loader<RuleObjClass> {
 	private final Map<String, RuleObjClass> classMap = new HashMap<>();
-	Context context;
+	BaseModule context;
+	private DataModelState dataModelState;
 
-	public DataLoader(Context context) {
+	public DataLoader(BaseModule context) {
 		this.context = context;
+		dataModelState = context.getSettings().getState().dataModelState;
 	}
 
-	public void analyse(RuleObjClass ruleObjClass) {
-		if (Arrays.stream(context.getConfiguration().dataModelState.highestClasses).noneMatch(ac -> Objects.equals(ac, ruleObjClass.getPyClassName()))) {
+	public Collection<RuleObjClass> load(RuleObjClass ruleObjClass) throws IOException {
+		if (Arrays.stream(dataModelState.highestClasses).noneMatch(ac -> Objects.equals(ac, ruleObjClass.getPyClassName()))) {
 			final RuleObjClass ruleObjClass1 = getMClass(ruleObjClass.getPyClassName());
 			if (ruleObjClass1 != null) {
 				analyseInheritance(ruleObjClass1);
@@ -52,24 +54,25 @@ class DataLoader implements Loader<RuleObjClass> {
 				boolean pendingClasses = true;
 				int mxc = 100;
 				while (pendingClasses && mxc-- > 0) {
-					getMetadatas().stream().filter(c -> !c.isAnalyzed()).forEach(this::analyse);
-					pendingClasses = getMetadatas().stream().anyMatch(c -> !c.isAnalyzed());
+					final List<RuleObjClass> values = new ArrayList<>(classMap.values());
+					for (int i = 0; i < values.size(); i++) {
+						RuleObjClass objClass = values.get(i);
+						if (!objClass.isAnalyzed()) {
+							load(objClass);
+						}
+					}
+					pendingClasses = classMap.values().stream().anyMatch(c -> !c.isAnalyzed());
 				}
 			}
 		}
-	}
-
-	public Collection<RuleObjClass> getMetadatas() {
 		return new ArrayList<>(classMap.values());
 	}
 
 	private void analyseInheritance(RuleObjClass ruleObjClass) {
-		final HttpGet get = context.createRequest("/class/" + ruleObjClass.getPyClassName());
 		context.log("analyseClass: " + ruleObjClass.getPyClassName());
 		//		System.out.println(context.getState());
 		final InputStream content;
-
-		try (CloseableHttpResponse response = context.execute(get)) {
+		try (CloseableHttpResponse response = context.execute("class", ruleObjClass.getPyRuleName(), ruleObjClass.getPyRuleSetVersion(), ruleObjClass.getPyClassName())) {
 			context.log(response.getStatusLine().toString());
 			context.log(System.getProperty("line.separator"));
 			content = response.getEntity().getContent();
@@ -95,11 +98,10 @@ class DataLoader implements Loader<RuleObjClass> {
 		}
 	}
 
-	private void analyseProperties(RuleObjClass ruleObjClass) {
-		final HttpGet get = context.createRequest("/properties/" + ruleObjClass.getPyClassName());
+	private void analyseProperties(RuleObjClass ruleObjClass) throws IOException {
 		context.log("analyseproperties: " + ruleObjClass.getPyClassName());
 		final InputStream content;
-		try (CloseableHttpResponse response = context.execute(get)) {
+		try (CloseableHttpResponse response = context.execute("properties", ruleObjClass.getPyClassName())) {
 			context.log(response.getStatusLine().toString());
 			context.log(System.getProperty("line.separator"));
 			content = response.getEntity().getContent();
@@ -116,7 +118,8 @@ class DataLoader implements Loader<RuleObjClass> {
 	}
 
 	private RuleObjClass getMClass(String pyPageClass) {
-		if (Arrays.stream(context.getConfiguration().dataModelState.highestClasses).noneMatch(ac -> Objects.equals(ac, pyPageClass)) && classMap.size() < context.getConfiguration().dataModelState.maxClass) {
+		if (Arrays.stream(context.getSettings().getState().dataModelState.highestClasses).noneMatch(ac -> Objects.equals(ac,
+																														 pyPageClass)) && classMap.size() < context.getSettings().getState().dataModelState.maxClass) {
 			if (!classMap.containsKey(pyPageClass)) {
 				classMap.put(pyPageClass, new RuleObjClass(pyPageClass));
 			}

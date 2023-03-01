@@ -25,7 +25,7 @@ import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.project.Project;
 import net.pega.intellij.BaseModule;
 import net.pega.intellij.modeler.CaseTypeService;
-import net.pega.intellij.modeler.Rule;
+import net.pega.model.Rule;
 import net.pega.model.RuleApplication;
 import net.pega.model.RuleObjCaseType;
 import net.pega.model.RuleSetVersion;

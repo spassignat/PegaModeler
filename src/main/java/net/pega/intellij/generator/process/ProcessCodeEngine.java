@@ -17,61 +17,33 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package net.pega.model;
+package net.pega.intellij.generator.process;
 
-public class RuleObjProperty extends RuleObj {
-	private boolean list;
-	private boolean multiple;
-	private String pyPropertyName;
-	private boolean page;
-	private boolean reference;
-	private String pyPropertyMode;
+import com.intellij.openapi.project.Project;
+import net.pega.intellij.BaseModule;
+import net.pega.intellij.generator.CodeEngine;
+import net.pega.intellij.generator.Generator;
+import net.pega.intellij.generator.Loader;
+import net.pega.model.RuleObjCaseType;
+import org.jetbrains.annotations.NotNull;
 
-	public String getPyPropertyName() {
-		return pyPropertyName;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.Collection;
+
+public class ProcessCodeEngine extends BaseModule implements CodeEngine<RuleObjCaseType> {
+	public ProcessCodeEngine(@NotNull Project project) {
+		super(project);
 	}
 
-	public void setPyPropertyName(String pyPropertyName) {
-		this.pyPropertyName = pyPropertyName;
-	}
-
-	public String getPyPropertyMode() {
-		return pyPropertyMode;
-	}
-
-	public void setPyPropertyMode(String pyPropertyMode) {
-		this.pyPropertyMode = pyPropertyMode;
-	}
-
-	public boolean isList() {
-		return list;
-	}
-
-	public void setList(boolean list) {
-		this.list = list;
-	}
-
-	public boolean isMultiple() {
-		return multiple;
-	}
-
-	public void setMultiple(boolean multiple) {
-		this.multiple = multiple;
-	}
-
-	public boolean isPage() {
-		return page;
-	}
-
-	public void setPage(boolean page) {
-		this.page = page;
-	}
-
-	public boolean isReference() {
-		return reference;
-	}
-
-	public void setReference(boolean reference) {
-		this.reference = reference;
+	@Override
+	public void analyse(PrintStream out, RuleObjCaseType rule) throws IOException {
+		Generator<RuleObjCaseType> generator = new CaseTypeGenerator(this);
+		Loader<RuleObjCaseType> loader = project.getService(CaseTypeLoader.class);
+		final Collection<RuleObjCaseType> load = loader.load(rule);
+		out.println("@startuml");
+		generator.generateHeader(out, getSettings().getState());
+		generator.generateDiagram(out, load);
+		out.println("@enduml");
 	}
 }

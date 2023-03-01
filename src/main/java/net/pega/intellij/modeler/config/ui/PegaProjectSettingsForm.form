@@ -39,7 +39,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <nested-form id="f19c2" form-file="net/pega/intellij/modeler/data/DataModelForm.form" binding="dataModelForm">
+              <nested-form id="f19c2" form-file="net/pega/intellij/generator/datamodel/DataModelForm.form" binding="dataModelForm">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
